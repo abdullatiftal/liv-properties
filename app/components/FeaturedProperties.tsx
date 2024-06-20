@@ -26,7 +26,7 @@ export const FeaturedProperties = () => {
     }, [])
 
     return (
-        <div className="">
+        <div className="h-[100vh] flex flex-col px-[3vw] sm:px-[85px] verticalPanelInner">
             <div className='flex flex-wrap gap-8'>
                 <div className='gotham text-[40px] sm:text-[69px] leading-[94%] font-[700]'>
                     <div>Featured</div>

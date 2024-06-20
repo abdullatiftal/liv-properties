@@ -3,7 +3,7 @@ import s from '@/app/ui/main.module.css'
 
 export const Instagram = () => {
     return (
-        <div className="">
+        <div className="flex flex-col verticalPanelInner">
             <div className='text-[40px] sm:text-[69px] leading-[123%] font-[700]'>
                 <div>Instagram</div>
             </div>

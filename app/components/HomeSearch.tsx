@@ -35,7 +35,7 @@ export const HomeSearch = () => {
 
     return isLargeScreen ? (
         <>
-            <div className='px-[3vw] sm:px-[85px] max-[639px]:mx-[3vw] mt-[400px] xl:mt-[200px] max-[639px]:w-full max-[639px]:text-center flex text-sm'>
+            <div className='px-[3vw] sm:px-[85px] max-[639px]:mx-[3vw] mt-[400px] xl:mt-[150px] max-[639px]:w-full max-[639px]:text-center flex text-sm'>
                 <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] ${projType === 'ready' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
                     onClick={() => setProjType('ready')}>Ready</div>
                 <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] ${projType === 'new' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}

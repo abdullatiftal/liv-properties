@@ -35,18 +35,32 @@ const useMenuState = () => {
     return { isOpen, toggleMenu }
 }
 
-
 export const Header = () => {
     const [isVisible, setIsVisible] = useState(true)
     const stickyHeaderRef = useRef<HTMLDivElement>(null)
 
+    const handleScroll = () => {
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        let isNearBottom:boolean = false;
+        if(scrollTop > 0){
+            isNearBottom = scrollTop + clientHeight >= scrollHeight - 5; // Adding a small tolerance
+        }
+    
+        if (isNearBottom) {
+            setIsVisible(false);
+        } else {
+            setIsVisible(true);
+        }
+    };
+    
     useEffect(() => {
-        const handleScroll = () => setIsVisible(window.scrollY < 2900)
-
-        window.addEventListener('scroll', handleScroll)
-
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+    
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     useEffect(() => {
         if (isVisible && stickyHeaderRef.current) { // Check both visibility and ref
@@ -69,11 +83,11 @@ export const Header = () => {
     }, [])
 
     return isLargeScreen ? (
-        <div ref={stickyHeaderRef} className={`sticky top-0 mb-[50px] sm:mb-0 px-[3vw] sm:px-[85px] h-[340px] pt-[30px] lg:pt-[89px] flex lg:flex-col`}>
+        <div ref={stickyHeaderRef} className={`${isRouteActive('/', path) ? 'fixed ' : 'sticky '}w-full top-0 mb-[50px] sm:mb-0 px-[3vw] sm:px-[85px] h-[280px] pt-[30px] lg:pt-[60px] flex lg:flex-col z-[99]`}>
             <Link href='/' className='w-fit'>
                 <Image src='/logos/slim.svg' alt='Slim Properties logo' width={142} height={71} className='ml-[-4px]' />
             </Link>
-            <nav className='z-50 mt-[41px] flex flex-wrap gap-[1px] text-sm'>
+            <nav className='z-50 mt-[21px] flex flex-wrap gap-[1px] text-sm'>
                 {routes.map((route) => (
                     <Link key={route} href={route + '/'}>
                         <div className={`${isRouteActive(route, path) ? s.navActive : ''} ${sMain.headerNav} cursor-pointer p-4 rounded-xl`}>
@@ -84,7 +98,7 @@ export const Header = () => {
             </nav>
         </div>
     ) : (
-        <div className={`mb-[50px] md:mb-0 px-[15px] md:px-[85px] h-[160px] pt-[30px] lg:pt-[89px] flex justify-between`}>
+        <div className={`mb-[50px] md:mb-0 px-[15px] md:px-[85px] h-[160px] pt-[30px] lg:pt-[60px] flex justify-between`}>
             <Link href='/'>
                 <Image src='/logos/slim.svg' alt='Slim Properties logo' width={142} height={71}
                     className='ml-[-4px] w-[76px] h-[38px] lg:w-[142px] lg:h-[71px]' />

@@ -3,7 +3,7 @@ import '@/app/ui/index.css'
 
 export const OurServices = () => {
     return (
-        <div className="max-w-[100%]">
+        <div className="max-w-[100%] flex flex-col px-[3vw] sm:px-[85px] verticalPanelInner gap-[30px]">
             <div className='gotham'>
                 <div className='text-[40px] sm:text-[69px] leading-[94%] font-[700]'>
                     <div>Our Services</div>

@@ -41,11 +41,23 @@ body {
     overflow-x: hidden;
 }
 
-.horizontalSection {
+.verticalSection {
     display: flex;
-    /* overflow: hidden; */
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.horizontalPanel {
-    flex: 1 0 100%;
+.verticalPanel {
+    /* flex: 1 0 100%; */
+    padding-top: 280px;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    opacity: 0;
+}
+
+.verticalPanel:last-child{
+    position: relative;
 }

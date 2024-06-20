@@ -1,9 +1,9 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { Observer } from "gsap/Observer"
 import { useGSAP } from '@gsap/react'
 import s from '@/app/ui/scrollSection.module.css'
 import '@/app/ui/index.css'
@@ -11,46 +11,103 @@ import { HomeHero, FeaturedProperties, OurServices, Instagram } from '@/app/comp
 
 
 if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger, useGSAP)
+    gsap.registerPlugin(Observer, useGSAP)
 }
 
 export const ScrollingSections = () => {
-    const horizontalSection = useRef(null)
+    const verticalSection = useRef(null)
+    const sectionsRefs = useRef<(HTMLDivElement | null)[]>([])
 
-    useGSAP(
-        () => {
-            const slides = gsap.utils.toArray('.horizontalPanel')
-            gsap.to(slides, {
-                xPercent: -108 * (slides.length - 1),
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: horizontalSection.current,
-                    pin: true,
-                    start: 'bottom bottom',
-                    //   snap: 1 / (slides.length - 1),
-                    end: '+=300%',
-                    scrub: 0.8,
-                },
-            })
-        },
-        {
-            scope: horizontalSection,
+    useGSAP(() => {
+        let sections = sectionsRefs.current,
+            currentIndex = 0,
+            animating = false,
+            lastSection = false;
+    
+        function gotoSection(index: number) {
+            if (index < 0 || index >= sections.length) {
+                animating = false;
+                return;
+            }
+            animating = true;
+            let tl = gsap.timeline({
+                defaults: { duration: 0.50, ease: "power1.inOut" },
+                onComplete: () => {
+                    animating = false;
+                }
+            });
+    
+            if (currentIndex >= 0) {
+                gsap.set(sections[currentIndex], { zIndex: 0 });
+                tl.to(sections[currentIndex], { opacity: 0 });
+            }
+    
+            gsap.set(sections[index], { zIndex: 1 });
+            tl.fromTo(sections[index], 
+                { opacity: 0 }, 
+                { opacity: 1 }
+            );
+    
+            currentIndex = index;
+            
+            // Control overflow based on section index
+            let overflowTimeline = gsap.timeline({ duration: 0.5 });
+            if (index === sections.length - 1) {
+                overflowTimeline.to("body > div", { overflow: "", height: "auto" });
+                if((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight){
+                    lastSection = true;
+                }
+            } else {
+                overflowTimeline.to("body > div", { overflow: "hidden", height: "100vh" });
+                lastSection = false;
+            }
         }
-    )
-
+    
+        // Create the Observer for scroll handling
+        const observer = Observer.create({
+            type: "wheel,touch,pointer",
+            wheelSpeed: -1,
+            onDown: () => {
+                if (!animating && currentIndex > 0){
+                    if(lastSection){
+                        gotoSection(currentIndex);
+                        lastSection = false;
+                    }
+                    else{
+                        gotoSection(currentIndex - 1);
+                    }
+                }
+            },
+            onUp: () => {
+                if (!animating && currentIndex < sections.length - 1) {
+                    gotoSection(currentIndex + 1);
+                }
+            },
+            tolerance: 10,
+            preventDefault: true
+        });
+    
+        gotoSection(0);
+    
+        return () => {
+            observer.kill();
+        };
+    }, []);
+    
+    
     return (
         <>
-            <div className="horizontalSection w-[1400px] section h-[calc(100vh-340px)]" ref={horizontalSection}>
-                <div className="horizontalPanel ml-[-200px]">
+            <div className="verticalSection section flex-col w-full" ref={verticalSection}>
+                <div className="verticalPanel"  ref={(el) => (sectionsRefs.current[0] = el!)}>
                     <HomeHero />
                 </div>
-                <div className="horizontalPanel mt-[-48px] ml-[100px]">
+                <div className="verticalPanel" ref={(el) => (sectionsRefs.current[1] = el!)}>
                     <FeaturedProperties />
                 </div>
-                <div className="horizontalPanel mt-[-48px]">
+                <div className="verticalPanel" ref={(el) => (sectionsRefs.current[2] = el!)}>
                     <OurServices />
                 </div>
-                <div className="horizontalPanel mt-[-48px]">
+                <div className="verticalPanel" ref={(el) => (sectionsRefs.current[3] = el!)}>
                     <Instagram />
                 </div>
             </div>

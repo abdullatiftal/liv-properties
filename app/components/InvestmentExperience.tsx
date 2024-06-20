@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const InvestmentExperience = () => {
     return (
-        <div className='flex flex-wrap gap-x-2 gap-y-14 mt-[35px]'>
+        <div className='flex flex-wrap gap-x-2 gap-y-14'>
             <div className={`${s.serviceBlock} relative sm:w-[380px]`}>
                 <div className='text-[20px]'>Sales</div>
                 <div className='mt-[20px] text-white text-xs leading-[170%] font-[200]'>
