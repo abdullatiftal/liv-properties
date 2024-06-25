@@ -28,7 +28,15 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(147, 130, 112, 0.7), rgba(147, 130, 112, 0));
+    background: linear-gradient(to bottom, rgba(147, 130, 112, 0.7), rgba(147, 130, 112, 0));
+    filter: brightness(0.5);
+}
+
+@media screen(sm) {
+    .tint {
+        background: linear-gradient(to right, rgba(147, 130, 112, 0.7), rgba(147, 130, 112, 0));
+        filter: brightness(1);
+    }
 }
 
 .emailUnderline {

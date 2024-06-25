@@ -34,22 +34,24 @@ export const HomeSearch = () => {
     }, [])
 
     return isLargeScreen ? (
-        <>
-            <div className='px-[3vw] sm:px-[85px] max-[639px]:mx-[3vw] mt-[400px] xl:mt-[150px] max-[639px]:w-full max-[639px]:text-center flex text-sm'>
+        <div className='mt-[250px] small:mt-[30px] z-[3] home-search'>
+            <div className='px-[3vw] sm:px-0 small:px-[85px] max-[639px]:mx-[3vw] max-[639px]:w-full max-[639px]:text-center flex text-sm'>
                 <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] ${projType === 'ready' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
                     onClick={() => setProjType('ready')}>Ready</div>
                 <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] ${projType === 'new' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
                     onClick={() => setProjType('new')}>New Projects</div>
             </div>
-            <div className='mt-[15px] ml-[-13px] px-[3vw] sm:px-[85px] flex flex-wrap text-sm'>
+            <div className='mt-[15px] ml-[-13px] px-[3vw] sm:px-0 small:px-[85px] flex flex-wrap text-sm'>
                 <Select
                     options={[{ value: 'rent', label: 'Rent' }, { value: 'buy', label: 'Buy' }]}
                     value={dealType}
                     onChange={(v) => setDealType(v as DealType)}
                 />
-                <input type="text" name="cb" id="cb_input" value={cb} onChange={(e) => setCb(e.target.value)} className={`mx-[11px] w-[200px] block border-0 py-1.5 bg-transparent
-                    ring-1 ring-inset ring-transparent focus:ring-1 focus:ring-inset focus:ring-[#EDDFD0] hover:ring-[#EDDFD0]/50 sm:leading-6
-                    transition duration-200 ease-in-out placeholder-[#eddfd0] ${s.hoverable}`} placeholder='Community or Building' />
+                <div className={`mx-[11px] ${s.hoverable}`}>
+                    <input type="text" name="cb" id="cb_input" value={cb} onChange={(e) => setCb(e.target.value)} className={`small:min-w-[150px] h-full text-center block border-0 py-1.5 bg-transparent
+                    ring-0 ring-inset ring-transparent focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] hover:ring-[#EDDFD0]/50 sm:leading-6
+                    transition duration-200 ease-in-out placeholder-[#eddfd0] text-[100%]`} placeholder='Community or Building' />
+                </div>
                 {/* <div className={`mr-[11px] relative m-4 max-w-[fit-content] group ${s.hoverable}`}>
                     <input type='text' className="outline-none px-3 py-3 peer ring-transparent bg-transparent border-0" placeholder=" " value={cb} onChange={(e) => setCb(e.target.value)} />
                     <label className="absolute left-[9px] top-px text-sm text-[#EDDFD0] transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
@@ -67,20 +69,24 @@ export const HomeSearch = () => {
                     </fieldset>
                 </div> */}
                 <div className={`${s.line}`} />
-                <input type="text" name="location" id="location_input" value={location} onChange={(e) => setLocation(e.target.value)} className={`mx-[11px] w-[200px] block border-0 py-1.5 bg-transparent
-                    ring-1 ring-inset ring-transparent focus:ring-1 focus:ring-inset focus:ring-[#EDDFD0] hover:ring-[#EDDFD0]/50 sm:leading-6
-                    transition duration-200 ease-in-out placeholder-[#eddfd0] ${s.hoverable}`} placeholder='Location' />
+                <div className={`mx-[11px] ${s.hoverable}`}>
+                    <input type="text" name="location" id="location_input" value={location} onChange={(e) => setLocation(e.target.value)} className={`w-[80px] small:w-[110px] h-full text-center block border-0 py-1.5 bg-transparent
+                    ring-0 ring-inset ring-transparent focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] hover:ring-[#EDDFD0]/50 sm:leading-6
+                    transition duration-200 ease-in-out placeholder-[#eddfd0] text-[100%] ${s.hoverable}`} placeholder='Location' />
+                </div>
                 <div className={`${s.line}`} />
-                <input type="text" name="price" id="price_input" value={price} onChange={(e) => setPrice(e.target.value)} className={`mx-[11px] w-[200px] block border-0 py-1.5 bg-transparent
-                    ring-1 ring-inset ring-transparent focus:ring-1 focus:ring-inset focus:ring-[#EDDFD0] hover:ring-[#EDDFD0]/50 sm:leading-6
-                    transition duration-200 ease-in-out placeholder-[#eddfd0] ${s.hoverable}`} placeholder='Price' />
+                <div className={`mx-[11px] ${s.hoverable}`}>
+                    <input type="text" name="price" id="price_input" value={price} onChange={(e) => setPrice(e.target.value)} className={`w-[80px] small:w-[110px] h-full text-center block border-0 py-1.5 bg-transparent
+                    ring-0 ring-inset ring-transparent focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] hover:ring-[#EDDFD0]/50 sm:leading-6
+                    transition duration-200 ease-in-out placeholder-[#eddfd0] text-[100%] ${s.hoverable}`} placeholder='Price' />
+                </div>
                 <div className={`${s.line}`} />
-                <button className={`mx-[18px] py-3 pl-2 grid place-items-center grid-cols-2 gap-1 ${s.hoverable}`}>
+                <button className={`ml-[18px] mr-[0px] small:mx-[18px] py-3 pl-2 grid place-items-center grid-cols-2 gap-1 ${s.hoverable}`}>
                     Search
                     <Image src='/icons/search.svg' alt='Search icon' width={17} height={17} className='ml-[-20px]' />
                 </button>
             </div>
-        </>
+        </div>
     ) : (
         <>
             <div className='px-[3vw] mt-[300px] xl:mt-[200px] w-full text-center flex text-sm'>

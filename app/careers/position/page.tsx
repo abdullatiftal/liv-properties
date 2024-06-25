@@ -5,15 +5,15 @@ import Image from 'next/image'
 
 export default async function CareersPage() {
     return (
-        <div className='mb-[39px]'>
-            <div className='pb-[79px] w-full text-start gotham text-[50px] sm:text-[69px] leading-[88px] font-[700]
-            border-b border-solid border-[#eddfd0] border-opacity-60'>
-                Careers
+        <div className='mb-[30px] sm:mb-[60px] xl:mb-[70px] 3xl:max-w-[1200px] w-full sm:mt-[-50px] lg:mt-0'>
+            <div className='pb-[30px] md:pb-[50px] xl:pb-[79px] w-full text-start text-[40px] small:text-[69px] leading-[38px] small:leading-[88px] font-[700]
+                border-b border-solid border-[#eddfd0] border-opacity-60'>
+                <h1>Careers</h1>
             </div>
-            <div className='mt-[21px] flex flex-wrap sm:flex-nowrap justify-between gap-x-[100px] gap-y-[20px]'>
+            <div className='mt-[21px] flex flex-wrap sm:flex-nowrap justify-between gap-x-[30px] md:gap-x-[50px] lg:gap-x-[100px] gap-y-[20px]'>
                 <div>
-                    <div className='gotham text-[25px] font-[200]'>Marketing Executive</div>
-                    <div className='mt-[7px] gotham text-[20px] font-[200]'>We’re looking for a mid-level product designer to join our team.</div>
+                    <h2 className='text-[25px] font-[200]'>Marketing Executive</h2>
+                    <div className='mt-[7px] text-[20px] font-[200]'>We’re looking for a mid-level product designer to join our team.</div>
                     <div className='mt-[38px] flex gap-[15px]'>
                         <button className='px-[16px] pt-[10px] pl-[13px] pb-[10px] flex items-center gap-[7px] rounded-3xl border border-solid border-[#EDDFD0] text-xs'>
                             <Image src='/icons/location.svg' alt='Location icon' width={17} height={17} />
@@ -25,24 +25,23 @@ export default async function CareersPage() {
                             Full Time
                         </button>
                     </div>
-                    <div className='mt-[38px] text-xs leading-[162%]'>
+                    <p className='mt-[38px] text-xs leading-[162%]'>
                         Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.
-                    </div>
-                    <div className='mt-[20px] text-xs leading-[162%]'>
+                    </p>
+                    <p className='mt-[20px] text-xs leading-[162%]'>
                         Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.
-                    </div>
+                    </p>
                 </div>
-                <Link href={`#apply`}>
-                    <div className='p-2 h-fit rounded-3xl flex flex-col items-end gotham text-[25px] font-[200] hover:bg-white/30 active:bg-white/60 hover:text-gray-700
-                active:text-black transition duration-200 ease-in-out'>
-                        <Image src='/icons/arrow_outward.svg' alt='Outward arrow' width={48} height={48} />
-                        Apply
+                {/* <Link href={`/careers/position?id=marketing-executive`}>
+                    <div className='p-2 h-fit rounded-3xl flex flex-row items-center sm:flex-col sm:items-end text-[25px] font-[200] hover:bg-white/30 active:bg-white/60 hover:text-gray-700
+                    active:text-black transition duration-200 ease-in-out'>
+                        <Image src='/icons/arrow_outward.svg' className='ml-[20px] sm:ml-0 order-2 sm:order-1 w-[30px] sm:w-full' alt='Outward arrow' width={48} height={48} />
+                        <span className='order-1 sm:order-2'>Apply</span>
                     </div>
-                </Link>
+                </Link> */}
             </div>
-            <div className='mt-[39px] w-full gotham text-[50px] sm:text-[69px] leading-[88px] font-[700]'>
-                <div id='apply'>Apply</div>
-                <div>Now</div>
+            <div className='mt-[30px] lg:mt-[65px] w-full text-[40px] small:text-[69px] leading-[38px] small:leading-[88px] font-[700]'>
+                <h2>Apply<br/>Now</h2>
             </div>
             <EnquireForm hasUploadField />
         </div>

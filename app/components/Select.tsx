@@ -40,7 +40,7 @@ export const Select = ({ options, value, onChange }: CustomSelectProps) => {
                 <Image src='/icons/expand_more.svg' alt='Arrow down' width={32} height={32}
                     className={`ml-[-10px] mr-[12px] transition duration-200 ${isOpen ? 'rotate-180' : ''}`} />
             </button>
-            <ul className={`absolute top-full left-0 w-full rounded shadow mt-1 bg-[#eddfd0] pointer-events-none
+            <ul className={`absolute top-full left-0 w-full rounded shadow mt-[-15px] bg-[#eddfd0] pointer-events-none
                 transition duration-200 ease-in-out opacity-0 ${isOpen ? 'opacity-100 pointer-events-auto z-10' : ''}`}>
                 {options.map((option) => (
                     <li

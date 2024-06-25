@@ -13,7 +13,10 @@ import { Property } from '@/app/types'
 
 
 export const FeaturedProperties = () => {
-    const { data: properties, error, isLoading } = useSWR<Property[]>(apiUrl + '/api/get-featured-properties', fetcher)
+    const { data: properties, error, isLoading } = useSWR<Property>(apiUrl + '/api/get-featured-properties', fetcher)
+    console.log(properties);
+    // const properties = data?.data;
+    
     const [isLargeScreen, setIsLargeScreen] = useState(false)
     const [propType, setPropType] = useState<'villas' | 'apartments' | 'all'>('villas')
     const [action, setAction] = useState<'rent' | 'buy' | 'sell'>('buy')
@@ -26,14 +29,13 @@ export const FeaturedProperties = () => {
     }, [])
 
     return (
-        <div className="h-[100vh] flex flex-col px-[3vw] sm:px-[85px] verticalPanelInner">
-            <div className='flex flex-wrap gap-8'>
-                <div className='gotham text-[40px] sm:text-[69px] leading-[94%] font-[700]'>
-                    <div>Featured</div>
-                    <div>Properties</div>
+        <div className="small:h-[100vh] flex flex-col px-[3vw] sm:px-0 small:px-[85px] verticalPanelInner featured-properties">
+            <div className='flex flex-wrap gap-8 max-[1024px]:justify-between justify-normal items-end'>
+                <div className='home-sec_title text-[40px] small:text-[69px] leading-[94%] font-[700]'>
+                    <h2>Featured<br />Properties</h2>
                 </div>
                 {isLargeScreen ? (
-                    <div className='text-[12px] mt-0 sm:mt-[39px] flex-wrap'>
+                    <div className='text-[12px] sm:mt-0 mt-[39px] sm:mb-[15px] flex-wrap'>
                         <div className='flex'>
                             <div className={`border-solid border-[#eddfd0] ${s.prop} ${s.hoverable} ${propType === 'villas' ? 'border-b-[3px]' : 'border-b'}`} onClick={() => setPropType('villas')}>Villas</div>
                             <div className={`border-solid border-[#eddfd0] ${s.prop} ${s.hoverable} ${propType === 'apartments' ? 'border-b-[3px]' : 'border-b'}`} onClick={() => setPropType('apartments')}>Apartments</div>
@@ -47,21 +49,21 @@ export const FeaturedProperties = () => {
                     </div>
                 ) : (
                     <>
-                        <div className='w-full text-center flex text-sm'>
-                            <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] border-b-[3px] border-solid border-[#eddfd0] ${s.hoverable}`}>Villas</div>
-                            <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] border-b border-solid border-[#eddfd0] ${s.hoverable}`}>Apartments</div>
-                            <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] border-b border-solid border-[#eddfd0] ${s.hoverable}`}>View All</div>
+                        <div className='w-full text-center flex text-sm items-stretch'>
+                            <div className={`flex-1 pb-[8px] min-w-[100px] sm:min-w-[132px] ${s.prop} ${s.hoverable} ${propType === 'villas' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable}`} onClick={() => setPropType('villas')}>Villas</div>
+                            <div className={`flex-1 pb-[8px] min-w-[100px] sm:min-w-[132px] ${s.prop} ${s.hoverable} ${propType === 'apartments' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable}`} onClick={() => setPropType('apartments')}>Apartments</div>
+                            <div className={`flex-1 pb-[8px] min-w-[100px] sm:min-w-[132px] ${s.prop} ${s.hoverable} ${propType === 'all' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable}`} onClick={() => setPropType('all')}>View All</div>
                         </div>
                         <div className='w-full text-center flex text-sm'>
-                            <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] border-b border-solid border-[#eddfd0] ${s.hoverable}`}>Rent</div>
-                            <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] border-b-[3px] border-solid border-[#eddfd0] ${s.hoverable}`}>Buy</div>
-                            <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] border-b border-solid border-[#eddfd0] ${s.hoverable}`}>Sell</div>
+                            <div className={`flex-1 pb-[8px] min-w-[100px] sm:min-w-[132px] ${s.prop} ${s.hoverable} ${action === 'rent' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable}`} onClick={() => setAction('rent')}>Rent</div>
+                            <div className={`flex-1 pb-[8px] min-w-[100px] sm:min-w-[132px] ${s.prop} ${s.hoverable} ${action === 'buy' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable}`} onClick={() => setAction('buy')}>Buy</div>
+                            <div className={`flex-1 pb-[8px] min-w-[100px] sm:min-w-[132px] ${s.prop} ${s.hoverable} ${action === 'sell' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable}`} onClick={() => setAction('sell')}>Sell</div>
                         </div>
                     </>
                 )}
             </div>
-            <div className='flex flex-wrap'>
-                {properties && properties.map((p: Property) => (
+            <div className='grid grid-cols-[repeat(3,1fr)] grid-rows-[1fr] 4xlh:grid-rows-[2fr] 4xlh:grid-y-[40px] featured-properties_grid'>
+                {Array.isArray(properties) && properties.slice(0,3).map((p: Property) => (
                     <Fragment key={p.id}>
                         <PropertyCard
                             id={p.id}
@@ -76,9 +78,9 @@ export const FeaturedProperties = () => {
                     </Fragment>
                 ))}
                 {isLargeScreen ? (
-                    <div className='mt-[43px] w-full sm:w-[304px]'>
+                    <div className='mt-[43px] w-full sm:w-[304px] property-card explore-all'>
                         <div className={`${s.lastProperty}`}>
-                            <Image src='/images/property.jpg' alt='Photo of a property' width={304} height={293} className='max-[639px]:w-full' />
+                            <Image src='/images/property.jpg' alt='Photo of a property' width={304} height={293} className='w-full property-card_img' />
                             <Link href='/projects/ready'>
                                 <div className={`${s.backdrop} text-[14px]`}>Explore All</div>
                             </Link>

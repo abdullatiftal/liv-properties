@@ -2,6 +2,7 @@ import '@/app/ui/global.css'
 import Image from 'next/image'
 import { Metadata } from 'next'
 import { Header, Footer, SmoothScrolling } from '@/app/components'
+import { APIContextProvider } from "./context/APIContext";
 
 export const metadata: Metadata = {
     title: 'Slim Properties',
@@ -11,9 +12,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
+        <APIContextProvider>
         <html lang="en">
             <body>
-                <div className='text-[#eddfd0] helveticaNeue font-[200]'>
+                <div className='text-[#eddfd0] helveticaNeue font-[200] overflow-hidden relative'>
                     <Header />
                     <Image src='/images/bg.jpeg' alt='Background' width={1934} height={1154} className='z-[-50] fixed top-0 w-full h-full' />
                     <main>
@@ -27,5 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </div>
             </body>
         </html>
+        </APIContextProvider>
     )
 }

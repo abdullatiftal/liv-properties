@@ -1,25 +1,24 @@
 import Image from 'next/image'
-import { GoogleMapsEmbed } from '@next/third-parties/google'
 import '@/app/ui/index.css'
+import { GoogleMapsEmbed } from '@next/third-parties/google'
 import { EnquireForm } from '@/app/components'
 import { gmapsApiKey } from '@/app/constants'
 
 
 export default async function Contact() {
     return (
-        <div className='mb-[84px]'>
-            <div className="mb-[82px] relative min-[1630px]:min-w-[1440px] max-[1629px]:w-full">
-                <div className='gotham text-[50px] sm:text-[69px] leading-[88px] font-[700]'>
-                    <div>Contact</div>
-                    <div>Us</div>
-                    <div className='z-[-30] absolute top-[50%] translate-y-[-25%] sm:translate-y-[-45%] lg:translate-y-[-60%] pointer-events-none'>
+        <div className='mb-[30px] sm:mb-[60px] xl:mb-[84px] 3xl:max-w-[1200px] w-full'>
+            <div className="relative 3xl:max-w-[1200px] w-full">
+            <div className='text-[40px] small:text-[69px] leading-[38px] small:leading-[88px] font-[700]'>
+                <h2>Contact<br/>Us</h2>
+                <div className='z-[-30] absolute top-[50%] translate-y-[-30%] sm:translate-y-[-60%] md:translate-y-[-60%] xl:translate-y-[-70%] scale-[1.6] md:scale-[1.4] xl:scale-[1.2] 2xl:scale-[1.1] pointer-events-none'>
                         <Image src='/images/contact_building.webp' alt='Home' width={1404} height={885} />
                     </div>
                 </div>
             </div>
-            <div className='mt-[120px] mb-[30px] pb-[43px] flex flex-wrap gap-[75px] border-b border-solid border-[#EDDFD0] border-opacity-50'>
-                <div className='sm:ml-[78px] w-[252px] text-sm leading-[29px]'>
-                    <div className='mt-[53px]'>Office 304, Bay Square 11, Business Bay, Dubai, UAE</div>
+            <div className='mt-[30px] md:mt-[80px] lg:mt-[120px] mb-[30px] pb-[43px] flex flex-wrap lg:flex-wrap justify-between items-center gap-[50px] lg:gap-[0px] border-b border-solid border-[#EDDFD0] border-opacity-50'>
+                <div className='w-[252px] lg:w-[calc(30%-25px)] text-sm leading-[29px]'>
+                    <div className='mt-[53px] sm:mt-[0px]'>Office 304, Bay Square 11, Business Bay, Dubai, UAE</div>
                     <div className='mt-[6px]'>Ph: +971 04 111 1111</div>
                     <div className='mt-[6px]'>Email: info@example.com</div>
                     <div className='mt-[13px] flex'>
@@ -29,7 +28,7 @@ export default async function Contact() {
                         <Image src='/icons/linkedin.svg' alt='Linkedin icon' width={13} height={13} className='w-[13px] h-[13px]' />
                     </div>
                 </div>
-                <div className='w-full max-[890px]-w-[872px]'>
+                <div className='w-full lg:w-[calc(70%-25px)]'>
                     <GoogleMapsEmbed
                         apiKey={gmapsApiKey}
                         height={366}
@@ -39,9 +38,8 @@ export default async function Contact() {
                     />
                 </div>
             </div>
-            <div className='gotham text-[50px] sm:text-[69px] leading-[88px] font-[700]'>
-                <div>Enquire</div>
-                <div>Now</div>
+            <div className='text-[40px] small:text-[69px] leading-[38px] small:leading-[88px] font-[700]'>
+                <h2>Enquire<br/>Now</h2>
             </div>
             <EnquireForm/>
         </div>

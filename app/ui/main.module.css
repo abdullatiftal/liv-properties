@@ -100,7 +100,7 @@
 }
 
 .propFilter {
-    width: 135px;
+    /* width: 135px; */
     padding: 4px 0 4px 0;
     border-bottom: #eddfd0 solid 1px;
 }
@@ -115,15 +115,17 @@
     position: relative;
 }
 
-.propPic::after {
-    content: "";
-    z-index: 10;
-    position: absolute;
-    right: -3px;
-    top: 30px;
-    width: 6px;
-    height: 241px;
-    background: #827161;
+@media only screen and (min-width:1200px){
+    .propPic::after {
+        content: "";
+        z-index: 10;
+        position: absolute;
+        right: -3px;
+        top: 30px;
+        width: 6px;
+        height: 241px;
+        background: #827161;
+    }
 }
 
 .lastProperty {
@@ -156,15 +158,20 @@
 .serviceBlock::after {
     content: "";
     position: absolute;
-    right: 52px;
+    right: 0px;
     top: 5%;
     width: .5px;
     height: 90%;
     background: #EDDFD0;
     opacity: 70%;
 }
+@media screen(3xl) {
+    .serviceBlock::after{
+        right: 52px;
+    }
+}
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 919px) {
     .serviceBlock::after {
         display: none;
     }

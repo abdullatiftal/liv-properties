@@ -106,36 +106,36 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
     return (
         <>
             <form onSubmit={handleSubmit} className='mt-[43px] text-white'>
-                <div className='flex flex-wrap gap-y-[28px] gap-x-[52px]'>
-                    <div>
+                <div className='flex flex-wrap gap-y-[28px] gap-x-[30px] justify-between w-full'>
+                    <div className='w-full msm:w-[calc(50%-15px)] md:w-[calc(50%-26px)]'>
                         <label htmlFor="name" className="block text-sm font-medium leading-6">Your Name*</label>
                         <input type="text" name="name" id="name" autoComplete="given-name" value={formData.name} onChange={handleChange} required
-                            className={`sm:w-[584px] block border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
+                            className={`w-[100%] block border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
                                 focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6 transition duration-200 ease-in-out`} />
                     </div>
-                    <div>
+                    <div className='w-full msm:w-[calc(50%-15px)] md:w-[calc(50%-26px)]'>
                         <label htmlFor="email" className="block text-sm font-medium leading-6">Email Address*</label>
                         <input type="text" name="email" id="email" autoComplete="email" value={formData.email} onChange={handleChange} required
-                            className={`sm:w-[584px] block border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
+                            className={`w-[100%] block border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
                                 focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6 transition duration-200 ease-in-out`} />
                     </div>
-                    <div>
+                    <div className='w-full msm:w-[calc(50%-15px)] md:w-[calc(50%-26px)]'>
                         <label htmlFor="phone" className="block text-sm font-medium leading-6">Contact Number*</label>
                         <input type="text" name="phone" id="phone" autoComplete="tel" value={formData.phone} onChange={handleChange} required
-                            className={`sm:w-[584px] block border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
+                            className={`w-[100%] block border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
                                 focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6 transition duration-200 ease-in-out`} />
                     </div>
-                    <div>
+                    <div className='w-full msm:w-[calc(50%-15px)] md:w-[calc(50%-26px)]'>
                         <label htmlFor="subject" className="block text-sm font-medium leading-6">Subject*</label>
                         <input type="text" name="subject" id="subject" value={formData.subject} onChange={handleChange} required
-                            className={`sm:w-[584px] block border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
+                            className={`w-[100%] block border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
                                 focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6 transition duration-200 ease-in-out`} />
                     </div>
                 </div>
                 {hasUploadField ? (
-                    <label className='mt-[28px] block text-sm font-medium leading-6' htmlFor="upload-cv">
+                    <label className='mt-[28px] block text-sm font-medium leading-6 w-full' htmlFor="upload-cv">
                         <div>Upload CV</div>
-                        <div className='pb-[28px] xl:w-[1220px] sm:w-[584px] flex justify-between items-baseline py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
+                        <div className='pb-[28px] w-full flex justify-between items-baseline py-1.5 bg-transparent shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
                             focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6 transition duration-200 ease-in-out cursor-pointer'>
                             <span>{selectedFile}</span>
                             <button type="submit" className='px-[50px] py-[15px] rounded-3xl border border-solid border-[#EDDFD0] text-sm hover:bg-white/30
@@ -152,15 +152,15 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                         />
                     </label>
                 ) : null}
-                <div className='mt-[33px]'>
+                <div className='mt-[33px] w-full'>
                     <label htmlFor="message" className="text-sm font-medium leading-6">Your Message</label>
                     <div className="mt-2">
                         <textarea ref={textareaRef} id="message" name="message" rows={3} value={formData.message} onChange={handleChange}
-                            className="xl:w-[1220px] w-full sm:w-[584px] border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0]
+                            className="w-full border-0 py-1.5 bg-transparent shadow-[white_0px_1px_0_0]
                                 ring-1 ring-inset ring-transparent focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6"></textarea>
                     </div>
                 </div>
-                <div className='xl:w-[1220px] sm:w-[584px]'>
+                <div className='w-full'>
                     <button type="submit" className='block mt-[39px] mx-auto px-[50px] py-[15px] rounded-3xl border border-solid border-[#EDDFD0] text-sm hover:bg-white/30
                         active:bg-white/60 hover:text-gray-700 active:text-black transition duration-200 ease-in-out'>
                         Submit

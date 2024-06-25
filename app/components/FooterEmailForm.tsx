@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import useSWR from 'swr'
 import { apiUrl, fetcher } from '@/app/constants'
+import s from '@/app/ui/main.module.css'
 
 interface Response {
     status: string
@@ -35,12 +36,13 @@ export const FooterEmailForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label className='mt-[19px] text-sm font-[200]'>Enter your email</label>
-            <div className='mt-[-15px] flex gap-1 items-end'>
-                <input type="email" name="email" id="email_input" value={email} onChange={handleChange} className="w-[200px] block border-0 py-1.5 bg-transparent
-                    shadow-[rgb(237,223,208,0.5)_0px_1px_0_0] ring-1 ring-inset ring-transparent focus:ring-1 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6
-                    transition duration-200 ease-in-out`"/>
+        <form onSubmit={handleSubmit} className='footer-subscribe mt-[30px]'>
+            <div className='mt-[-15px] flex gap-1 items-stretch'>
+                <div className={`${s.hoverable} w-full`}>
+                    <input type="email" name="email" id="email_input" value={email} onChange={handleChange} className="w-full h-full block border-0 py-1.5 bg-transparent
+                    shadow-[rgb(237,223,208,0.5)_0px_1px_0_0] ring-0 ring-inset ring-transparent focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6
+                    transition duration-200 ease-in-out autofill-input placeholder-[#eddfd0] text-[100%]`" placeholder='Enter your email'/>
+                </div>
                 <button className='py-[16px] px-[35px] bg-[#938270] rounded-[40px] text-sm'>Sign&nbsp;Up</button>
             </div>
         </form>

@@ -28,9 +28,12 @@ const useMenuState = () => {
     const body = (typeof window === "undefined") ? null : document.querySelector('body')
     const toggleMenu = () => {
         setIsOpen(!isOpen)
-        body?.classList.toggle('overflow-hidden')
-        const relatives = (typeof window === "undefined") ? null : document.querySelectorAll("[class*='relative']")
-        relatives?.forEach((e) => e.classList.toggle('opacity-0'))
+        body?.classList.toggle('overflow-hidden');
+        if (typeof window !== "undefined") {
+            const relatives = document.querySelectorAll("[class*='relative']");
+            const filteredRelatives = Array.from(relatives).filter((e) => !e.classList.contains('helveticaNeue'));
+            filteredRelatives.forEach((e) => e.classList.toggle('opacity-0'));
+        }
     }
     return { isOpen, toggleMenu }
 }
@@ -39,18 +42,20 @@ export const Header = () => {
     const [isVisible, setIsVisible] = useState(true)
     const stickyHeaderRef = useRef<HTMLDivElement>(null)
 
+    const prevScrollY = useRef(0);
+
     const handleScroll = () => {
-        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-        let isNearBottom:boolean = false;
-        if(scrollTop > 0){
-            isNearBottom = scrollTop + clientHeight >= scrollHeight - 5; // Adding a small tolerance
-        }
-    
-        if (isNearBottom) {
+        const currentScrollY = window.scrollY;
+
+        if (prevScrollY.current < currentScrollY && currentScrollY > 0) {
+            // Scrolling down
             setIsVisible(false);
         } else {
+            // Scrolling up
             setIsVisible(true);
         }
+
+        prevScrollY.current = currentScrollY;
     };
     
     useEffect(() => {
@@ -83,14 +88,14 @@ export const Header = () => {
     }, [])
 
     return isLargeScreen ? (
-        <div ref={stickyHeaderRef} className={`${isRouteActive('/', path) ? 'fixed ' : 'sticky '}w-full top-0 mb-[50px] sm:mb-0 px-[3vw] sm:px-[85px] h-[280px] pt-[30px] lg:pt-[60px] flex lg:flex-col z-[99]`}>
+        <div ref={stickyHeaderRef} className={`${isRouteActive('/', path) ? 'fixed h-auto ' : 'sticky h-[280px] '}w-full top-0 mb-[50px] sm:mb-0 px-[3vw] sm:px-[85px] pt-[30px] lg:pt-[60px] flex lg:flex-col z-[99]`}>
             <Link href='/' className='w-fit'>
                 <Image src='/logos/slim.svg' alt='Slim Properties logo' width={142} height={71} className='ml-[-4px]' />
             </Link>
-            <nav className='z-50 mt-[21px] flex flex-wrap gap-[1px] text-sm'>
+            <nav className='z-50 mx-[-1rem] mt-[21px] flex flex-wrap gap-[1px] text-sm'>
                 {routes.map((route) => (
                     <Link key={route} href={route + '/'}>
-                        <div className={`${isRouteActive(route, path) ? s.navActive : ''} ${sMain.headerNav} cursor-pointer p-4 rounded-xl`}>
+                        <div className={`${isRouteActive(route, path) ? s.navActive : ''} ${sMain.headerNav} cursor-pointer px-4 py-2 rounded-xl`}>
                             <span>{routeNameMapping[route]}</span>
                         </div>
                     </Link>
@@ -98,7 +103,7 @@ export const Header = () => {
             </nav>
         </div>
     ) : (
-        <div className={`mb-[50px] md:mb-0 px-[15px] md:px-[85px] h-[160px] pt-[30px] lg:pt-[60px] flex justify-between`}>
+        <div className={`mb-[50px] sm:mb-0 px-[15px] md:px-[85px] ${isRouteActive('/', path) ? 'h-auto ' : 'sm:h-[160px] '}pt-[30px] lg:pt-[60px] flex justify-between !transform-none z-[99] relative !opacity-[1]`}>
             <Link href='/'>
                 <Image src='/logos/slim.svg' alt='Slim Properties logo' width={142} height={71}
                     className='ml-[-4px] w-[76px] h-[38px] lg:w-[142px] lg:h-[71px]' />
@@ -108,17 +113,17 @@ export const Header = () => {
                     <path d='M4 6H20M4 12H20M4 18H20' stroke='currentColor' strokeWidth='1' strokeLinecap='round' />
                 </svg>
             </button>
-            <div className={`z-1000 px-[15px] md:px-[85px] pt-[30px] lg:pt-[89px] ${isOpen? 'scale-y-100 pointer-events-auto' : 'scale-y-0 pointer-events-none'}
-                fixed inset-0 bg-[#EDDFD0] origin-top origin-center transition duration-1000 ease-[cubic-bezier(.16,1,.3,1)]`}>
-                <div className='flex justify-between'>
+            <div className={`z-[1000] px-[15px] md:px-[85px] py-[30px] lg:pt-[89px] ${isOpen? 'scale-y-[100dvh] pointer-events-auto' : 'scale-y-0 pointer-events-none'}
+                fixed inset-0 bg-[#EDDFD0] origin-top transition duration-1000 ease-[cubic-bezier(.16,1,.3,1)]`}>
+                <div className='flex justify-between items-center'>
                     <Link href='/'>
                         <Image src='/logos/slim_dark.svg' alt='Slim Properties logo' width={76} height={38} className='ml-[-4px]' />
                     </Link>
-                    <div onClick={toggleMenu} className='p-3'>
-                        <Image src='/icons/close.svg' alt='Close' width={14} height={14} className='ml-[-4px]' />
+                    <div onClick={toggleMenu} className='p-1 flex justify-center items-center'>
+                        <Image src='/icons/close.svg' alt='Close' width={14} height={14} className='' />
                     </div>
                 </div>
-                <nav className={`mt-[36px] flex flex-col gap-[1px] lg:hidden ${isOpen ? 'flex' : 'hidden'} text-[#827161] gotham font-[600] text-[20px] text-center`}>
+                <nav className={`mt-[calc(25%-50px)] sm:mt-[calc(25%-70px)] flex-col justify-between gap-[1px] lg:hidden ${isOpen ? 'flex' : 'hidden'} text-[#827161] font-[600] text-[20px] text-center h-[50dvh]`}>
                     {routes.map((route) => (
                         <Link key={route} href={route + '/'} onClick={toggleMenu}>
                             <div className={`${isRouteActive(route, path) ? s.menuNavActive : ''}

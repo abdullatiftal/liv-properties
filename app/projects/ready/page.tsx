@@ -1,34 +1,20 @@
 import Image from 'next/image'
 import s from '@/app/ui/main.module.css'
+import '@/app/ui/index.css'
 import { PropertyCard } from '@/app/components'
+import { PageSearch } from '@/app/components'
 
 export default async function ReadyProjectsPage() {
     return (
-        <div className="mb-[83px]">
+        <div className="mb-[30px] sm:mb-[60px] small:mb-[83px] 3xl:max-w-[1200px] w-full">
             <div className='flex flex-wrap gap-8'>
-                <div className='gotham text-[40px] sm:text-[69px] leading-[88px] font-[700]'>
-                    <div>Ready</div>
-                    <div>Projects</div>
+                <div className='text-[40px] small:text-[69px] leading-[38px] small:leading-[88px] font-[700]'>
+                    <h2>Ready<br/>Projects</h2>
                     <Image src='/images/organic-house.webp' alt='Home and a car' width={1404} height={885}
-                        className='z-[-30] absolute top-[43%] right-0 translate-y-[-25%] sm:translate-y-[-45%] lg:translate-y-[-60%] max-w-[95vw] sm:max-w-none pointer-events-none' />
+                        className='z-[-30] absolute top-[140px] sm:top-[200px] lg:top-[340px] right-0 translate-y-[-25%] sm:translate-y-[-45%] lg:translate-y-[-60%] max-w-[95dvw] sm:max-w-full pointer-events-none' />
                 </div>
             </div>
-            <div className='text-[12px] mt-[50px]'>
-                <div className='flex gap-4 flex-wrap'>
-                    <span className={`${s.propFilter}`}>Price Range</span>
-                    <span className={`${s.propFilter}`}>Bedroom</span>
-                    <span className={`${s.propFilter}`}>Bathroom</span>
-                    <span className={`${s.propFilter}`}>Home type</span>
-                    <span className={`${s.propFilter} flex justify-between`}>
-                        <span>Price low to high</span>
-                        <Image src='/icons/expand_more.svg' alt='Arrow down' width={24} height={24} />
-                    </span>
-                </div>
-                <div className='flex mt-[17px] text-center'>
-                    <span className={`${s.prop}`}>Rent</span>
-                    <span className={`${s.prop} ${s.propActive}`}>Buy</span>
-                </div>
-            </div>
+            <PageSearch type='ready' />
             <div className='mt-[9px] flex flex-wrap'>
                 <PropertyCard
                     id={2}

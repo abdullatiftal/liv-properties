@@ -9,6 +9,19 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            screens: {
+                'xs' : '320px',
+                'msm' : '480px',
+                'small': '920px',
+                'bigtab': '1025px',
+                'smlap': '1100px',
+                'mdlap': '1366px',
+                '3xl': '1536px',
+                '4xl': '1630px',
+                '4xlh': {
+                    'raw': '((min-width: 920px) and (min-height: 1080px) and (max-width:1280px))'
+                }
+            },
             gridTemplateColumns: {
                 '13': 'repeat(13, minmax(0, 1fr))',
             },
