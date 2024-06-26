@@ -1,39 +1,39 @@
 @font-face {
-    font-family: "Helvetica Neue";
-    src: url("/fonts/HelveticaNeueMedium.otf") format("truetype");
+    font-family: 'Helvetica Neue';
+    src: url('/fonts/HelveticaNeueMedium.otf') format('truetype');
     font-weight: 400;
 }
 
 @font-face {
-    font-family: "Helvetica Neue";
-    src: url("/fonts/HelveticaNeueBold.otf") format("truetype");
+    font-family: 'Helvetica Neue';
+    src: url('/fonts/HelveticaNeueBold.otf') format('truetype');
     font-weight: 700;
 }
 
 @font-face {
-    font-family: "Helvetica Neue";
-    src: url("/fonts/HelveticaNeueRoman.otf") format("truetype");
+    font-family: 'Helvetica Neue';
+    src: url('/fonts/HelveticaNeueRoman.otf') format('truetype');
     font-weight: 300;
 }
 
 @font-face {
-    font-family: "Gotham";
-    src: url("/fonts/GothamMedium.ttf") format("truetype");
+    font-family: 'Gotham';
+    src: url('/fonts/GothamMedium.ttf') format('truetype');
     font-weight: 400;
 }
 
 @font-face {
-    font-family: "Gotham";
-    src: url("/fonts/GothamBook.ttf") format("truetype");
+    font-family: 'Gotham';
+    src: url('/fonts/GothamBook.ttf') format('truetype');
     font-weight: 200;
 }
 
 .helveticaNeue {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .gotham {
-    font-family: "Gotham";
+    font-family: 'Gotham';
 }
 
 body {
@@ -46,7 +46,7 @@ body {
     flex-direction: column;
 }
 
-@media screen and (min-width:920px) {
+@media screen and (min-width: 920px) {
     .verticalPanel {
         height: 100%;
         width: 100%;
@@ -64,269 +64,268 @@ body {
     padding-top: 250px;
 }
 
-@media screen and (max-width:1023px) {
+@media screen and (max-width: 1023px) {
     .verticalPanel {
         padding-top: 100px;
     }
 }
 
-@media screen and (max-width:919px) {
+@media screen and (max-width: 919px) {
     .verticalPanel {
         padding-top: 80px;
     }
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
     .verticalPanel {
         padding-top: 50px;
     }
 }
 
-@media screen and (max-width:620px) {
+@media screen and (max-width: 620px) {
     .verticalPanel:first-child {
         padding-top: 0px;
     }
 }
 
-.verticalPanel:last-child{
+.verticalPanel:last-child {
     position: relative;
-    @apply pb-[30px] sm:pb-[60px] small:pb-[30px] lg:pb-[60px];
+    @apply pb-[30px] sm:pb-[60px] lg:pb-[60px] small:pb-[30px];
 }
-@media screen and (min-width:920px) and (max-width:1023px) {
-    .verticalPanel:last-child{
+@media screen and (min-width: 920px) and (max-width: 1023px) {
+    .verticalPanel:last-child {
         padding-top: 30px;
     }
 }
 
-.services-cta > div{
+.services-cta > div {
     padding: 50px 40px;
 }
 
-@media screen and (max-width:619px) {
-    .services-cta > div{
+@media screen and (max-width: 619px) {
+    .services-cta > div {
         padding: 30px 30px 20px;
     }
 }
-@media screen and (min-width:1024px) and (max-height:800px) {
+@media screen and (min-width: 1024px) and (max-height: 800px) {
     .verticalPanel {
         padding-top: 220px;
     }
 }
 
-@media screen and (max-height:800px) {
+@media screen and (max-height: 800px) {
     .verticalPanelInner {
         gap: 15px;
     }
 }
 
-@media screen and (max-width:919px) {
+@media screen and (max-width: 919px) {
     .verticalPanelInner.instagram-sec {
         gap: 15px;
     }
 }
 
-@media screen and (min-width:620px) and (max-height:880px) {
-    .services-cta > div{
+@media screen and (min-width: 620px) and (max-height: 880px) {
+    .services-cta > div {
         padding: 45px 30px;
     }
 }
-@media screen and (min-width:620px) and (max-height:850px) {
-    .verticalPanelInner.services{
+@media screen and (min-width: 620px) and (max-height: 850px) {
+    .verticalPanelInner.services {
         gap: 20px;
     }
-    .services-cta > div{
+    .services-cta > div {
         padding: 35px 30px;
     }
-    .verticalPanelInner.featured-properties{
+    .verticalPanelInner.featured-properties {
         gap: 15px;
     }
-    .verticalPanelInner.featured-properties .property-card{
+    .verticalPanelInner.featured-properties .property-card {
         margin-top: 0px;
     }
 }
-@media screen and (min-width:620px) and (max-height:768px) {
-    .services-cta > div{
+@media screen and (min-width: 620px) and (max-height: 768px) {
+    .services-cta > div {
         padding: 20px 30px;
     }
 }
-@media screen and (min-width:620px) and (min-height:920px) {
-    .verticalPanelInner.services{
+@media screen and (min-width: 620px) and (min-height: 920px) {
+    .verticalPanelInner.services {
         gap: 50px;
     }
-    .verticalPanelInner.featured-properties{
+    .verticalPanelInner.featured-properties {
         gap: 20px;
     }
 }
-@media screen and (min-width:920px) and (min-height:1000px) {
-    .services-cta > div{
+@media screen and (min-width: 920px) and (min-height: 1000px) {
+    .services-cta > div {
         padding: 80px 40px;
     }
 }
 
-@media screen and (min-width:620px) and (min-height:1081px) {
-    .services-cta > div{
+@media screen and (min-width: 620px) and (min-height: 1081px) {
+    .services-cta > div {
         padding: 80px 40px 150px;
     }
 }
 
-@media screen and (min-width:1100px) {
+/* @media screen and (min-width:1100px) {
     .featured-properties_grid{
         display: flex;
     }
-}
+} */
 
-@media screen and (max-width:1023px) {
-    .featured-properties_grid{
-        display: flex;
+@media screen and (max-width: 1023px) {
+    .featured-properties_grid {
+        /* display: flex; */
         flex-wrap: wrap;
         /* column-gap: 30px; */
         row-gap: 30px;
     }
 }
 
-@media screen and (min-width:920px) and (max-width:1023px) and (max-height:1000px) {
-    .featured-properties_grid > div:nth-child(n+2):not(.explore-all){
+@media screen and (min-width: 920px) and (max-width: 1023px) and (max-height: 1000px) {
+    .featured-properties_grid > div:nth-child(n + 2):not(.explore-all) {
         display: none;
     }
 }
 
-@media screen and (min-width:1301px) and (max-width:1400px){
-    .featured-properties_grid > div{
+@media screen and (min-width: 1301px) and (max-width: 1400px) {
+    .featured-properties_grid > div {
         flex: 1;
         width: 25% !important;
     }
     .featured-properties_grid > div a > div,
-    .featured-properties_grid > div a img{
+    .featured-properties_grid > div a img {
         width: auto !important;
         height: 293px !important;
     }
-    .featured-properties_grid a img{
+    .featured-properties_grid a img {
         object-fit: cover;
     }
 }
 
-@media screen and (min-width:920px) and (max-width:1300px) and (max-height:1080px) {
-    .featured-properties_grid > div:nth-child(n+3):not(.explore-all){
+@media screen and (min-width: 920px) and (max-width: 1300px) and (max-height: 1080px) {
+    .featured-properties_grid > div:nth-child(n + 3):not(.explore-all) {
         display: none;
     }
 }
-@media screen and (min-width:920px) and (max-width:1023px) and (max-height:1000px) {
-    .featured-properties_grid > div:nth-child(n+2):not(.explore-all),
-    .featured-properties_grid > div:nth-child(n+3):not(.explore-all){
+@media screen and (min-width: 920px) and (max-width: 1023px) and (max-height: 1000px) {
+    .featured-properties_grid > div:nth-child(n + 2):not(.explore-all),
+    .featured-properties_grid > div:nth-child(n + 3):not(.explore-all) {
         display: none;
     }
 }
 
-@media screen and (min-width:1024px) and (max-width:1100px){
-    .featured-properties_grid > div{
+@media screen and (min-width: 1024px) and (max-width: 1100px) {
+    .featured-properties_grid > div {
         width: 100% !important;
         min-width: 285px !important;
         height: 350px !important;
     }
     .featured-properties_grid a > div,
     .featured-properties_grid .property-card_img,
-    .featured-properties_grid .react-loading-skeleton{
+    .featured-properties_grid .react-loading-skeleton {
         width: 100% !important;
         height: 250px !important;
     }
-    .featured-properties_grid img{
+    .featured-properties_grid img {
         object-fit: cover;
     }
 }
 
-@media screen and (max-width:919px){
-    .featured-properties_grid{
-        
+@media screen and (max-width: 919px) {
+    .featured-properties_grid {
     }
-    .featured-properties_grid > div{
+    .featured-properties_grid > div {
         height: 350px !important;
     }
-    .featured-properties_grid .property-card{
+    .featured-properties_grid .property-card {
         width: 50% !important;
     }
-    .featured-properties_grid .property-card.property-card.explore-all{
+    .featured-properties_grid .property-card.property-card.explore-all {
         width: 100% !important;
     }
     .featured-properties_grid a > div,
     .featured-properties_grid .property-card_img,
-    .featured-properties_grid .react-loading-skeleton{
+    .featured-properties_grid .react-loading-skeleton {
         width: 100% !important;
         height: 250px !important;
     }
-    .featured-properties_grid img{
+    .featured-properties_grid img {
         object-fit: cover;
     }
-    .featured-properties_grid .property-card.explore-all{
+    .featured-properties_grid .property-card.explore-all {
         height: auto !important;
     }
-    .featured-properties .property-card{
+    .featured-properties .property-card {
         margin-top: 0px;
     }
 }
-@media screen and (max-width:639px){
-    .featured-properties_grid{
+@media screen and (max-width: 639px) {
+    .featured-properties_grid {
         flex-direction: column;
     }
 }
 
-@media screen and (max-width:639px){
-    .featured-properties_grid{
+@media screen and (max-width: 639px) {
+    .featured-properties_grid {
         row-gap: 20px;
     }
 
-    .featured-properties_grid > div{
+    .featured-properties_grid > div {
         height: auto !important;
     }
-    .featured-properties_grid .property-card{
+    .featured-properties_grid .property-card {
         width: 100% !important;
         overflow: hidden;
         position: relative;
     }
     .featured-properties_grid a > div,
-    .featured-properties_grid .react-loading-skeleton{
+    .featured-properties_grid .react-loading-skeleton {
         width: 100% !important;
         height: 250px !important;
     }
-    .featured-properties_grid .property-card_img{
+    .featured-properties_grid .property-card_img {
         height: 250px !important;
     }
-    .featured-properties_grid img{
+    .featured-properties_grid img {
         object-fit: cover;
     }
-    .featured-properties_grid .property-card.explore-all{
+    .featured-properties_grid .property-card.explore-all {
         height: auto !important;
     }
-    .featured-properties .property-card{
+    .featured-properties .property-card {
         margin-top: 0px;
     }
 }
 
-@media screen(small){
-    .investment-experience p{
+@media screen(small) {
+    .investment-experience p {
         margin-right: 30px;
     }
 }
 
 @media screen(3xl) {
-    .investment-experience p{
-        margin-right: calc(52px + 30px)
+    .investment-experience p {
+        margin-right: calc(52px + 30px);
     }
 }
 
-.ellipse-text{
+.ellipse-text {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical
+    -webkit-box-orient: vertical;
 }
 
-.react-loading-skeleton.loaded::after{
+.react-loading-skeleton.loaded::after {
     display: none;
 }
 
-@media screen and (max-width:1100px){
-    .react-loading-skeleton{
+@media screen and (max-width: 1100px) {
+    .react-loading-skeleton {
         background-color: transparent !important;
         --base-color: transparent !important;
         --highlight-color: transparent !important;
@@ -335,5 +334,7 @@ body {
 
 input.autofill-input:-webkit-autofill,
 input.autofill-input:-webkit-autofill:focus {
-    transition: background-color 0s 600000s, color 0s 600000s !important;
+    transition:
+        background-color 0s 600000s,
+        color 0s 600000s !important;
 }

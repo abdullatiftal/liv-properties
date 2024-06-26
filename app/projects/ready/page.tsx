@@ -1,17 +1,26 @@
-import Image from 'next/image'
-import s from '@/app/ui/main.module.css'
-import '@/app/ui/index.css'
-import { PropertyCard } from '@/app/components'
-import { PageSearch } from '@/app/components'
+import Image from 'next/image';
+import s from '@/app/ui/main.module.css';
+import '@/app/ui/index.css';
+import { PropertyCard } from '@/app/components';
+import { PageSearch } from '@/app/components';
 
 export default async function ReadyProjectsPage() {
     return (
-        <div className="mb-[30px] sm:mb-[60px] small:mb-[83px] 3xl:max-w-[1200px] w-full">
+        <div className='mb-[30px] w-full sm:mb-[60px] small:mb-[83px] 3xl:max-w-[1200px]'>
             <div className='flex flex-wrap gap-8'>
-                <div className='text-[40px] small:text-[69px] leading-[38px] small:leading-[88px] font-[700]'>
-                    <h2>Ready<br/>Projects</h2>
-                    <Image src='/images/organic-house.webp' alt='Home and a car' width={1404} height={885}
-                        className='z-[-30] absolute top-[140px] sm:top-[200px] lg:top-[340px] right-0 translate-y-[-25%] sm:translate-y-[-45%] lg:translate-y-[-60%] max-w-[95dvw] sm:max-w-full pointer-events-none' />
+                <div className='text-[40px] font-[700] leading-[38px] small:text-[69px] small:leading-[88px]'>
+                    <h2>
+                        Ready
+                        <br />
+                        Projects
+                    </h2>
+                    <Image
+                        src='/images/organic-house.webp'
+                        alt='Home and a car'
+                        width={1404}
+                        height={885}
+                        className='pointer-events-none absolute right-0 top-[140px] z-[-30] max-w-[95dvw] translate-y-[-25%] sm:top-[200px] sm:max-w-full sm:translate-y-[-45%] lg:top-[340px] lg:translate-y-[-60%]'
+                    />
                 </div>
             </div>
             <PageSearch type='ready' />
@@ -106,5 +115,5 @@ export default async function ReadyProjectsPage() {
                 />
             </div>
         </div>
-    )
+    );
 }

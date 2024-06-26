@@ -1,56 +1,74 @@
-'use client'
+'use client';
 
-import '@/app/ui/index.css'
-import Image from 'next/image'
-import s from '@/app/ui/main.module.css'
-import { useState, useLayoutEffect } from 'react'
-import { Select } from '@/app/components'
+import '@/app/ui/index.css';
+import Image from 'next/image';
+import s from '@/app/ui/main.module.css';
+import { useState, useLayoutEffect } from 'react';
+import { Select } from '@/app/components';
 // import { Select, SelectItem } from "@nextui-org/react"
 
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-type DealType = 'buy' | 'rent'
-
+type DealType = 'buy' | 'rent';
 
 export const HomeSearch = () => {
-    const [dealType, setDealType] = useState<DealType>('buy')
-    const [isLargeScreen, setIsLargeScreen] = useState(false)
-    const [projType, setProjType] = useState<'ready' | 'new'>('ready')
-    const [cb, setCb] = useState('')
-    const [location, setLocation] = useState('')
-    const [price, setPrice] = useState('')
+    const [dealType, setDealType] = useState<DealType>('buy');
+    const [isLargeScreen, setIsLargeScreen] = useState(false);
+    const [projType, setProjType] = useState<'ready' | 'new'>('ready');
+    const [cb, setCb] = useState('');
+    const [location, setLocation] = useState('');
+    const [price, setPrice] = useState('');
 
-    const [selectedOption, setSelectedOption] = useState<'buy' | 'rent'>('buy')
+    const [selectedOption, setSelectedOption] = useState<'buy' | 'rent'>('buy');
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedOption(e.target.value as 'buy' | 'rent')
-    }
+        setSelectedOption(e.target.value as 'buy' | 'rent');
+    };
 
     useLayoutEffect(() => {
-        const handleResize = () => setIsLargeScreen(window.innerWidth >= 640)
-        handleResize()
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
+        const handleResize = () => setIsLargeScreen(window.innerWidth >= 640);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return isLargeScreen ? (
-        <div className='mt-[250px] small:mt-[30px] z-[3] home-search'>
-            <div className='px-[3vw] sm:px-0 small:px-[85px] max-[639px]:mx-[3vw] max-[639px]:w-full max-[639px]:text-center flex text-sm'>
-                <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] ${projType === 'ready' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
-                    onClick={() => setProjType('ready')}>Ready</div>
-                <div className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] ${projType === 'new' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
-                    onClick={() => setProjType('new')}>New Projects</div>
+        <div className='home-search z-[3] mt-[250px] small:mt-[30px]'>
+            <div className='max-[639px]:mx-[3vw] max-[639px]:w-full max-[639px]:text-center flex px-[3vw] text-sm sm:px-0 small:px-[85px]'>
+                <div
+                    className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] ${projType === 'ready' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
+                    onClick={() => setProjType('ready')}
+                >
+                    Ready
+                </div>
+                <div
+                    className={`max-[639px]:flex-1 pb-[8px] sm:min-w-[132px] ${projType === 'new' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
+                    onClick={() => setProjType('new')}
+                >
+                    New Projects
+                </div>
             </div>
-            <div className='mt-[15px] ml-[-13px] px-[3vw] sm:px-0 small:px-[85px] flex flex-wrap text-sm'>
+            <div className='ml-[-13px] mt-[15px] flex flex-wrap px-[3vw] text-sm sm:px-0 small:px-[85px]'>
                 <Select
-                    options={[{ value: 'rent', label: 'Rent' }, { value: 'buy', label: 'Buy' }]}
+                    options={[
+                        { value: 'rent', label: 'Rent' },
+                        { value: 'buy', label: 'Buy' }
+                    ]}
                     value={dealType}
                     onChange={(v) => setDealType(v as DealType)}
                 />
                 <div className={`mx-[11px] ${s.hoverable}`}>
-                    <input type="text" name="cb" id="cb_input" value={cb} onChange={(e) => setCb(e.target.value)} className={`small:min-w-[150px] h-full text-center block border-0 py-1.5 bg-transparent
-                    ring-0 ring-inset ring-transparent focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] hover:ring-[#EDDFD0]/50 sm:leading-6
-                    transition duration-200 ease-in-out placeholder-[#eddfd0] text-[100%]`} placeholder='Community or Building' />
+                    <input
+                        type='text'
+                        name='cb'
+                        id='cb_input'
+                        value={cb}
+                        onChange={(e) => setCb(e.target.value)}
+                        className={`block h-full border-0 bg-transparent py-1.5 text-center text-[100%]
+                    placeholder-[#eddfd0] ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50
+                    focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6 small:min-w-[150px]`}
+                        placeholder='Community or Building'
+                    />
                 </div>
                 {/* <div className={`mr-[11px] relative m-4 max-w-[fit-content] group ${s.hoverable}`}>
                     <input type='text' className="outline-none px-3 py-3 peer ring-transparent bg-transparent border-0" placeholder=" " value={cb} onChange={(e) => setCb(e.target.value)} />
@@ -70,50 +88,114 @@ export const HomeSearch = () => {
                 </div> */}
                 <div className={`${s.line}`} />
                 <div className={`mx-[11px] ${s.hoverable}`}>
-                    <input type="text" name="location" id="location_input" value={location} onChange={(e) => setLocation(e.target.value)} className={`w-[80px] small:w-[110px] h-full text-center block border-0 py-1.5 bg-transparent
-                    ring-0 ring-inset ring-transparent focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] hover:ring-[#EDDFD0]/50 sm:leading-6
-                    transition duration-200 ease-in-out placeholder-[#eddfd0] text-[100%] ${s.hoverable}`} placeholder='Location' />
+                    <input
+                        type='text'
+                        name='location'
+                        id='location_input'
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        className={`block h-full w-[80px] border-0 bg-transparent py-1.5 text-center text-[100%]
+                    placeholder-[#eddfd0] ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50
+                    focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6 small:w-[110px] ${s.hoverable}`}
+                        placeholder='Location'
+                    />
                 </div>
                 <div className={`${s.line}`} />
                 <div className={`mx-[11px] ${s.hoverable}`}>
-                    <input type="text" name="price" id="price_input" value={price} onChange={(e) => setPrice(e.target.value)} className={`w-[80px] small:w-[110px] h-full text-center block border-0 py-1.5 bg-transparent
-                    ring-0 ring-inset ring-transparent focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] hover:ring-[#EDDFD0]/50 sm:leading-6
-                    transition duration-200 ease-in-out placeholder-[#eddfd0] text-[100%] ${s.hoverable}`} placeholder='Price' />
+                    <input
+                        type='text'
+                        name='price'
+                        id='price_input'
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        className={`block h-full w-[80px] border-0 bg-transparent py-1.5 text-center text-[100%]
+                    placeholder-[#eddfd0] ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50
+                    focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6 small:w-[110px] ${s.hoverable}`}
+                        placeholder='Price'
+                    />
                 </div>
                 <div className={`${s.line}`} />
-                <button className={`ml-[18px] mr-[0px] small:mx-[18px] py-3 pl-2 grid place-items-center grid-cols-2 gap-1 ${s.hoverable}`}>
+                <button
+                    className={`ml-[18px] mr-[0px] grid grid-cols-2 place-items-center gap-1 py-3 pl-2 small:mx-[18px] ${s.hoverable}`}
+                >
                     Search
-                    <Image src='/icons/search.svg' alt='Search icon' width={17} height={17} className='ml-[-20px]' />
+                    <Image
+                        src='/icons/search.svg'
+                        alt='Search icon'
+                        width={17}
+                        height={17}
+                        className='ml-[-20px]'
+                    />
                 </button>
             </div>
         </div>
     ) : (
         <>
-            <div className='px-[3vw] mt-[300px] xl:mt-[200px] w-full text-center flex text-sm'>
-                <div className={`flex-1 pb-[8px] min-w-[132px] border-b-[3px] border-solid border-[#eddfd0]`}>Ready</div>
-                <div className={`flex-1 pb-[8px] min-w-[132px] border-b border-solid border-[#eddfd0]`}>New Projects</div>
+            <div className='mt-[300px] flex w-full px-[3vw] text-center text-sm xl:mt-[200px]'>
+                <div
+                    className={`min-w-[132px] flex-1 border-b-[3px] border-solid border-[#eddfd0] pb-[8px]`}
+                >
+                    Ready
+                </div>
+                <div
+                    className={`min-w-[132px] flex-1 border-b border-solid border-[#eddfd0] pb-[8px]`}
+                >
+                    New Projects
+                </div>
             </div>
-            <div className='mt-[15px] px-[3vw] flex flex-col text-sm'>
-                <button className='py-4 flex justify-between grid-cols-2 gap-1 hover:bg-white/30 active:bg-white/60 hover:text-gray-700
-                    border-b border-solid border-[#eddfd0] border-opacity-60 active:text-black transition duration-200 ease-in-out'>
+            <div className='mt-[15px] flex flex-col px-[3vw] text-sm'>
+                <button
+                    className='flex grid-cols-2 justify-between gap-1 border-b border-solid border-[#eddfd0] border-opacity-60
+                    py-4 transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
+                >
                     Buy
-                    <Image src='/icons/expand_more.svg' alt='Arrow down' width={29} height={29} className='mt-[-5px]' />
+                    <Image
+                        src='/icons/expand_more.svg'
+                        alt='Arrow down'
+                        width={29}
+                        height={29}
+                        className='mt-[-5px]'
+                    />
                 </button>
-                <button className='pt-[24px] pb-[15px] flex hover:bg-white/30 active:bg-white/60 hover:text-gray-700 active:text-black transition duration-200 ease-in-out
-                    border-b border-solid border-[#eddfd0] border-opacity-60'>Community or Building</button>
-                <button className='pt-[24px] pb-[15px] flex justify-between grid-cols-2 gap-1 hover:bg-white/30 active:bg-white/60 hover:text-gray-700
-                        border-b border-solid border-[#eddfd0] border-opacity-60 active:text-black transition duration-200 ease-in-out'>
+                <button
+                    className='flex border-b border-solid border-[#eddfd0] border-opacity-60 pb-[15px] pt-[24px] transition duration-200 ease-in-out
+                    hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
+                >
+                    Community or Building
+                </button>
+                <button
+                    className='flex grid-cols-2 justify-between gap-1 border-b border-solid border-[#eddfd0] border-opacity-60 pb-[15px]
+                        pt-[24px] transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
+                >
                     Location
-                    <Image src='/icons/location_round.svg' alt='Location' width={24} height={24} className='mt-[-5px] mr-[5px]' />
+                    <Image
+                        src='/icons/location_round.svg'
+                        alt='Location'
+                        width={24}
+                        height={24}
+                        className='mr-[5px] mt-[-5px]'
+                    />
                 </button>
-                <button className='pt-[24px] pb-[15px] flex hover:bg-white/30 active:bg-white/60 hover:text-gray-700 active:text-black transition duration-200 ease-in-out
-                    border-b border-solid border-[#eddfd0] border-opacity-60'>Price</button>
-                <button className='mt-[26px] mx-auto px-[30px] py-[10px] w-[114px] flex gap-1 rounded-3xl bg-[#EDDFD0] hover:bg-white/30 text-[#916940]
-                    active:bg-white/60 hover:text-gray-700 active:text-black transition duration-200 ease-in-out'>
+                <button
+                    className='flex border-b border-solid border-[#eddfd0] border-opacity-60 pb-[15px] pt-[24px] transition duration-200 ease-in-out
+                    hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
+                >
+                    Price
+                </button>
+                <button
+                    className='mx-auto mt-[26px] flex w-[114px] gap-1 rounded-3xl bg-[#EDDFD0] px-[30px] py-[10px] text-[#916940] transition
+                    duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
+                >
                     Search
-                    <Image src='/icons/search_brown.svg' alt='Search icon' width={13} height={13} className='mt-[2px]' />
+                    <Image
+                        src='/icons/search_brown.svg'
+                        alt='Search icon'
+                        width={13}
+                        height={13}
+                        className='mt-[2px]'
+                    />
                 </button>
             </div>
         </>
-    )
-}
+    );
+};
