@@ -9,7 +9,7 @@ export const Footer = () => {
     return (
         <footer
             className={`min-[1440px]-h-[477px] max-[639px]:bg-bottom relative bg-cover`}
-            style={{ backgroundImage: 'url("/images/ft-bg.jpeg")' }}
+            style={{ backgroundImage: 'url("/images/ft-bg.webp")' }}
         >
             <div className={`z-[1] ${styles.tint} z-[1]`}></div>
             <div className='relative z-[2] flex flex-wrap gap-x-[30px] gap-y-[30px] px-[3vw] pt-[40px] sm:justify-between sm:px-[80px] lg:pt-[80px] small:gap-y-[50px] bigtab:flex-nowrap'>

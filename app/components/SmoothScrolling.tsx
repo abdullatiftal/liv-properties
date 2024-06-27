@@ -1,5 +1,5 @@
-'use client'
-import { ReactLenis } from '@studio-freight/react-lenis'
+'use client';
+import { ReactLenis } from '@studio-freight/react-lenis';
 
 export function SmoothScrolling({ children }: { children: React.ReactNode }) {
     return (
@@ -7,5 +7,5 @@ export function SmoothScrolling({ children }: { children: React.ReactNode }) {
             <>{/**@ts-ignore */}</>
             {children}
         </ReactLenis>
-    )
+    );
 }
