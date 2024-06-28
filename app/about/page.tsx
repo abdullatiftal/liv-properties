@@ -1,23 +1,38 @@
-import '@/app/ui/index.css'
-import Image from 'next/image'
-import { Instagram, WhoWeAre } from '@/app/components'
+import '@/app/ui/index.css';
+import { Instagram, WhoWeAre, Loading } from '@/app/components';
+import { AboutUs } from '@/app/types';
+import { fetchData } from '@/app/constants';
+import { Metadata } from 'next';
+import SubHeader from './SubHeader';
 
-export default async function AboutPage() {
-    return (
-        <div className='3xl:max-w-[1200px] w-full mx-auto'>
-            <div className="relative 3xl:max-w-[1200px] w-full mx-auto">
-                <div className='text-[40px] small:text-[69px] leading-[38px] small:leading-[88px] font-[700]'>
-                    <h2>Who we<br/>are</h2>
-                    <div className='z-[-30] absolute top-[50%] translate-y-[-25%] sm:translate-y-[-45%] lg:translate-y-[-60%] scale-[1.4] md:scale-[1.3] lg:scale-[1.2] pointer-events-none'>
-                        <Image src='/images/aboutus-bulding.webp' alt='Home and a car' width={1404} height={885} />
-                    </div>
+export async function generateMetadata(): Promise<Metadata> {
+    const aboutUs: AboutUs = await fetchData(2);
+
+    return {
+        title: aboutUs.header[0].metatitle,
+        description: aboutUs.header[0].metadescription
+    };
+}
+
+const AboutPage = async () => {
+    const aboutUs: AboutUs = await fetchData(2);
+
+    if (!aboutUs || aboutUs === undefined) {
+        return <Loading />;
+    } else {
+        return (
+            <div className='mx-auto w-full 3xl:max-w-[1200px]'>
+                <div className='relative mx-auto w-full 3xl:max-w-[1200px]'>
+                    <SubHeader data={aboutUs} />
+                </div>
+                <WhoWeAre data={aboutUs} />
+
+                <div className='mb-[30px] mt-[50px] flex flex-wrap sm:mb-[60px]'>
+                    <Instagram />
                 </div>
             </div>
-            <WhoWeAre />
-            
-            <div className='mt-[50px] mb-[30px] sm:mb-[60px] flex flex-wrap'>
-                <Instagram />
-            </div>
-        </div>
-    )
-}
+        );
+    }
+};
+
+export default AboutPage;
