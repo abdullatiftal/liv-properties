@@ -5,12 +5,13 @@ import { fetchData } from '@/app/constants';
 import { Metadata } from 'next';
 import SubHeader from './SubHeader';
 
-export async function generateMetadata(): Promise<Metadata> {
-    const aboutUs: AboutUs = await fetchData(2);
+const aboutUs: AboutUs = await fetchData(2);
 
+export async function generateMetadata(): Promise<Metadata> {
     return {
         title: aboutUs.header[0].metatitle,
-        description: aboutUs.header[0].metadescription
+        description: aboutUs.header[0].metadescription,
+        keywords: aboutUs.header[0].metakeyword
     };
 }
 
