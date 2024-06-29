@@ -13,11 +13,17 @@ interface CustomSelectProps {
     options: Option[];
     value: string;
     onChange: (value: string) => void;
+    className: string;
 }
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export const Select = ({ options, value, onChange }: CustomSelectProps) => {
+export const Select = ({
+    options,
+    value,
+    onChange,
+    className
+}: CustomSelectProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleClick = () => {
@@ -30,9 +36,9 @@ export const Select = ({ options, value, onChange }: CustomSelectProps) => {
     };
 
     return (
-        <div className={`relative ${s.hoverable}`}>
+        <div className={`relative ${s.hoverable} ${className}`}>
             <button
-                className={`relative grid grid-cols-2 place-items-center gap-2 bg-transparent py-3 pl-2 text-[#eddfd0] focus:outline-none`}
+                className={`relative flex flex-row bg-transparent justify-between items-center py-3 pl-2 text-[#eddfd0] focus:outline-none min-w-[130px] w-full`}
                 onClick={handleClick}
             >
                 {capitalize(value)}
@@ -41,11 +47,11 @@ export const Select = ({ options, value, onChange }: CustomSelectProps) => {
                     alt='Arrow down'
                     width={32}
                     height={32}
-                    className={`ml-[-10px] mr-[12px] transition duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                    className={`transition duration-200 ${isOpen ? 'rotate-180' : ''}`}
                 />
             </button>
             <ul
-                className={`pointer-events-none absolute left-0 top-full mt-[-15px] w-full rounded bg-[#eddfd0] opacity-0
+                className={`pointer-events-none absolute left-0 top-full w-full rounded bg-[#eddfd0] opacity-0
                 shadow transition duration-200 ease-in-out ${isOpen ? 'pointer-events-auto z-10 opacity-100' : ''}`}
             >
                 {options.map((option) => (

@@ -55,6 +55,7 @@ export const HomeSearch = () => {
                         { value: 'buy', label: 'Buy' }
                     ]}
                     value={dealType}
+                    className='home-search'
                     onChange={(v) => setDealType(v as DealType)}
                 />
                 <div className={`mx-[11px] ${s.hoverable}`}>

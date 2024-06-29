@@ -1,0 +1,62 @@
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 5,
+            "unique_id": "e4da3b7fbbce2345d7772b0674a318d5",
+            "construction_status": "Ready",
+            "property_type": "Apartment",
+            "availablefor": "Rent",
+            "emirate": null,
+            "area": null,
+            "project_name": null,
+            "property_name": "Canal View Villa asdf",
+            "price": 800,
+            "number_of_bedroom": 1,
+            "number_of_bathroom": "2",
+            "area_in_sqft": "800",
+            "description": null,
+            "main_image": "http://localhost/demo/QET/project/assets/frontend/img/contact-2.jpg",
+            "images": "[\"http://localhost/demo/liv_properties/public/uploads/Destination/New%20Project.png\",\"http://localhost/demo/liv_properties/public/uploads/Destination/6b5e60e64d66d401e23da778f34a091e.png\"]",
+            "video": "http://localhost/demo/liv_properties/public/uploads/lead/Express%20Computers.pdf",
+            "floor_plan": "http://localhost/demo/liv_properties/public/uploads/lead/Express%20Computers.pdf",
+            "brochure": "http://localhost/demo/liv_properties/public/uploads/lead/Express%20Computers.pdf",
+            "services": "null",
+            "location": "greater noida uttar pardesh",
+            "map": "<iframe loading=\"lazy\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyAS49hXHr0hePqJdzalBGh3iTOuDrgXX00&amp;q=1+Sheikh+Mohammed+bin+Rashid+Blvd+-+Downtown+Dubai+-+Dubai+-+United+Arab+Emirates\" referrerpolicy=\"no-referrer-when-downgrade\" frameborder=\"0\" style=\"border:0\" allowfullscreen=\"\" width=\"100%\" height=\"280\"></iframe>",
+            "payment_terms": null,
+            "status": 0,
+            "list_order": null,
+            "featured": 0,
+            "updated_at": "2024-06-06T02:47:30.000000Z",
+            "created_at": "2024-06-04T19:44:27.000000Z"
+        }
+    ],
+    "first_page_url": "http://localhost/demo/liv_properties/api/search?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http://localhost/demo/liv_properties/api/search?page=1",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "http://localhost/demo/liv_properties/api/search?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": null,
+    "path": "http://localhost/demo/liv_properties/api/search",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
