@@ -10,27 +10,44 @@ interface Response {
     message: string;
 }
 
+interface FormData {
+    email: string;
+}
+
 export const FooterEmailForm = () => {
+    const [formData, setFormData] = useState<FormData>({
+        email: '',
+    });
     const [email, setEmail] = useState('');
-    // const { data: submittionResponse, error, isLoading } = useSWR<Response>(apiUrl + '/api/search', fetcher)
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const response = await fetch('/api/opt-in-email', {
+        const response = await fetch(apiUrl + '/api/newsletter-signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(email)
+            body: JSON.stringify(formData)
         });
+        const data = await response.json();
         if (!response.ok) {
             console.error('Error submitting form:', response.statusText);
+            setErrorMessage(
+                data.message ||
+                    'There was an error.'
+            );
+            setSuccessMessage(null);
         } else {
-            console.log('Form submitted successfully!');
+            setSuccessMessage(
+                'Subscribed successfully.'
+            );
+            setErrorMessage(null);
             setEmail('');
         }
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.name);
+        setFormData({ ...formData, [event.target.name]: event.target.value });
         setEmail(event.target.value);
     };
 
@@ -54,6 +71,16 @@ export const FooterEmailForm = () => {
                     Sign&nbsp;Up
                 </button>
             </div>
+            {successMessage && (
+                    <div className='mt-4'>
+                        {successMessage}
+                    </div>
+                )}
+                {errorMessage && (
+                    <div className='mt-4'>
+                        {errorMessage}
+                    </div>
+                )}
         </form>
     );
 };

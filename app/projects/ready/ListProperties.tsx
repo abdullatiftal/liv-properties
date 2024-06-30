@@ -30,7 +30,7 @@ const ListProperties = () => {
                 {!searchProperty.isLoading &&
                     searchProperty.data.total <= 0 && (
                         <div className='mx-auto inline-block'>
-                            <div className='w-full mt-[43px]'>
+                            <div className='mt-[43px] w-full'>
                                 <p>No results found</p>
                             </div>
                         </div>

@@ -25,48 +25,48 @@ export const Footer = () => {
                 </div>
                 <div className='max-[639px]:w-full order-2 text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
                     <div className='font-[700]'>EXPLORE RESIDENTIAL IN</div>
-                    <Link
-                        href='/'
+                    <a
+                        href='/projects/ready?availablefor=buy&construction_status=ready&location=Palm%20Jumeirah'
                         className={`mt-[7px] block w-fit ${s.hoverable}`}
                     >
                         Palm Jumeirah
-                    </Link>
-                    <Link
-                        href='/'
+                    </a>
+                    <a
+                        href='/projects/ready?availablefor=buy&construction_status=ready&location=Jumeirah%20Beach%20Residence'
                         className={`mt-[7px] block w-fit ${s.hoverable}`}
                     >
                         Jumeirah Beach Residence
-                    </Link>
-                    <Link
-                        href='/'
+                    </a>
+                    <a
+                        href='/projects/ready?availablefor=buy&construction_status=ready&location=Dubai%20Marina'
                         className={`mt-[7px] block w-fit ${s.hoverable}`}
                     >
                         Dubai Marina
-                    </Link>
-                    <Link
-                        href='/'
+                    </a>
+                    <a
+                        href='/projects/ready?availablefor=buy&construction_status=ready&location=Downtown%20Dubai'
                         className={`mt-[7px] block w-fit ${s.hoverable}`}
                     >
                         Downtown Dubai
-                    </Link>
-                    <Link
-                        href='/'
+                    </a>
+                    <a
+                        href='/projects/ready?availablefor=buy&construction_status=ready&location=Business%20Bay'
                         className={`mt-[7px] block w-fit ${s.hoverable}`}
                     >
                         Business Bay
-                    </Link>
-                    <Link
-                        href='/'
+                    </a>
+                    <a
+                        href='/projects/ready?availablefor=buy&construction_status=ready&location=Dubai%20Hills'
                         className={`mt-[7px] block w-fit ${s.hoverable}`}
                     >
                         Dubai Hills
-                    </Link>
-                    <Link
-                        href='/'
+                    </a>
+                    <a
+                        href='/projects/ready?availablefor=buy&construction_status=ready&location=City%20Walk'
                         className={`mt-[7px] block w-fit ${s.hoverable}`}
                     >
                         City Walk
-                    </Link>
+                    </a>
                 </div>
                 <div className='max-[639px]:w-full order-3 text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
                     <div className='font-[700]'>SLIM PROPERTY</div>

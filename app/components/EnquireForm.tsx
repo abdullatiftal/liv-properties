@@ -2,6 +2,8 @@
 
 import s from '@/app/ui/main.module.css';
 import { useState, useRef, useEffect } from 'react';
+import { apiUrl } from '../constants';
+// import { useAPI } from '../context/APIContext';
 
 const useAutoResizeTextarea = () => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -52,11 +54,15 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
     });
     const [selectedFile, setSelectedFile] = useState('');
     const { textareaRef, resize: resizeTextarea } = useAutoResizeTextarea();
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+    // const { token } = useAPI();
 
     const handleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-        console.log(event.target.name);
+        // console.log(event.target.name);
         setFormData({ ...formData, [event.target.name]: event.target.value });
         resizeTextarea();
     };
@@ -72,16 +78,33 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        const response = await fetch('/api/submit-form', {
+        // console.log(token);
+        const response = await fetch(apiUrl + '/api/submit-enquiry', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+                // 'X-CSRF-TOKEN': token
+            },
             body: JSON.stringify(formData)
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-            console.error('Error submitting form:', response.statusText);
+            console.error(
+                'Error submitting form:',
+                data.message || response.statusText
+            );
+            setErrorMessage(
+                data.message ||
+                    'There was an error submitting the form. Please try again.'
+            );
+            setSuccessMessage(null);
         } else {
-            console.log('Form submitted successfully!');
+            setSuccessMessage(
+                data.message || 'Form Submitted! We will get back to you shortly.'
+            );
+            setErrorMessage(null);
             setFormData({
                 name: '',
                 email: '',
@@ -90,6 +113,11 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                 message: ''
             });
         }
+    };
+
+    const closeAlert = () => {
+        setErrorMessage(null);
+        setSuccessMessage(null);
     };
 
     useEffect(() => {
@@ -126,8 +154,17 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            className={`block w-[100%] border-0 bg-transparent py-1.5 shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
-                                transition duration-200 ease-in-out focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6`}
+                            placeholder='Full Name'
+                            className={`block 
+                                w-[100%] 
+                                border-0 border-b-[1px] border-[#eddfd0] 
+                                bg-transparent 
+                                py-1.5 
+                                placeholder-[#eddfd0] 
+                                ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50 
+                                focus:border-0 focus:border-b-[1px] focus:border-[#eddfd0] focus:outline-none 
+                                focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] 
+                                sm:leading-6`}
                         />
                     </div>
                     <div className='w-full md:w-[calc(50%-26px)] msm:w-[calc(50%-15px)]'>
@@ -138,15 +175,24 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                             Email Address*
                         </label>
                         <input
-                            type='text'
+                            type='email'
                             name='email'
                             id='email'
                             autoComplete='email'
                             value={formData.email}
                             onChange={handleChange}
+                            placeholder='name@company.com'
                             required
-                            className={`block w-[100%] border-0 bg-transparent py-1.5 shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
-                                transition duration-200 ease-in-out focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6`}
+                            className={`block 
+                                w-[100%] 
+                                border-0 border-b-[1px] border-[#eddfd0] 
+                                bg-transparent 
+                                py-1.5 
+                                placeholder-[#eddfd0] 
+                                ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50 
+                                focus:border-0 focus:border-b-[1px] focus:border-[#eddfd0] focus:outline-none 
+                                focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] 
+                                sm:leading-6`}
                         />
                     </div>
                     <div className='w-full md:w-[calc(50%-26px)] msm:w-[calc(50%-15px)]'>
@@ -157,15 +203,25 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                             Contact Number*
                         </label>
                         <input
-                            type='text'
+                            type='tel'
                             name='phone'
                             id='phone'
                             autoComplete='tel'
                             value={formData.phone}
+                            placeholder='+971 50 123 4567'
+                            maxLength={12}
                             onChange={handleChange}
                             required
-                            className={`block w-[100%] border-0 bg-transparent py-1.5 shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
-                                transition duration-200 ease-in-out focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6`}
+                            className={`block 
+                                w-[100%] 
+                                border-0 border-b-[1px] border-[#eddfd0] 
+                                bg-transparent 
+                                py-1.5 
+                                placeholder-[#eddfd0] 
+                                ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50 
+                                focus:border-0 focus:border-b-[1px] focus:border-[#eddfd0] focus:outline-none 
+                                focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] 
+                                sm:leading-6`}
                         />
                     </div>
                     <div className='w-full md:w-[calc(50%-26px)] msm:w-[calc(50%-15px)]'>
@@ -182,8 +238,17 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                             value={formData.subject}
                             onChange={handleChange}
                             required
-                            className={`block w-[100%] border-0 bg-transparent py-1.5 shadow-[white_0px_1px_0_0] ring-1 ring-inset ring-transparent
-                                transition duration-200 ease-in-out focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6`}
+                            placeholder='Subject'
+                            className={`block 
+                                w-[100%] 
+                                border-0 border-b-[1px] border-[#eddfd0] 
+                                bg-transparent 
+                                py-1.5 
+                                placeholder-[#eddfd0] 
+                                ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50 
+                                focus:border-0 focus:border-b-[1px] focus:border-[#eddfd0] focus:outline-none 
+                                focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] 
+                                sm:leading-6`}
                         />
                     </div>
                 </div>
@@ -194,14 +259,19 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                     >
                         <div>Upload CV</div>
                         <div
-                            className='flex w-full cursor-pointer items-baseline justify-between bg-transparent py-1.5 pb-[28px] shadow-[white_0px_1px_0_0] ring-1 ring-inset
-                            ring-transparent transition duration-200 ease-in-out focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6'
+                            className='flex w-full 
+                            border-0 border-b-[1px] border-[#eddfd0] 
+                            cursor-pointer items-baseline justify-between 
+                            bg-transparent 
+                            py-1.5 pb-[28px]
+                            ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50 
+                            focus:border-0 focus:border-b-[1px] focus:border-[#eddfd0] focus:outline-none 
+                            sm:leading-6'
                         >
                             <span>{selectedFile}</span>
                             <button
-                                type='submit'
                                 className='rounded-3xl border border-solid border-[#EDDFD0] px-[50px] py-[15px] text-sm transition
-                            duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
+                            duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black z-[-1]'
                             >
                                 Upload
                             </button>
@@ -220,18 +290,28 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                         htmlFor='message'
                         className='text-sm font-medium leading-6'
                     >
-                        Your Message
+                        Your Message*
                     </label>
                     <div className='mt-2'>
                         <textarea
                             ref={textareaRef}
                             id='message'
+                            placeholder='Write your message here'
                             name='message'
                             rows={3}
                             value={formData.message}
                             onChange={handleChange}
-                            className='w-full border-0 bg-transparent py-1.5 shadow-[white_0px_1px_0_0]
-                                ring-1 ring-inset ring-transparent focus:ring-1 focus:ring-inset focus:ring-white sm:leading-6'
+                            required
+                            className='block 
+                                w-[100%] 
+                                border-0 border-b-[1px] border-[#eddfd0] 
+                                bg-transparent 
+                                py-1.5 
+                                placeholder-[#eddfd0] 
+                                ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50 
+                                focus:border-0 focus:border-b-[1px] focus:border-[#eddfd0] focus:outline-none 
+                                focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] 
+                                sm:leading-6'
                         ></textarea>
                     </div>
                 </div>
@@ -244,6 +324,25 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                         Submit
                     </button>
                 </div>
+                {(errorMessage || successMessage) && (
+                    <div
+                        className='relative mt-[25px] border-0 border-b-[1px] border-[#EDDFD0] px-4 py-3 max-w-[500px] mx-auto'
+                        role='alert'
+                    >
+                        <span className='block sm:inline'>{errorMessage || successMessage}</span>
+                        <span className='absolute bottom-0 right-0 top-0 px-4 py-3' onClick={closeAlert}>
+                            <svg
+                                className='h-6 w-6 fill-current text-[#EDDFD0]'
+                                role='button'
+                                xmlns='http://www.w3.org/2000/svg'
+                                viewBox='0 0 20 20'
+                            >
+                                <title>Close</title>
+                                <path d='M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z' />
+                            </svg>
+                        </span>
+                    </div>
+                )}
             </form>
         </>
     );

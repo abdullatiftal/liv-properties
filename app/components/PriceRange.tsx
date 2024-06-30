@@ -19,9 +19,9 @@ const PriceRange = ({ pr, setPr, className, setVisible }: PriceRangeProps) => {
     }, [pr]);
 
     const ref = useRef<HTMLDivElement>(null);
-    
+
     useEffect(() => {
-        const handleOutSideClick = (event: { target: any; }) => {
+        const handleOutSideClick = (event: { target: any }) => {
             if (!ref.current?.contains(event.target)) {
                 setVisible(false);
             }
@@ -67,6 +67,7 @@ const PriceRange = ({ pr, setPr, className, setVisible }: PriceRangeProps) => {
         if (isValidRange) {
             setPr(prMin + '-' + prMax);
         }
+        setVisible(false);
     };
 
     return (
@@ -96,7 +97,7 @@ const PriceRange = ({ pr, setPr, className, setVisible }: PriceRangeProps) => {
                         duration-200 ease-in-out hover:ring-[#EDDFD0]/50 focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0]`}
                         />
                         <button
-                            className={`cursor-pointer bg-[#827161] py-3 text-sm font-[500] text-white hover:bg-[#916940] disabled:bg-gray-400`}
+                            className={`cursor-pointer bg-[#827161] py-3 font-[500] text-white hover:bg-[#916940] disabled:bg-gray-400`}
                             type='reset'
                             disabled={!prMin && !prMax}
                         >
@@ -117,7 +118,7 @@ const PriceRange = ({ pr, setPr, className, setVisible }: PriceRangeProps) => {
                         duration-200 ease-in-out hover:ring-[#EDDFD0]/50 focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0]`}
                         />
                         <button
-                            className={`cursor-pointer bg-[#916940] py-3 text-sm font-[500] text-white hover:bg-[#827161] disabled:bg-gray-400`}
+                            className={`cursor-pointer bg-[#916940] py-3 font-[500] text-white hover:bg-[#827161] disabled:bg-gray-400`}
                             type='submit'
                             disabled={!prMin || !prMax}
                         >
