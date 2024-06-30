@@ -30,7 +30,7 @@ const ListProperties = () => {
                 {!searchProperty.isLoading &&
                     searchProperty.data.total <= 0 && (
                         <div className='mx-auto inline-block'>
-                            <div className='w-full md:mt-[43px]'>
+                            <div className='w-full mt-[43px]'>
                                 <p>No results found</p>
                             </div>
                         </div>
@@ -38,22 +38,21 @@ const ListProperties = () => {
 
                 {!searchProperty.isLoading &&
                     Array.isArray(searchProperty.data.data) &&
-                    searchProperty.data.data
-                        .map((p) => (
-                            <Fragment key={p.id}>
-                                <PropertyCard
-                                    id={p.id}
-                                    imageUrl={p.main_image}
-                                    altText={`Photo of ${p.property_name}`}
-                                    title={p.property_name}
-                                    location={p.location}
-                                    bedrooms={p.number_of_bedroom}
-                                    bathrooms={p.number_of_bathroom}
-                                    area={p.area_in_sqft}
-                                    price={p.price}
-                                />
-                            </Fragment>
-                        ))}
+                    searchProperty.data.data.map((p) => (
+                        <Fragment key={p.id}>
+                            <PropertyCard
+                                id={p.id}
+                                imageUrl={p.main_image}
+                                altText={`Photo of ${p.property_name}`}
+                                title={p.property_name}
+                                location={p.location}
+                                bedrooms={p.number_of_bedroom}
+                                bathrooms={p.number_of_bathroom}
+                                area={p.area_in_sqft}
+                                price={p.price}
+                            />
+                        </Fragment>
+                    ))}
             </div>
         );
     } else {

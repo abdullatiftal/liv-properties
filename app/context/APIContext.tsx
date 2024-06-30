@@ -14,7 +14,7 @@ import {
     ReadyProperties,
     SearchProperty,
     SearchParameters,
-    ContactUs,
+    ContactUs
 } from '@/app/types';
 
 export interface APIContextData {
@@ -96,7 +96,10 @@ export function APIContextProvider({ children }: { children: ReactNode }) {
         data: upcomingData,
         error: upcomingPropertiesError,
         isLoading: upcomingPropertiesisLoading
-    } = useSWR<UpcomingProperties>(`${apiUrl}/api/search?construction_status=upcoming`, fetcher);
+    } = useSWR<UpcomingProperties>(
+        `${apiUrl}/api/search?construction_status=upcoming`,
+        fetcher
+    );
 
     /*
      * get ready properties
@@ -105,7 +108,10 @@ export function APIContextProvider({ children }: { children: ReactNode }) {
         data: readyData,
         error: readyPropertiesError,
         isLoading: readyPropertiesisLoading
-    } = useSWR<ReadyProperties>(`${apiUrl}/api/search?construction_status=ready`, fetcher);
+    } = useSWR<ReadyProperties>(
+        `${apiUrl}/api/search?construction_status=ready`,
+        fetcher
+    );
 
     /*
      * get featured properties

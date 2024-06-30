@@ -96,12 +96,12 @@ export default async function Contact() {
                             )}`}
                         >
                             <Image
-                            src='/icons/x.svg'
-                            alt='X icon'
-                            width={13}
-                            height={13}
-                            className='mr-[13px] h-[13px] w-[13px]'
-                        />
+                                src='/icons/x.svg'
+                                alt='X icon'
+                                width={13}
+                                height={13}
+                                className='mr-[13px] h-[13px] w-[13px]'
+                            />
                         </Link>
                         <Link
                             href={`${getFieldValueByName(
@@ -110,12 +110,12 @@ export default async function Contact() {
                             )}`}
                         >
                             <Image
-                            src='/icons/instagram.svg'
-                            alt='Instagram icon'
-                            width={13}
-                            height={13}
-                            className='mr-[13px] h-[13px] w-[13px]'
-                        />
+                                src='/icons/instagram.svg'
+                                alt='Instagram icon'
+                                width={13}
+                                height={13}
+                                className='mr-[13px] h-[13px] w-[13px]'
+                            />
                         </Link>
                         <Link
                             href={`${getFieldValueByName(
@@ -124,12 +124,12 @@ export default async function Contact() {
                             )}`}
                         >
                             <Image
-                            src='/icons/linkedin.svg'
-                            alt='Linkedin icon'
-                            width={13}
-                            height={13}
-                            className='h-[13px] w-[13px]'
-                        />
+                                src='/icons/linkedin.svg'
+                                alt='Linkedin icon'
+                                width={13}
+                                height={13}
+                                className='h-[13px] w-[13px]'
+                            />
                         </Link>
                     </div>
                 </div>
@@ -144,10 +144,12 @@ export default async function Contact() {
                 </div>
             </div>
             <div className='text-[40px] font-[700] leading-[38px] small:text-[69px] small:leading-[88px]'>
-                <h2>{getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Form Heading'
-                            )}</h2>
+                <h2>
+                    {getFieldValueByName(
+                        contactUs?.['contact-us-section-1'],
+                        'Form Heading'
+                    )}
+                </h2>
             </div>
             <EnquireForm />
         </div>

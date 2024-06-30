@@ -17,3 +17,4 @@ export { MuiInput } from './MuiInput';
 export { Select } from './Select';
 export { ScrollingSections } from './ScrollingSections';
 export { PageSearch } from './PageSearch';
+export { Loading } from './Loading';

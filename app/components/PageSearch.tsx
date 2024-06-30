@@ -6,13 +6,12 @@ import { useState, useEffect } from 'react';
 import { useAPI } from '@/app/context/APIContext';
 import { Select } from '@/app/components';
 import { useRouter, useSearchParams } from 'next/navigation';
+import PriceRange from './PriceRange';
 
-type HomeTypeOption = 'Home Type'| 'Villa' | 'Apartment';
+type HomeTypeOption = 'Home Type' | 'Villa' | 'Apartment';
 type SelectedOption = 'Price low to high' | 'Price high to low';
 
-
 export const PageSearch = ({ type = 'ready' }) => {
-
     const [projType, setProjType] = useState<'rent' | 'buy' | ''>('');
     const [pr, setPr] = useState('');
     const [bedroom, setBedroom] = useState('');
@@ -22,6 +21,7 @@ export const PageSearch = ({ type = 'ready' }) => {
     const [selectedOption, setSelectedOption] =
         useState<SelectedOption>('Price low to high');
     const [textSearch, setTextSearch] = useState('');
+    const [visible, setVisible] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
     const router = useRouter();
@@ -29,7 +29,11 @@ export const PageSearch = ({ type = 'ready' }) => {
 
     const handleLocation = () => {
         if (location) setLocation('');
-    }
+    };
+
+    const handlePriceClick = () => {
+        setVisible((prevCheck) => !prevCheck);
+    };
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -47,7 +51,8 @@ export const PageSearch = ({ type = 'ready' }) => {
         if (numberOfBathroom) setBathroom(numberOfBathroom);
 
         const propertyType = params.get('property_type') as HomeTypeOption;
-        if (propertyType && propertyType !== 'Home Type') setHometype(propertyType);
+        if (propertyType && propertyType !== 'Home Type')
+            setHometype(propertyType);
 
         const locationParam = params.get('location');
         if (locationParam) setLocation(locationParam);
@@ -72,67 +77,77 @@ export const PageSearch = ({ type = 'ready' }) => {
     // set all the search parameters based on the selection
     useEffect(() => {
         const params = new URLSearchParams();
-    
+
         if (projType) params.set('availablefor', projType);
         if (pr) params.set('price_range', pr);
         if (bedroom) params.set('number_of_bedroom', bedroom);
         if (bathroom) params.set('number_of_bathroom', bathroom);
         if (hometype !== 'Home Type') params.set('property_type', hometype);
-        (type === 'ready') ? params.set('construction_status', type) : params.set('construction_status', 'upcoming');
+        type === 'ready'
+            ? params.set('construction_status', type)
+            : params.set('construction_status', 'upcoming');
         if (location) params.set('location', location);
         if (textSearch) params.set('search_text', textSearch);
-    
+
         const paramString = params.toString();
         const newSearchQuery = paramString ? `?${paramString}` : '';
-    
+
         setSearchQuery(newSearchQuery);
-    
-    }, [projType, pr, bedroom, bathroom, hometype, selectedOption, location, textSearch]);
+    }, [
+        projType,
+        pr,
+        bedroom,
+        bathroom,
+        hometype,
+        selectedOption,
+        location,
+        textSearch
+    ]);
 
     if (type === 'ready')
         return (
-            <div className='mt-[80px] lg:mt-[50px] text-[12px]'>
+            <div className='mt-[80px] text-[12px] lg:mt-[50px]'>
                 <div className='flex flex-col gap-4 sm:flex-row sm:flex-wrap'>
-                    <div className={`!py-3 ${s.propFilter} ${s.hoverable}`}>
-                        <input
-                            type='text'
-                            name='pr'
-                            id='pr_input'
-                            value={pr}
-                            onChange={(e) => setPr(e.target.value)}
-                            className={`block h-full border-0 bg-transparent py-1.5 text-center text-[100%]
-                        placeholder-[#eddfd0] ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50
-                        focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6 small:min-w-[150px] ${s.hoverable}`}
-                            placeholder='Price Range'
-                        />
+                    <div className={`!py-3 ${s.propFilter} ${s.hoverable} min-w-[calc(33.333%-0.8rem)] lg:min-w-[auto]`}>
+                        {visible && (
+                            <PriceRange setPr={setPr} pr={pr} setVisible={setVisible} className="absolute z-[10] bottom-[calc(100%-30px)] sm:bottom-[calc(100%-10px)] sm:left-[-50%]"
+                            />
+                        )}
+                        <button
+                            className='mt-[30px] flex flex-row items-center justify-start sm:justify-center px-[16px]
+                            py-3 pl-[13px] text-xs transition duration-200 ease-in-out sm:mt-0 w-full lg:w-auto sm:min-w-[150px]'
+                            onClick={handlePriceClick}
+                        >
+                            {!pr ? 'Price Range' : pr}
+                        </button>
                     </div>
-                    <div className={`!py-3 ${s.propFilter} ${s.hoverable}`}>
+                    <div className={`!py-3 ${s.propFilter} ${s.hoverable} min-w-[calc(33.333%-0.8rem)] lg:min-w-[auto]`}>
                         <input
                             name='bedroom'
                             type='number'
-                            min="1"
-                            max="20"
+                            min='1'
+                            max='20'
                             id='bedroom_input'
                             value={bedroom}
                             onChange={(e) => setBedroom(e.target.value)}
-                            className={`block h-full border-0 bg-transparent py-1.5 text-center text-[100%]
+                            className={`block h-full border-0 bg-transparent py-1.5 text-left sm:text-center text-[100%]
                         placeholder-[#eddfd0] ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50
-                        focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6 small:min-w-[150px] ${s.hoverable}`}
+                        focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6 w-full lg:w-auto sm:min-w-[150px] ${s.hoverable}`}
                             placeholder='Bedroom'
                         />
                     </div>
-                    <div className={`!py-3 ${s.propFilter} ${s.hoverable}`}>
+                    <div className={`!py-3 ${s.propFilter} ${s.hoverable} min-w-[calc(33.333%-1rem)] lg:min-w-[auto]`}>
                         <input
                             name='bathroom'
                             type='number'
-                            min="1"
-                            max="10"
+                            min='1'
+                            max='10'
                             id='bathroom_input'
                             value={bathroom}
                             onChange={(e) => setBathroom(e.target.value)}
-                            className={`block h-full border-0 bg-transparent py-1.5 text-center text-[100%]
+                            className={`block h-full border-0 bg-transparent py-1.5 text-left sm:text-center text-[100%]
                         placeholder-[#eddfd0] ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50
-                        focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6 small:min-w-[150px] ${s.hoverable}`}
+                        focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:leading-6 w-full lg:w-auto sm:min-w-[150px] ${s.hoverable}`}
                             placeholder='Bathroom'
                         />
                     </div>
@@ -152,7 +167,7 @@ export const PageSearch = ({ type = 'ready' }) => {
                             }
                         ]}
                         value={hometype}
-                        className={`page-search ${s.propFilter} mt-[-12px] sm:mt-0 min-w-[150px]`}
+                        className={`page-search ${s.propFilter} mt-[-12px] min-w-[calc(33.333%-0.5rem)] lg:min-w-[150px] sm:mt-0`}
                         onChange={(v) => setHometype(v as HomeTypeOption)}
                     />
                     <Select
@@ -167,30 +182,33 @@ export const PageSearch = ({ type = 'ready' }) => {
                             }
                         ]}
                         value={selectedOption}
-                        className={`page-search ${s.propFilter} mt-[-12px] sm:mt-0 min-w-[150px]`}
+                        className={`page-search ${s.propFilter} mt-[-12px] min-w-[calc(33.333%-0.5rem)] lg:min-w-[150px] sm:mt-0`}
                         onChange={(v) => setSelectedOption(v as SelectedOption)}
                     />
                 </div>
-                <div className='mt-[17px] flex flex-row text-center flex-wrap sm:flex-nowrap'>
+                <div className='mt-[17px] flex flex-row flex-wrap text-center lg:flex-nowrap'>
                     <div
-                        className={`max-[639px]:flex-1 py-3 min-w-[50%] sm:min-w-[160px] ${projType === 'rent' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
+                        className={`max-[639px]:flex-1 min-w-[50%] py-3 lg:min-w-[160px] ${projType === 'rent' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
                         onClick={() => setProjType('rent')}
                     >
                         Rent
                     </div>
                     <div
-                        className={`max-[639px]:flex-1 py-3 min-w-[50%] sm:min-w-[160px] ${projType === 'buy' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
+                        className={`max-[639px]:flex-1 min-w-[50%] py-3 lg:min-w-[160px] ${projType === 'buy' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] ${s.hoverable} cursor-pointer`}
                         onClick={() => setProjType('buy')}
                     >
                         Buy
                     </div>
-                    {location && <button
-                                className='mt-[30px] sm:mt-0 w-[180px] sm:w-auto sm:min-w-[150px] sm:ml-[30px] gap-[7px] rounded-3xl border border-solid border-[#EDDFD0] px-[16px] py-3 pl-[13px]
-                            text-xs transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black flex flex-row justify-between items-center' onClick={handleLocation}
-                            >
-                                <div>{location}</div>
-                                <span>X</span>
-                            </button>}
+                    {location && (
+                        <button
+                            className='mt-[30px] flex w-[180px] flex-row items-center justify-between gap-[7px] rounded-3xl border border-solid border-[#EDDFD0] px-[16px] py-3 pl-[13px]
+                            text-xs transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black lg:ml-[30px] lg:mt-0 sm:w-auto sm:min-w-[150px]'
+                            onClick={handleLocation}
+                        >
+                            <div>{location}</div>
+                            <span>X</span>
+                        </button>
+                    )}
                 </div>
             </div>
         );
@@ -198,7 +216,7 @@ export const PageSearch = ({ type = 'ready' }) => {
         <div className='mt-[80px] text-[12px] small:mt-[50px]'>
             <div className='flex flex-wrap gap-4'>
                 <div
-                    className={`${s.upcomingSearch} ${s.hoverable} flex justify-between`}
+                    className={`${s.upcomingSearch} ${s.hoverable} flex justify-between !w-full sm:!w-[291px]`}
                 >
                     <input
                         type='text'

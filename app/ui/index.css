@@ -320,6 +320,10 @@ body {
     -webkit-box-orient: vertical;
 }
 
+.ellipse-text-2 {
+    -webkit-line-clamp: 2;
+}
+
 .react-loading-skeleton.loaded::after {
     display: none;
 }
@@ -337,4 +341,63 @@ input.autofill-input:-webkit-autofill:focus {
     transition:
         background-color 0s 600000s,
         color 0s 600000s !important;
+}
+
+.home-search ul {
+    top: unset;
+    transform: translateY(-70%);
+    bottom: 0;
+    left: 12zpx;
+}
+
+/* .who-desc {
+    @apply lg:w-[calc(50%-13px)];
+}
+
+.who-desc:nth-child(1) p,
+.who-desc:nth-child(2) p{
+    display: none;
+}
+
+.who-desc:nth-child(1) p:nth-child(1),
+.who-desc:nth-child(1) p:nth-child(2),
+.who-desc:nth-child(2) p:last-child{
+    display: block;
+}
+
+.who-desc:nth-child(1) p:nth-child(2){
+    margin-top: 23px;
+} */
+.who-desc {
+    display: grid;
+    @apply grid-cols-[1fr] gap-[13px] lg:grid-cols-[1fr_1fr] lg:gap-[26px];
+    grid-auto-rows: min-content;
+}
+
+.who-desc p:nth-child(1),
+.who-desc p:nth-child(2) {
+    @apply lg:col-[1];
+}
+
+.who-desc p:nth-child(3) {
+    @apply lg:col-[2] lg:row-[1];
+}
+
+.two-col-desc {
+    display: grid;
+    @apply grid-cols-[1fr] gap-[13px] lg:grid-cols-[1fr_1fr] lg:gap-[26px];
+    grid-auto-rows: min-content;
+}
+
+.two-col-desc p {
+    @apply text-xs leading-[162%];
+}
+
+.two-col-desc p:nth-child(1),
+.two-col-desc p:nth-child(n + 1) {
+    @apply lg:col-[1];
+}
+
+.two-col-desc p:last-child {
+    @apply lg:col-[2] lg:row-[1];
 }

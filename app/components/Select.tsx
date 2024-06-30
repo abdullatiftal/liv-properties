@@ -38,7 +38,7 @@ export const Select = ({
     return (
         <div className={`relative ${s.hoverable} ${className}`}>
             <button
-                className={`relative flex flex-row bg-transparent justify-between items-center py-3 pl-2 text-[#eddfd0] focus:outline-none min-w-[130px] w-full`}
+                className={`relative flex w-full min-w-[130px] flex-row items-center justify-between bg-transparent py-3 pl-2 text-[#eddfd0] focus:outline-none`}
                 onClick={handleClick}
             >
                 {capitalize(value)}
