@@ -102,7 +102,8 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
             setSuccessMessage(null);
         } else {
             setSuccessMessage(
-                data.message || 'Form Submitted! We will get back to you shortly.'
+                data.message ||
+                    'Form Submitted! We will get back to you shortly.'
             );
             setErrorMessage(null);
             setFormData({
@@ -260,8 +261,8 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                         <div>Upload CV</div>
                         <div
                             className='flex w-full 
-                            border-0 border-b-[1px] border-[#eddfd0] 
                             cursor-pointer items-baseline justify-between 
+                            border-0 border-b-[1px] border-[#eddfd0] 
                             bg-transparent 
                             py-1.5 pb-[28px]
                             ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50 
@@ -270,8 +271,8 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                         >
                             <span>{selectedFile}</span>
                             <button
-                                className='rounded-3xl border border-solid border-[#EDDFD0] px-[50px] py-[15px] text-sm transition
-                            duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black z-[-1]'
+                                className='z-[-1] rounded-3xl border border-solid border-[#EDDFD0] px-[50px] py-[15px] text-sm
+                            transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
                             >
                                 Upload
                             </button>
@@ -326,11 +327,16 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                 </div>
                 {(errorMessage || successMessage) && (
                     <div
-                        className='relative mt-[25px] border-0 border-b-[1px] border-[#EDDFD0] px-4 py-3 max-w-[500px] mx-auto'
+                        className='relative mx-auto mt-[25px] max-w-[500px] border-0 border-b-[1px] border-[#EDDFD0] px-4 py-3'
                         role='alert'
                     >
-                        <span className='block sm:inline'>{errorMessage || successMessage}</span>
-                        <span className='absolute bottom-0 right-0 top-0 px-4 py-3' onClick={closeAlert}>
+                        <span className='block sm:inline'>
+                            {errorMessage || successMessage}
+                        </span>
+                        <span
+                            className='absolute bottom-0 right-0 top-0 px-4 py-3'
+                            onClick={closeAlert}
+                        >
                             <svg
                                 className='h-6 w-6 fill-current text-[#EDDFD0]'
                                 role='button'

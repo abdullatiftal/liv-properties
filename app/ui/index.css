@@ -350,24 +350,6 @@ input.autofill-input:-webkit-autofill:focus {
     left: 12zpx;
 }
 
-/* .who-desc {
-    @apply lg:w-[calc(50%-13px)];
-}
-
-.who-desc:nth-child(1) p,
-.who-desc:nth-child(2) p{
-    display: none;
-}
-
-.who-desc:nth-child(1) p:nth-child(1),
-.who-desc:nth-child(1) p:nth-child(2),
-.who-desc:nth-child(2) p:last-child{
-    display: block;
-}
-
-.who-desc:nth-child(1) p:nth-child(2){
-    margin-top: 23px;
-} */
 .who-desc {
     display: grid;
     @apply grid-cols-[1fr] gap-[13px] lg:grid-cols-[1fr_1fr] lg:gap-[26px];
@@ -400,4 +382,12 @@ input.autofill-input:-webkit-autofill:focus {
 
 .two-col-desc p:last-child {
     @apply lg:col-[2] lg:row-[1];
+}
+
+.custom-select {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="%23eddfd0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>');
+}
+
+.custom-wordbreak {
+    word-spacing: 100dvw;
 }

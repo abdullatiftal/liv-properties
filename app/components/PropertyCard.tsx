@@ -10,6 +10,7 @@ import { PropertyCardProps } from '@/app/types';
 
 export const PropertyCard: React.FC<PropertyCardProps> = ({
     id = 1,
+    uniqueId = '',
     imageUrl = '',
     altText = 'alt text',
     title = 'Title',
@@ -34,7 +35,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         <div
             className={`${isLargeScreen ? s.propPic : ''} property-card mt-[20px] w-full flex-1 md:mt-[43px] smlap:w-[300px] smlap:flex-none`}
         >
-            <Link href={`/project?id=${id} relative`}>
+            <Link href={`/project?unique_id=${uniqueId}`} className='relative'>
                 <div className='relative block h-[293px] w-full min-w-[300px] overflow-hidden smlap:w-[300px]'>
                     <Image
                         src={imageUrl || ''}

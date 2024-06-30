@@ -41,6 +41,7 @@ const ListProperties = () => {
                         <Fragment key={p.id}>
                             <PropertyCard
                                 id={p.id}
+                                uniqueId={p.unique_id ?? ''}
                                 imageUrl={p.main_image}
                                 altText={`Photo of ${p.property_name}`}
                                 title={p.property_name}
@@ -79,6 +80,7 @@ const ListProperties = () => {
                         <Fragment key={p.id}>
                             <PropertyCard
                                 id={p.id}
+                                uniqueId={p.unique_id ?? ''}
                                 imageUrl={p.main_image}
                                 altText={`Photo of ${p.property_name}`}
                                 title={p.property_name}

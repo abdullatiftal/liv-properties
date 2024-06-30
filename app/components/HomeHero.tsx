@@ -6,18 +6,22 @@ import { Home } from '../types';
 // import { useAPI } from '../context/APIContext'
 
 interface HomeHeroProps {
-    home: Home
+    home: Home;
 }
 
-export const HomeHero: React.FC<HomeHeroProps> = ({home}) => {
-    const imageSrc = home?.['section-1'][1].field_value ?? '/images/car-home.webp';
-    const imageAlt = home?.['section-1'][0].field_value ?? 'Timeless luxury re-imagined';
+export const HomeHero: React.FC<HomeHeroProps> = ({ home }) => {
+    const imageSrc =
+        home?.['section-1'][1].field_value ?? '/images/car-home.webp';
+    const imageAlt =
+        home?.['section-1'][0].field_value ?? 'Timeless luxury re-imagined';
 
     return (
         <div className='min-[1630px]:min-w-[1440px] max-[1629px]:w-full verticalPanelInner flex h-full flex-col justify-between overflow-hidden lg:pb-[50px] xl:pb-[60px] small:pb-[40px]'>
             <div className='home-sec_title relative z-[2] flex w-[100vw] text-[50px] font-[700] leading-[43px] small:text-[85px] small:leading-[88px]'>
                 <div className='px-[3vw] sm:px-0 small:px-[85px]'>
-                    <h1 className='max-[767px]:ml-[3vw] inline-block custom-wordbreak'>{home?.['section-1'][0].field_value}</h1>
+                    <h1 className='max-[767px]:ml-[3vw] custom-wordbreak inline-block'>
+                        {home?.['section-1'][0].field_value}
+                    </h1>
                 </div>
             </div>
             <HomeSearch />

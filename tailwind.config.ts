@@ -12,6 +12,7 @@ const config: Config = {
             screens: {
                 xs: '320px',
                 msm: '480px',
+                msmall: '858px',
                 small: '920px',
                 bigtab: '1025px',
                 smlap: '1100px',

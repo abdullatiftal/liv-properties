@@ -16,7 +16,7 @@ interface FormData {
 
 export const FooterEmailForm = () => {
     const [formData, setFormData] = useState<FormData>({
-        email: '',
+        email: ''
     });
     const [email, setEmail] = useState('');
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -32,15 +32,10 @@ export const FooterEmailForm = () => {
         const data = await response.json();
         if (!response.ok) {
             console.error('Error submitting form:', response.statusText);
-            setErrorMessage(
-                data.message ||
-                    'There was an error.'
-            );
+            setErrorMessage(data.message || 'There was an error.');
             setSuccessMessage(null);
         } else {
-            setSuccessMessage(
-                'Subscribed successfully.'
-            );
+            setSuccessMessage('Subscribed successfully.');
             setErrorMessage(null);
             setEmail('');
         }
@@ -71,16 +66,8 @@ export const FooterEmailForm = () => {
                     Sign&nbsp;Up
                 </button>
             </div>
-            {successMessage && (
-                    <div className='mt-4'>
-                        {successMessage}
-                    </div>
-                )}
-                {errorMessage && (
-                    <div className='mt-4'>
-                        {errorMessage}
-                    </div>
-                )}
+            {successMessage && <div className='mt-4'>{successMessage}</div>}
+            {errorMessage && <div className='mt-4'>{errorMessage}</div>}
         </form>
     );
 };

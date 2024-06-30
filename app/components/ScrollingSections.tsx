@@ -19,11 +19,13 @@ if (typeof window !== 'undefined') {
     gsap.registerPlugin(Observer, useGSAP);
 }
 
-interface ScrollingSectionsProps{
-    home: Home
+interface ScrollingSectionsProps {
+    home: Home;
 }
 
-export const ScrollingSections: React.FC<ScrollingSectionsProps> = ({home}) => {
+export const ScrollingSections: React.FC<ScrollingSectionsProps> = ({
+    home
+}) => {
     const verticalSection = useRef(null);
     const sectionsRefs = useRef<(HTMLDivElement | null)[]>([]);
 

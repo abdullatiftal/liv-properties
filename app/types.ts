@@ -85,6 +85,7 @@ export interface SearchParameters {
 
 export interface PropertyCardProps {
     id?: number;
+    uniqueId?: string;
     imageUrl?: string | null;
     altText?: string;
     title?: string;
@@ -198,4 +199,13 @@ export interface Career {
     description: string;
     remote: boolean;
     fulltime: boolean;
+}
+
+export interface HomeSearchText {
+    availablefor: string;
+    price_range: string;
+    location: string;
+    construction_status: string;
+    search_text: string;
+    [key: string]: string | undefined; // Add index signature
 }

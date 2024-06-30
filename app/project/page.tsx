@@ -3,10 +3,16 @@
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import s from '@/app/ui/main.module.css';
+import { useState, useEffect } from 'react';
 import { Suspense } from 'react';
 import { GoogleMapsEmbed } from '@next/third-parties/google';
-import { gmapsApiKey } from '@/app/constants';
+import { gmapsApiKey, fetchProperty, apiUrl, fetcher } from '@/app/constants';
+import { Property } from '@/app/types';
 import Link from 'next/link';
+import useSWR from 'swr';
+import { Loading } from '../components';
+import renderService from './renderService';
+import ImageGallery from './ImageGallery';
 
 export default function ProjectPage() {
     return (
@@ -18,35 +24,48 @@ export default function ProjectPage() {
 
 function ProjectComponent() {
     const searchParams = useSearchParams();
+    const id = searchParams.get('unique_id');
 
-    const id = searchParams.get('id');
+    if (!id) {
+        return (
+            <div className='mt-30px min-h-[150px] w-full'>
+                No ID found in the URL
+            </div>
+        );
+    }
 
-    // request data
+    const {
+        data: property,
+        error,
+        isLoading
+    } = useSWR(`${apiUrl}/api/projectdetails?unique_id=${id}`, fetcher);
 
-    const data = {
-        id: '123testid456',
-        imageUrl: '/images/property.jpg',
-        bigImageUrl: '/images/prop-close.jpg',
-        altText: 'Photo of a property',
-        description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-        title: 'Canal View Villa',
-        location: 'Vezul Residence, Business Bay.',
-        bedrooms: 2,
-        bathrooms: 2,
-        area: '1,273 sqft',
-        price: 'AED 1,560.000'
-    };
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    if (!property) {
+        return <div>No property found</div>;
+    }
+
+    const images = property[0].images ? JSON.parse(property[0].images) : [];
+    const maxVisibleImages = 3;
+
+    const services = property[0].services ? JSON.parse(property[0].services) : [];
 
     return (
         <div className='w-full 3xl:max-w-[1200px]'>
             <div className='flex w-full flex-wrap gap-8 border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[37px] sm:mt-[-50px] xl:mt-0 xl:flex-nowrap xl:gap-0 xl:pb-[0px]'>
                 <div className='z-[1] order-2 flex w-[100%] flex-row flex-wrap xl:order-1 xl:mr-[-5%] xl:w-[40%] xl:translate-y-[50px] xl:flex-col xl:flex-nowrap'>
                     <div className='order-1 w-[100%] text-[40px] font-[700] leading-[38px] small:text-[69px] small:leading-[88px]'>
-                        <h2>{data.title}</h2>
+                        <h2>{property[0].property_name ?? 'Property Name'}</h2>
                     </div>
                     <div className='order-2 mt-[10px] w-[100%] text-lg'>
-                        {data.location}
+                        {property[0].location ?? 'Property Location'}
                     </div>
                     <div className='order-4 mt-[21px] flex w-full items-center sm:w-[50%] sm:justify-end xl:order-3 xl:mt-[50px] xl:w-[auto] xl:justify-normal'>
                         <button className='grid grid-cols-2 place-items-center gap-[11px] rounded-3xl border border-solid border-[#EDDFD0] px-[25px] py-[9px] pl-[15px] text-sm transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'>
@@ -68,7 +87,7 @@ function ProjectComponent() {
                                 height={17}
                                 className='mr-[2px] inline'
                             />
-                            2
+                            {property[0].number_of_bedroom ?? 0}
                         </div>
                         <div>
                             <Image
@@ -78,7 +97,7 @@ function ProjectComponent() {
                                 height={17}
                                 className='mr-[2px] inline'
                             />
-                            2
+                            {property[0].number_of_bathroom ?? 0}
                         </div>
                         <div>
                             <Image
@@ -88,62 +107,68 @@ function ProjectComponent() {
                                 height={17}
                                 className='mr-[2px] inline'
                             />
-                            1,273 sqft
+                            {property[0].area_in_sqft ?? '0'} Sqft
                         </div>
                     </div>
                     <div className='order-5 mt-[31px] max-w-[100%] text-sm leading-[202%] xl:max-w-[483px]'>
-                        {data.description}
+                        {property[0].description ?? ''}
                     </div>
                 </div>
-                <div className='x-[60%] order-1 flex w-full flex-col items-end gap-[15px] xl:order-2 xl:w-[65%] xl:translate-y-[-100px]'>
-                    <Image
-                        src={data.bigImageUrl}
-                        alt={data.altText}
-                        width={791}
-                        height={490}
-                        className='w-full xl:w-[791px]'
-                    />
-                    <div className='mx-auto flex max-h-[101px] gap-[11px] xl:ml-auto xl:mr-[175px]'>
+
+                {images && (
+                    <div className='x-[60%] order-1 flex w-full flex-col items-end gap-[15px] xl:order-2 xl:w-[65%] xl:translate-y-[-100px]'>
                         <Image
-                            src='/images/prop-close-thumb.jpg'
-                            alt={data.altText}
-                            width={101}
-                            height={97}
-                            className='max-w-[22%]'
+                            src={property[0].main_image ?? ''}
+                            alt={property[0].property_name ?? 'property image'}
+                            width={791}
+                            height={490}
+                            className='w-full xl:w-[791px]'
+                            priority
                         />
-                        <Image
-                            src='/images/prop-close-thumb.jpg'
-                            alt={data.altText}
-                            width={101}
-                            height={97}
-                            className='max-w-[22%]'
-                        />
-                        <Image
-                            src='/images/prop-close-thumb.jpg'
-                            alt={data.altText}
-                            width={101}
-                            height={97}
-                            className='max-w-[22%]'
-                        />
-                        <div className={`${s.viewMorePics} `}>
-                            <Image
-                                src='/images/prop-close-thumb.jpg'
-                                alt='Photo of a property'
-                                width={101}
-                                height={97}
-                            />
-                            <div className={`${s.backdrop} text-sm`}>
-                                <Image
-                                    src='/icons/camera.svg'
-                                    alt='Camera icon'
-                                    width={24}
-                                    height={24}
-                                />
-                                <span>20+ Photos</span>
-                            </div>
+                        <div className='mx-auto flex max-h-[101px] gap-[11px] xl:ml-auto xl:mr-[175px]'>
+                            <ImageGallery images={images}/>
+                            {images
+                                .slice(0, maxVisibleImages)
+                                .map((image: string, index: string) => (
+                                    <div key={index} className='w-[100px] h-[100px]'>
+                                    <Image
+                                        src={image}
+                                        alt={property[0].property_name ?? 'property image'}
+                                        width={0}
+                                        height={0}
+                                        className='m-1'
+                                        sizes="100vw"
+                                        style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                                    />
+                                    </div>
+                                ))}
+                            {images.length > maxVisibleImages && (
+                                <div className={`${s.viewMorePics}`}>
+                                    <Image
+                                        src={images[3]}
+                                        alt={property[0].property_name ?? 'property image'}
+                                        width={0}
+                                        height={0}
+                                        sizes="100vw"
+                                        style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                                    />
+                                    <div className={`${s.backdrop} text-sm`}>
+                                        <Image
+                                            src='/icons/camera.svg'
+                                            alt='Camera icon'
+                                            width={24}
+                                            height={24}
+                                        />
+                                        <span>
+                                            {images.length - maxVisibleImages}+
+                                            Photos
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
-                </div>
+                )}
             </div>
             <div className='flex w-full flex-wrap items-center justify-center gap-7 border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[46px] pt-[36px] xl:justify-normal'>
                 <div className='flex w-[100%] flex-wrap justify-center gap-[28px] md:w-[auto]'>
@@ -160,7 +185,7 @@ function ProjectComponent() {
                         </Link>
                     </div>
                     <div className='text-center'>
-                        <Link href='/'>
+                        <Link href={property[0].floor_plan ?? '/'} target='_blank'>
                             <Image
                                 src='/icons/floor_lamp.svg'
                                 alt='Lamp icon'
@@ -172,7 +197,7 @@ function ProjectComponent() {
                         </Link>
                     </div>
                     <div className='text-center'>
-                        <Link href='/'>
+                        <Link href={property[0].video ?? '/'} target='_blank'>
                             <Image
                                 src='/icons/play_circle.svg'
                                 alt='Play circle icon'
@@ -184,7 +209,7 @@ function ProjectComponent() {
                         </Link>
                     </div>
                     <div className='text-center'>
-                        <Link href='/'>
+                        <Link href={property[0].brochure ?? '/'} target='_blank'>
                             <Image
                                 src='/icons/book.svg'
                                 alt='Book icon'
@@ -203,100 +228,32 @@ function ProjectComponent() {
                 </div>
             </div>
             <div className='mb-[44px] flex w-full flex-wrap gap-[30px] border-b border-solid border-[#EDDFD0] border-opacity-50 py-[30px] xl:gap-[65px] xl:py-[46px]'>
+                {property[0].map &&
                 <div className='w-full xl:w-[651px]'>
-                    <GoogleMapsEmbed
+                    {/* <GoogleMapsEmbed
                         apiKey={gmapsApiKey}
                         height={280}
                         width='100%'
                         mode='place'
-                        q='1 Sheikh Mohammed bin Rashid Blvd - Downtown Dubai - Dubai - United Arab Emirates'
-                    />
-                </div>
+                        q={property[0].location}
+                    /> */}
+
+                    <div
+                        className='google-map'
+                        dangerouslySetInnerHTML={{
+                            __html: property[0].map as string
+                        }}
+                    ></div>
+                </div> }
                 <div className='my-auto w-full xl:w-[auto] xl:min-w-[400px]'>
                     <div className='text-[20px] font-[700]'>
                         Current Services
                     </div>
                     <div className='text-normal mt-[16px] grid grid-cols-2'>
-                        <div className='flex items-center'>
-                            <Image
-                                src='/icons/fire.svg'
-                                alt='Fire icon'
-                                width={16}
-                                height={16}
-                                className='mr-[10px] inline'
-                            />
-                            Fireplace
-                        </div>
-                        <div className='flex items-center'>
-                            <Image
-                                src='/icons/waves.svg'
-                                alt='Waves icon'
-                                width={16}
-                                height={16}
-                                className='mr-[10px] inline'
-                            />
-                            Pool
-                        </div>
-                        <div className='flex items-center'>
-                            <Image
-                                src='/icons/garage.svg'
-                                alt='Garage icon'
-                                width={16}
-                                height={16}
-                                className='mr-[10px] inline'
-                            />
-                            Garage
-                        </div>
-                        <div className='flex items-center'>
-                            <Image
-                                src='/icons/faucet.svg'
-                                alt='Faucet icon'
-                                width={16}
-                                height={16}
-                                className='mr-[10px] inline'
-                            />
-                            Outdoor Kitchen
-                        </div>
-                        <div className='flex items-center'>
-                            <Image
-                                src='/icons/mountains.svg'
-                                alt='Mountains icon'
-                                width={16}
-                                height={16}
-                                className='mr-[10px] inline'
-                            />
-                            Mountain View
-                        </div>
-                        <div className='flex items-center'>
-                            <Image
-                                src='/icons/checkroom.svg'
-                                alt='Checkroom icon'
-                                width={16}
-                                height={16}
-                                className='mr-[10px] inline'
-                            />
-                            Walk in Closet
-                        </div>
-                        <div className='flex items-center'>
-                            <Image
-                                src='/icons/chair.svg'
-                                alt='Chair icon'
-                                width={16}
-                                height={16}
-                                className='mr-[10px] inline'
-                            />
-                            Terrace
-                        </div>
-                        <div className='flex items-center'>
-                            <Image
-                                src='/icons/flare.svg'
-                                alt='Flare icon'
-                                width={16}
-                                height={16}
-                                className='mr-[10px] inline'
-                            />
-                            Modern
-                        </div>
+                        {services &&
+                            services?.map((service: number | string) => {
+                                return renderService(service);
+                            })}
                     </div>
                 </div>
             </div>

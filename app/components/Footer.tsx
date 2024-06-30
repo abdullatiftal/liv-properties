@@ -119,7 +119,7 @@ export const Footer = () => {
                         alt='LIV Squared Properties logo'
                         width={142}
                         height={71}
-                        className='ml-[-4px]'
+                        className='ml-[-4px] h-auto w-auto'
                     />
                     <div className='mt-[30px] xl:mt-[53px]'>
                         Office 304, Bay Square 11, Business Bay, Dubai, UAE

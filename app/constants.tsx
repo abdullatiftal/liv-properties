@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { Field } from '@/app/types';
 // import { useAPI } from '../context/APIContext';
 
@@ -45,6 +45,27 @@ export async function fetchData(id: number) {
     }
 }
 
+export async function fetchProperty(id: string | number) {
+    console.log('fetching Property');
+    try {
+        const res = await fetch(
+            apiUrl + `/api/projectdetails?unique_id=${id}`,
+            {
+                next: { revalidate: 3600 }
+            }
+        );
+
+        if (!res.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
 // export const fetchData = async (id: number) => {
 //     try {
 //         const response = await axios.get(
@@ -57,27 +78,27 @@ export async function fetchData(id: number) {
 //     }
 // };
 
-export const postFetcher = async (url: string, payload?: string) => {
-    try {
-        const csrfToken = await fetchTokenAndReturn();
-        const headers = {
-            'Content-Type': 'application/json',
-            _token: csrfToken
-        };
+// export const postFetcher = async (url: string, payload?: string) => {
+//     try {
+//         const csrfToken = await fetchTokenAndReturn();
+//         const headers = {
+//             'Content-Type': 'application/json',
+//             _token: csrfToken
+//         };
 
-        const response = await axios.post(url, payload, { headers });
+//         const response = await axios.post(url, payload, { headers });
 
-        return response.data;
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            console.error('Axios Error:', error.message);
-            throw error;
-        } else {
-            console.error('General Error:', error);
-            throw error;
-        }
-    }
-};
+//         return response.data;
+//     } catch (error) {
+//         if (axios.isAxiosError(error)) {
+//             console.error('Axios Error:', error.message);
+//             throw error;
+//         } else {
+//             console.error('General Error:', error);
+//             throw error;
+//         }
+//     }
+// };
 
 // takes and field name and returns field value for the data
 export const getFieldValueByName = (

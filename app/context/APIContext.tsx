@@ -15,6 +15,7 @@ import {
     SearchProperty,
     SearchParameters,
     ContactUs
+    // HomeSearch
 } from '@/app/types';
 
 export interface APIContextData {
