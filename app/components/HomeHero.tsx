@@ -3,7 +3,6 @@ import '@/app/ui/index.css';
 import { HomeSearch } from '@/app/components';
 import s from '@/app/ui/main.module.css';
 import { Home } from '../types';
-// import { useAPI } from '../context/APIContext'
 
 interface HomeHeroProps {
     home: Home;
