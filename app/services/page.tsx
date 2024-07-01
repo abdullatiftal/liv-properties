@@ -32,7 +32,11 @@ export default async function ServicesPage() {
                     </h1>
                     <div className='pointer-events-none absolute top-[50%] z-[-30] translate-y-[-55%] scale-[1.4] sm:translate-y-[-60%] md:translate-y-[-60%] md:scale-[1.3] lg:scale-[1.3] xl:translate-y-[-70%] 2xl:scale-[1.4]'>
                         <Image
-                            src='/images/services_building.webp'
+                            src={
+                                ourServices?.['our-services-section-1'][1]
+                                    .field_value ??
+                                '/images/services_building.webp'
+                            }
                             alt='Home'
                             width={1404}
                             height={885}

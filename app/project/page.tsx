@@ -21,6 +21,9 @@ export default function ProjectPage() {
 
 function ProjectComponent() {
     const [viewGallery, setViewGallery] = useState(false);
+    const [shareButton, setShareButton] = useState(false);
+
+    const url = typeof window !== 'undefined' ? window.location.href : '';
 
     const searchParams = useSearchParams();
     const id = searchParams.get('unique_id');
@@ -65,6 +68,10 @@ function ProjectComponent() {
         setViewGallery((prevCheck) => !prevCheck);
     };
 
+    const handleShare = () => {
+        setShareButton((prevCheck) => !prevCheck);
+    };
+
     return (
         <div className='w-full 3xl:max-w-[1200px]'>
             <div className='flex w-full flex-wrap gap-8 border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[37px] sm:mt-[-50px] xl:mt-0 xl:flex-nowrap xl:gap-0 xl:pb-[0px]'>
@@ -75,8 +82,11 @@ function ProjectComponent() {
                     <div className='order-2 mt-[10px] w-[100%] text-lg'>
                         {property[0].location ?? 'Property Location'}
                     </div>
-                    <div className='order-4 mt-[21px] flex w-full items-center sm:w-[50%] sm:justify-end xl:order-3 xl:mt-[50px] xl:w-[auto] xl:justify-normal'>
-                        <button className='grid grid-cols-2 place-items-center gap-[11px] rounded-3xl border border-solid border-[#EDDFD0] px-[25px] py-[9px] pl-[15px] text-sm transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'>
+                    <div className='relative order-4 mt-[40px] flex w-full items-center sm:w-[50%] sm:justify-end xl:order-3 xl:mt-[50px] xl:w-[auto] xl:justify-normal'>
+                        <button
+                            className='grid grid-cols-2 place-items-center gap-[11px] rounded-3xl border border-solid border-[#EDDFD0] px-[25px] py-[9px] pl-[15px] text-sm transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
+                            onClick={handleShare}
+                        >
                             <Image
                                 src='/icons/share.svg'
                                 alt='Share icon'
@@ -85,6 +95,69 @@ function ProjectComponent() {
                             />
                             Share
                         </button>
+                        {shareButton && (
+                            <ul
+                                className='share_options -top-[35px] right-0 ml-[30px] flex list-none gap-[30px] sm:absolute sm:ml-0 xl:left-0 xl:right-[unset]'
+                                data-title='Share'
+                            >
+                                <li>
+                                    <Link
+                                        href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+                                        target='_blank'
+                                    >
+                                        <Image
+                                            src='/icons/fb.svg'
+                                            alt='Facebook icon'
+                                            width={0}
+                                            height={0}
+                                            className='h-[18px] w-[18px]'
+                                        />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href={`https://www.linkedin.com/shareArticle?mini=true&url=${url}`}
+                                        target='_blank'
+                                    >
+                                        <Image
+                                            src='/icons/x.svg'
+                                            alt='X icon'
+                                            width={0}
+                                            height={0}
+                                            className='h-[17px] w-[17px]'
+                                        />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href={`https://x.com/intent/tweet?url=${url}`}
+                                        target='_blank'
+                                    >
+                                        <Image
+                                            src='/icons/linkedin.svg'
+                                            alt='LinkedIn icon'
+                                            width={0}
+                                            height={0}
+                                            className='h-[18px] w-[18px]'
+                                        />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href={`https://api.whatsapp.com/send?text=${url}`}
+                                        target='_blank'
+                                    >
+                                        <Image
+                                            src='/icons/whatsapp-2.svg'
+                                            alt='Whatsapp icon'
+                                            width={0}
+                                            height={0}
+                                            className='h-[20px] w-[20px]'
+                                        />
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}
                     </div>
                     <div className='order-3 mt-[21px] flex w-full items-center justify-start gap-[22px] text-sm sm:w-[50%] xl:order-4 xl:w-[auto]'>
                         <div>
@@ -124,19 +197,17 @@ function ProjectComponent() {
                 </div>
 
                 {images && (
-                    <div
-                        className='x-[60%] order-1 flex w-full flex-col items-end gap-[15px] xl:order-2 xl:w-[65%] xl:translate-y-[-100px]'
-                    >
+                    <div className='order-1 flex w-full flex-col items-end gap-[15px] xl:order-2 xl:w-[65%] xl:translate-y-[-100px]'>
                         <Image
                             src={property[0].main_image ?? ''}
                             alt={property[0].property_name ?? 'property image'}
                             width={791}
                             height={490}
-                            className='w-full xl:w-[791px]'
+                            className='w-full xl:w-[791px] cursor-pointer'
                             priority
                             onClick={handlePriceClick}
                         />
-                        <div className='mx-auto flex max-h-[101px] gap-[11px] xl:ml-auto xl:mr-[175px]'>
+                        <div className='mx-auto flex max-h-[101px] gap-[11px]'>
                             {images
                                 .slice(0, maxVisibleImages)
                                 .map((image: string, index: string) => (
@@ -152,13 +223,8 @@ function ProjectComponent() {
                                             }
                                             width={0}
                                             height={0}
-                                            className='m-1'
+                                            className='m-1 cursor-pointer w-[100px] h-[100px] object-cover'
                                             sizes='100vw'
-                                            style={{
-                                                width: '100px',
-                                                height: '100px',
-                                                objectFit: 'cover'
-                                            }}
                                             onClick={handlePriceClick}
                                         />
                                     </div>
@@ -174,11 +240,7 @@ function ProjectComponent() {
                                         width={0}
                                         height={0}
                                         sizes='100vw'
-                                        style={{
-                                            width: '100px',
-                                            height: '100px',
-                                            objectFit: 'cover'
-                                        }}
+                                        className='cursor-pointer w-[100px] h-[100px] object-cover'
                                         onClick={handlePriceClick}
                                     />
                                     <div className={`${s.backdrop} text-sm`}>
@@ -187,6 +249,7 @@ function ProjectComponent() {
                                             alt='Camera icon'
                                             width={24}
                                             height={24}
+                                            className='cursor-pointer'
                                         />
                                         <span>
                                             {images.length - maxVisibleImages}+

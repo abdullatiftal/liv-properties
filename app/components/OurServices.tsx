@@ -1,6 +1,10 @@
-"use client"
+'use client';
 
-import { InvestmentAdvisory, InvestmentExperience, Loading } from '@/app/components';
+import {
+    InvestmentAdvisory,
+    InvestmentExperience,
+    Loading
+} from '@/app/components';
 import '@/app/ui/index.css';
 import { fetcher, apiUrl } from '../constants';
 import useSWR from 'swr';
@@ -26,18 +30,22 @@ export const OurServices = () => {
         <div className='verticalPanelInner services flex max-w-[100%] flex-col gap-[30px] px-[3vw] sm:px-0 small:px-[85px]'>
             <div className='home-sec_title'>
                 <div className='text-[40px] font-[700] leading-[94%] small:text-[69px]'>
-                    <h2>{ourServices?.['our-services-section-1'][0]
-                            .field_value ?? ''}</h2>
+                    <h2>
+                        {ourServices?.['our-services-section-1'][0]
+                            .field_value ?? ''}
+                    </h2>
                 </div>
                 <div className='mt-[11px] text-[25px] font-[200] leading-[120%] small:w-[480px]'>
-                    <h3>{ourServices?.['our-services-section-1']?.[2]
-                            ?.field_value ?? ''}</h3>
+                    <h3>
+                        {ourServices?.['our-services-section-1']?.[2]
+                            ?.field_value ?? ''}
+                    </h3>
                 </div>
             </div>
             <InvestmentExperience ourServices={ourServices} />
             <InvestmentAdvisory
-                    data={ourServices?.personalisedinvestmentadvisory}
-                />
+                data={ourServices?.personalisedinvestmentadvisory}
+            />
         </div>
     );
 };

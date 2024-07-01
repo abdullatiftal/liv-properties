@@ -161,7 +161,7 @@ export function APIContextProvider({ children }: { children: ReactNode }) {
         isLoading: searchPropertyisLoading
     } = useSWR<SearchProperty>(
         searchParameters
-            ? `${apiUrl}/api/search${searchParameters}&sort_by='id'&sort_order='DESC'`
+            ? `${apiUrl}/api/search${searchParameters}&sort_by=id&sort_order=DESC`
             : null,
         fetcher
     );

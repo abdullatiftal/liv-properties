@@ -118,7 +118,7 @@ const PriceRange = ({ pr, setPr, className, setVisible }: PriceRangeProps) => {
                         duration-200 ease-in-out hover:ring-[#EDDFD0]/50 focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0]`}
                         />
                         <button
-                            className={`cursor-pointer bg-[#916940] py-3 font-[500] text-white hover:bg-[#827161] disabled:bg-gray-400`}
+                            className={`cursor-pointer bg-[#916940] py-3 font-[500] text-white hover:bg-[#827161] disabled:bg-[#827161]`}
                             type='submit'
                             disabled={!prMin || !prMax}
                         >
