@@ -203,7 +203,7 @@ function ProjectComponent() {
                             alt={property[0].property_name ?? 'property image'}
                             width={791}
                             height={490}
-                            className='w-full xl:w-[791px] cursor-pointer'
+                            className='w-full cursor-pointer xl:w-[791px]'
                             priority
                             onClick={handlePriceClick}
                         />
@@ -223,7 +223,7 @@ function ProjectComponent() {
                                             }
                                             width={0}
                                             height={0}
-                                            className='m-1 cursor-pointer w-[100px] h-[100px] object-cover'
+                                            className='m-1 h-[100px] w-[100px] cursor-pointer object-cover'
                                             sizes='100vw'
                                             onClick={handlePriceClick}
                                         />
@@ -240,7 +240,7 @@ function ProjectComponent() {
                                         width={0}
                                         height={0}
                                         sizes='100vw'
-                                        className='cursor-pointer w-[100px] h-[100px] object-cover'
+                                        className='h-[100px] w-[100px] cursor-pointer object-cover'
                                         onClick={handlePriceClick}
                                     />
                                     <div className={`${s.backdrop} text-sm`}>

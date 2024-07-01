@@ -28,8 +28,8 @@ export default async function InvestPage() {
                     </h1>
                     <div className='origin-center-right pointer-events-none absolute top-[50%] z-[-30] translate-x-[10%] translate-y-[-55%] scale-[1.1] md:translate-x-[20%] md:scale-[1.1] lg:translate-x-[15%] lg:translate-y-[-75%] lg:scale-[1.1] xl:translate-x-[5%] 2xl:scale-[1.3] mdlap:translate-y-[-60%]'>
                         <Image
-                            src='/images/invest_building.webp'
-                            alt='Home'
+                            src={(investment?.['investment-section-1'][1].field_value as string) ?? '/images/invest_building.webp'}
+                            alt={investment.header[0].metadescription}
                             width={1384}
                             height={736}
                         />

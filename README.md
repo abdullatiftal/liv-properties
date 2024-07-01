@@ -8,4 +8,4 @@ run outside of github:
 
 2 replace "" with nothing
 
-3 ```yarn build && npx serve@latest out```
+3 `yarn build && npx serve@latest out`

@@ -28,8 +28,8 @@ export default async function Contact() {
                     </h1>
                     <div className='pointer-events-none absolute top-[50%] z-[-30] translate-y-[-30%] scale-[1.6] sm:translate-y-[-60%] md:translate-y-[-60%] md:scale-[1.4] xl:translate-y-[-70%] xl:scale-[1.2] 2xl:scale-[1.1]'>
                         <Image
-                            src='/images/contact_building.webp'
-                            alt='Home'
+                            src={(contactUs?.['contact-us-section-1'][1].field_value as string) ?? '/images/contact_building.webp'}
+                            alt={contactUs.header[0].metadescription}
                             width={1404}
                             height={885}
                         />

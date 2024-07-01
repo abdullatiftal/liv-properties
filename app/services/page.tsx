@@ -94,7 +94,6 @@ export default async function ServicesPage() {
                             {ourServices?.['our-services-section-2']?.[8]
                                 ?.field_value ?? ''}
                         </p>
-                        {/* <p className='mt-[20px] text-xs leading-[170%] text-white'>{getFieldValueByName(ourServices?.["our-services-section-2"],'Description')}</p> */}
                     </div>
                 </div>
                 <InvestmentAdvisory

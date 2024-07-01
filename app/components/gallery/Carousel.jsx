@@ -48,7 +48,6 @@ const Carousel = ({ slides, images }) => {
                             {slides.map((index) => (
                                 <div className='embla__slide' key={index}>
                                     <div className='embla__slide__inner'>
-                                        {/* <ReactImageZoom {...props} /> */}
                                         <img
                                             className='embla__slide__img'
                                             src={images[index]}

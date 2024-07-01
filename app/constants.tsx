@@ -1,17 +1,14 @@
-// import axios from 'axios';
 import { Field } from '@/app/types';
 // import { useAPI } from '../context/APIContext';
 
-// export const apiUrl = process.env.NEXT_PUBLIC_API_URL
+//constant values
 export const apiUrl = 'https://codeandcode.xyz/demo/slim_properties';
 export const gmapsApiKey = 'AIzaSyD88z8fXIyVINVS11rwWh2EWxOMU7_iLgE';
 
-// export const fetcher = (...args: any) => fetch(args).then((res) => res.json());
 export const fetcher = async (url: string) =>
     await fetch(url).then((res) => res.json());
 
-// axios.defaults.withXSRFToken = true;
-
+//fetch token
 export const fetchTokenAndReturn = async () => {
     try {
         const response = await fetch(
@@ -27,6 +24,7 @@ export const fetchTokenAndReturn = async () => {
     }
 };
 
+//fetch cms-pages
 export async function fetchData(id: number) {
     console.log('fetching');
     try {
@@ -45,6 +43,7 @@ export async function fetchData(id: number) {
     }
 }
 
+//fetch property data
 export async function fetchProperty(id: string | number) {
     console.log('fetching Property');
     try {
@@ -66,41 +65,7 @@ export async function fetchProperty(id: string | number) {
     }
 }
 
-// export const fetchData = async (id: number) => {
-//     try {
-//         const response = await axios.get(
-//             `${apiUrl}/api/cms-pages?page_id=${id}'`
-//         );
-//         return response.data;
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//         throw error;
-//     }
-// };
-
-// export const postFetcher = async (url: string, payload?: string) => {
-//     try {
-//         const csrfToken = await fetchTokenAndReturn();
-//         const headers = {
-//             'Content-Type': 'application/json',
-//             _token: csrfToken
-//         };
-
-//         const response = await axios.post(url, payload, { headers });
-
-//         return response.data;
-//     } catch (error) {
-//         if (axios.isAxiosError(error)) {
-//             console.error('Axios Error:', error.message);
-//             throw error;
-//         } else {
-//             console.error('General Error:', error);
-//             throw error;
-//         }
-//     }
-// };
-
-// takes and field name and returns field value for the data
+// takes and field name and returns field value for the data - json
 export const getFieldValueByName = (
     data: Field | any[],
     fieldName: string
