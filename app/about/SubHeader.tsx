@@ -16,7 +16,10 @@ const SubHeader = (props: { data: AboutUs }) => {
             </h1>
             <div className='pointer-events-none absolute top-[50%] z-[-30] translate-y-[-25%] scale-[1.4] sm:translate-y-[-45%] md:scale-[1.3] lg:translate-y-[-60%] lg:scale-[1.2]'>
                 <Image
-                    src={(props.data?.asdf[1].field_value as string) ?? '/images/aboutus-building.webp'}
+                    src={
+                        (props.data?.asdf[1].field_value as string) ??
+                        '/images/aboutus-building.webp'
+                    }
                     alt={props.data?.header[0].metadescription}
                     width={1404}
                     height={885}

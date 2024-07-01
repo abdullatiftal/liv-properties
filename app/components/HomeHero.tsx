@@ -32,6 +32,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ home }) => {
                         width={1404}
                         height={885}
                         className='max-[1366px]:w-[90dvw] w-[100dvw] 4xlh:w-[100dvw] 4xlh:origin-bottom-right 4xlh:scale-[1.5]'
+                        priority={true}
                     />
                     <Image
                         src='/images/cloud1.webp'

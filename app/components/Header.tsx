@@ -110,6 +110,7 @@ export const Header = () => {
                     width={95}
                     height={87}
                     className='ml-[-4px] h-auto w-auto'
+                    priority={true}
                 />
             </Link>
             <nav className='z-50 mx-[-1rem] mt-[21px] flex flex-wrap gap-[1px] text-sm'>
