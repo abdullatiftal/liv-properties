@@ -3,19 +3,46 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import '@/app/ui/index.css';
-import { PropertyCard } from '@/app/components';
+import { Loading, PropertyCard } from '@/app/components';
 import Link from 'next/link';
 import s from '@/app/ui/main.module.css';
 import { useState, useLayoutEffect, Fragment } from 'react';
-import { Property } from '@/app/types';
+import { FeaturedParameters, Property } from '@/app/types';
 import { useAPI } from '@/app/context/APIContext';
+import { apiUrl, fetcher } from '../constants';
+import useSWR from 'swr';
 
 export const FeaturedProperties = () => {
     const [action, setAction] = useState<'rent' | 'buy' | 'sell'>('buy');
     const [propType, setPropType] = useState<'villa' | 'apartment' | 'all'>(
         'all'
     );
-    const { featuredProperties, setParameters } = useAPI();
+
+    // const { featuredProperties, setParameters } = useAPI();
+    // const [featuredProperties, setFeaturedProperties] = useState<Property[]>(
+    //     []
+    // );
+    const [parameters, setParameters] = useState<FeaturedParameters>({
+        propType: 'all',
+        action: 'buy'
+    });
+    const fetchUrl =
+        parameters.propType === 'all'
+            ? `${apiUrl}/api/get-featured-properties`
+            : `${apiUrl}/api/get-featured-properties?property_type=${parameters.propType}&availablefor=${parameters.action}`;
+
+    const {
+        data: featuredData,
+        error: featuredPropertiesError,
+        isLoading: featuredPropertiesisLoading
+    } = useSWR<Property[]>(fetchUrl, fetcher);
+
+    // useEffect(() => {
+    //     if (featuredData) {
+    //         setFeaturedProperties(featuredData);
+    //     }
+    // }, [featuredData]);
+
     const [isLargeScreen, setIsLargeScreen] = useState(false);
 
     useEffect(() => {
@@ -31,7 +58,7 @@ export const FeaturedProperties = () => {
 
     return (
         <div className='verticalPanelInner featured-properties flex flex-col px-[3vw] sm:px-0 small:h-[100vh] small:px-[85px]'>
-            <div className='max-[1024px]:justify-between flex flex-wrap items-end justify-normal gap-8'>
+            <div className='max-[1024px]:justify-between mb-[30px] flex flex-wrap items-end justify-normal gap-8 small:mb-0'>
                 <div className='home-sec_title text-[40px] font-[700] leading-[94%] small:text-[69px]'>
                     <h2>
                         Featured
@@ -127,27 +154,28 @@ export const FeaturedProperties = () => {
                     </>
                 )}
             </div>
-            {featuredProperties.isLoading && (
+            {featuredPropertiesisLoading && (
                 <div className='self-center'>
                     <div className='mt-[20px] w-full md:mt-[43px]'>
-                        Loading featured properties...
+                        <Loading />
                     </div>
                 </div>
             )}
 
-            {featuredProperties.error && (
+            {featuredPropertiesError && (
                 <div className='mt-[20px] w-full md:mt-[43px]'>
                     Error loading featured properties:{' '}
-                    {featuredProperties.error.message}
+                    {featuredPropertiesError.message}
                 </div>
             )}
 
             <div className='featured-properties_grid flex'>
-                {Array.isArray(featuredProperties.data) &&
-                    featuredProperties.data.slice(0, 3).map((p: Property) => (
+                {Array.isArray(featuredData) &&
+                    featuredData.slice(0, 3).map((p: Property) => (
                         <Fragment key={p.id}>
                             <PropertyCard
                                 id={p.id}
+                                uniqueId={p.unique_id ?? ''}
                                 imageUrl={p.main_image}
                                 altText={`Photo of ${p.property_name}`}
                                 title={p.property_name}
