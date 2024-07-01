@@ -25,7 +25,12 @@ export default async function SellPage() {
                     </h1>
                     <div className='pointer-events-none absolute top-[50%] z-[-30] translate-y-[-30%] scale-[1.4] sm:translate-y-[-60%] md:translate-y-[-60%]  md:scale-[1.3] lg:scale-[1.3] xl:translate-y-[-80%] 2xl:scale-[1.4] msm:translate-y-[-55%] mdlap:translate-y-[-70%]'>
                         <Image
-                            src={(sellYourProperty?.['sell-your-property-section-1'][1].field_value as string) ?? '/images/sell_hero.webp'}
+                            src={
+                                (sellYourProperty?.[
+                                    'sell-your-property-section-1'
+                                ][1].field_value as string) ??
+                                '/images/sell_hero.webp'
+                            }
                             alt={sellYourProperty.header[0].metadescription}
                             width={1384}
                             height={736}

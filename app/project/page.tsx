@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import s from '@/app/ui/main.module.css';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { gmapsApiKey, apiUrl, fetcher } from '@/app/constants';
 import Link from 'next/link';
 import useSWR from 'swr';
@@ -22,11 +22,26 @@ export default function ProjectPage() {
 function ProjectComponent() {
     const [viewGallery, setViewGallery] = useState(false);
     const [shareButton, setShareButton] = useState(false);
-
     const url = typeof window !== 'undefined' ? window.location.href : '';
 
-    const searchParams = useSearchParams();
-    const id = searchParams.get('unique_id');
+    const [id, setId] = useState<string | null>(null);
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+        const searchParams = new URLSearchParams(window.location.search);
+        const id = searchParams.get('unique_id');
+        setId(id);
+    }, []);
+
+    const {
+        data: property,
+        error,
+        isLoading
+    } = useSWR(
+        isClient && id ? `${apiUrl}/api/projectdetails?unique_id=${id}` : null,
+        fetcher
+    );
 
     if (!id) {
         return (
@@ -36,11 +51,15 @@ function ProjectComponent() {
         );
     }
 
-    const {
-        data: property,
-        error,
-        isLoading
-    } = useSWR(`${apiUrl}/api/projectdetails?unique_id=${id}`, fetcher);
+    if (!isClient) {
+        return null; // Render nothing on the server
+    }
+
+    // const {
+    //     data: property,
+    //     error,
+    //     isLoading
+    // } = useSWR(`${apiUrl}/api/projectdetails?unique_id=${id}`, fetcher);
 
     if (isLoading) {
         return <Loading />;
