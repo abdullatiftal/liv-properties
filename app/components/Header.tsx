@@ -109,7 +109,7 @@ export const Header = () => {
                     alt='LIV Squared Properties logo'
                     width={95}
                     height={87}
-                    className='ml-[-4px] w-auto h-auto'
+                    className='ml-[-4px] h-auto w-auto'
                 />
             </Link>
             <nav className='z-50 mx-[-1rem] mt-[21px] flex flex-wrap gap-[1px] text-sm'>

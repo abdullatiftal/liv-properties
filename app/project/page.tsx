@@ -3,16 +3,13 @@
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import s from '@/app/ui/main.module.css';
-import { useState, useEffect } from 'react';
-import { Suspense } from 'react';
-import { GoogleMapsEmbed } from '@next/third-parties/google';
-import { gmapsApiKey, fetchProperty, apiUrl, fetcher } from '@/app/constants';
-import { Property } from '@/app/types';
+import { Suspense, useState } from 'react';
+import { gmapsApiKey, apiUrl, fetcher } from '@/app/constants';
 import Link from 'next/link';
 import useSWR from 'swr';
 import { Loading } from '../components';
 import renderService from './renderService';
-import ImageGallery from './ImageGallery';
+import Gallery from './Gallery';
 
 export default function ProjectPage() {
     return (
@@ -23,6 +20,8 @@ export default function ProjectPage() {
 }
 
 function ProjectComponent() {
+    const [viewGallery, setViewGallery] = useState(false);
+
     const searchParams = useSearchParams();
     const id = searchParams.get('unique_id');
 
@@ -52,10 +51,19 @@ function ProjectComponent() {
         return <div>No property found</div>;
     }
 
-    const images = property[0].images ? JSON.parse(property[0].images) : [];
+    let images = property[0].images ? JSON.parse(property[0].images) : [];
+    if (images.length <= 0 && property[0].main_image) {
+        images.push(property[0].main_image);
+    }
     const maxVisibleImages = 3;
 
-    const services = property[0].services ? JSON.parse(property[0].services) : [];
+    const services = property[0].services
+        ? JSON.parse(property[0].services)
+        : [];
+
+    const handlePriceClick = () => {
+        setViewGallery((prevCheck) => !prevCheck);
+    };
 
     return (
         <div className='w-full 3xl:max-w-[1200px]'>
@@ -116,7 +124,9 @@ function ProjectComponent() {
                 </div>
 
                 {images && (
-                    <div className='x-[60%] order-1 flex w-full flex-col items-end gap-[15px] xl:order-2 xl:w-[65%] xl:translate-y-[-100px]'>
+                    <div
+                        className='x-[60%] order-1 flex w-full flex-col items-end gap-[15px] xl:order-2 xl:w-[65%] xl:translate-y-[-100px]'
+                    >
                         <Image
                             src={property[0].main_image ?? ''}
                             alt={property[0].property_name ?? 'property image'}
@@ -124,33 +134,52 @@ function ProjectComponent() {
                             height={490}
                             className='w-full xl:w-[791px]'
                             priority
+                            onClick={handlePriceClick}
                         />
                         <div className='mx-auto flex max-h-[101px] gap-[11px] xl:ml-auto xl:mr-[175px]'>
-                            <ImageGallery images={images}/>
                             {images
                                 .slice(0, maxVisibleImages)
                                 .map((image: string, index: string) => (
-                                    <div key={index} className='w-[100px] h-[100px]'>
-                                    <Image
-                                        src={image}
-                                        alt={property[0].property_name ?? 'property image'}
-                                        width={0}
-                                        height={0}
-                                        className='m-1'
-                                        sizes="100vw"
-                                        style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-                                    />
+                                    <div
+                                        key={index}
+                                        className='h-[100px] w-[100px]'
+                                    >
+                                        <Image
+                                            src={image}
+                                            alt={
+                                                property[0].property_name ??
+                                                'property image'
+                                            }
+                                            width={0}
+                                            height={0}
+                                            className='m-1'
+                                            sizes='100vw'
+                                            style={{
+                                                width: '100px',
+                                                height: '100px',
+                                                objectFit: 'cover'
+                                            }}
+                                            onClick={handlePriceClick}
+                                        />
                                     </div>
                                 ))}
                             {images.length > maxVisibleImages && (
                                 <div className={`${s.viewMorePics}`}>
                                     <Image
                                         src={images[3]}
-                                        alt={property[0].property_name ?? 'property image'}
+                                        alt={
+                                            property[0].property_name ??
+                                            'property image'
+                                        }
                                         width={0}
                                         height={0}
-                                        sizes="100vw"
-                                        style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                                        sizes='100vw'
+                                        style={{
+                                            width: '100px',
+                                            height: '100px',
+                                            objectFit: 'cover'
+                                        }}
+                                        onClick={handlePriceClick}
                                     />
                                     <div className={`${s.backdrop} text-sm`}>
                                         <Image
@@ -169,6 +198,9 @@ function ProjectComponent() {
                         </div>
                     </div>
                 )}
+                {images.length > 0 && viewGallery && (
+                    <Gallery stateChanger={handlePriceClick} images={images} />
+                )}
             </div>
             <div className='flex w-full flex-wrap items-center justify-center gap-7 border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[46px] pt-[36px] xl:justify-normal'>
                 <div className='flex w-[100%] flex-wrap justify-center gap-[28px] md:w-[auto]'>
@@ -185,7 +217,10 @@ function ProjectComponent() {
                         </Link>
                     </div>
                     <div className='text-center'>
-                        <Link href={property[0].floor_plan ?? '/'} target='_blank'>
+                        <Link
+                            href={property[0].floor_plan ?? '/'}
+                            target='_blank'
+                        >
                             <Image
                                 src='/icons/floor_lamp.svg'
                                 alt='Lamp icon'
@@ -209,7 +244,10 @@ function ProjectComponent() {
                         </Link>
                     </div>
                     <div className='text-center'>
-                        <Link href={property[0].brochure ?? '/'} target='_blank'>
+                        <Link
+                            href={property[0].brochure ?? '/'}
+                            target='_blank'
+                        >
                             <Image
                                 src='/icons/book.svg'
                                 alt='Book icon'
@@ -228,9 +266,9 @@ function ProjectComponent() {
                 </div>
             </div>
             <div className='mb-[44px] flex w-full flex-wrap gap-[30px] border-b border-solid border-[#EDDFD0] border-opacity-50 py-[30px] xl:gap-[65px] xl:py-[46px]'>
-                {property[0].map &&
-                <div className='w-full xl:w-[651px]'>
-                    {/* <GoogleMapsEmbed
+                {property[0].map && (
+                    <div className='w-full xl:w-[651px]'>
+                        {/* <GoogleMapsEmbed
                         apiKey={gmapsApiKey}
                         height={280}
                         width='100%'
@@ -238,13 +276,14 @@ function ProjectComponent() {
                         q={property[0].location}
                     /> */}
 
-                    <div
-                        className='google-map'
-                        dangerouslySetInnerHTML={{
-                            __html: property[0].map as string
-                        }}
-                    ></div>
-                </div> }
+                        <div
+                            className='google-map'
+                            dangerouslySetInnerHTML={{
+                                __html: property[0].map as string
+                            }}
+                        ></div>
+                    </div>
+                )}
                 <div className='my-auto w-full xl:w-[auto] xl:min-w-[400px]'>
                     <div className='text-[20px] font-[700]'>
                         Current Services
