@@ -83,7 +83,7 @@ export default async function Contact() {
                             href={`${getFieldValueByName(
                                 contactUs?.['contact-us-section-1'],
                                 'Facebook Url'
-                            )}`}
+                            ) ?? '/'}`} target='_blank'
                         >
                             <Image
                                 src='/icons/fb.svg'
@@ -97,7 +97,7 @@ export default async function Contact() {
                             href={`${getFieldValueByName(
                                 contactUs?.['contact-us-section-1'],
                                 'Twitter Url'
-                            )}`}
+                            ) ?? '/'}`} target='_blank'
                         >
                             <Image
                                 src='/icons/x.svg'
@@ -111,7 +111,7 @@ export default async function Contact() {
                             href={`${getFieldValueByName(
                                 contactUs?.['contact-us-section-1'],
                                 'Instagram Url'
-                            )}`}
+                            ) ?? '/'}`} target='_blank'
                         >
                             <Image
                                 src='/icons/instagram.svg'
@@ -125,7 +125,7 @@ export default async function Contact() {
                             href={`${getFieldValueByName(
                                 contactUs?.['contact-us-section-1'],
                                 'Linkedin Url'
-                            )}`}
+                            ) ?? '/'}`} target='_blank'
                         >
                             <Image
                                 src='/icons/linkedin.svg'

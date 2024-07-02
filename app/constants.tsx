@@ -106,4 +106,4 @@ export const createSlug = (heading: string) => {
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');
-}
+};

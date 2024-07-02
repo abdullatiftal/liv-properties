@@ -31,7 +31,7 @@ export default async function NewsPage() {
             </div>
             <Link
                 href={`/news/${createSlug(latestNews.heading)}`}
-                className='relative mt-[50px] block h-[380px] lg:h-[480px] w-full'
+                className='relative mt-[50px] block h-[380px] w-full lg:h-[480px]'
             >
                 <Image
                     src={latestNews.image}

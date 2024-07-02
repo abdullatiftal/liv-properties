@@ -535,10 +535,10 @@ input.autofill-input:-webkit-autofill:focus {
     display: none;
 }
 
-.news-detail-desc > p{
+.news-detail-desc > p {
     margin-top: 14px;
 }
 
-.news-detail-desc p:last-child{
+.news-detail-desc p:last-child {
     @apply border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[15px];
 }

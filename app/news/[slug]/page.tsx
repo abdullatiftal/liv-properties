@@ -7,19 +7,40 @@ import { createSlug, fetchGeneral, formatDate } from '@/app/constants';
 import { NewsItem, NewsPageProps, NewsResponse } from '@/app/types';
 import { Loading } from '@/app/components';
 
+let newsData: NewsResponse;
 
+async function fetchNewsData() {
+    if (!newsData) {
+        newsData = await fetchGeneral('news');
+    }
+    return newsData;
+}
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+    params
+}: NewsPageProps): Promise<Metadata> {
+    const newsData = await fetchNewsData();
+    const data = newsData.data.find(
+        (item) => createSlug(item.heading) === params.slug
+    );
+
+    if (!data) {
+        return {
+            title: 'News & Events',
+            description: 'News not found',
+            keywords: 'news, events, not found'
+        };
+    }
+
     return {
-        title: '',
-        description: '',
-        keywords: ''
+        title: data.heading,
+        description: data.description.replace(/<[^>]*>?/gm, ''),
+        keywords: 'news, events, ' + data.heading
     };
 }
 
-const newsData: NewsResponse = await fetchGeneral('news');
-
 export async function generateStaticParams() {
+    const newsData = await fetchNewsData();
     const data = newsData.data.map((data: NewsItem) => ({
         slug: createSlug(data.heading)
     }));
@@ -27,6 +48,7 @@ export async function generateStaticParams() {
 }
 
 export default async function NewsPage({ params }: NewsPageProps) {
+    const newsData = await fetchNewsData();
     const data = newsData.data.find(
         (data) => createSlug(data.heading) === params.slug
     );
@@ -39,9 +61,12 @@ export default async function NewsPage({ params }: NewsPageProps) {
         );
     }
 
-    const currentIndex = newsData.data.findIndex((item) => createSlug(item.heading) === params.slug);
+    const currentIndex = newsData.data.findIndex(
+        (item) => createSlug(item.heading) === params.slug
+    );
     const prevIndex = currentIndex > 0 ? currentIndex - 1 : null;
-    const nextIndex = currentIndex < newsData.data.length - 1 ? currentIndex + 1 : null;
+    const nextIndex =
+        currentIndex < newsData.data.length - 1 ? currentIndex + 1 : null;
 
     const prevItem = prevIndex !== null ? newsData.data[prevIndex] : null;
     const nextItem = nextIndex !== null ? newsData.data[nextIndex] : null;
@@ -74,16 +99,21 @@ export default async function NewsPage({ params }: NewsPageProps) {
             ></div>
             <div className='mt-[28px] flex justify-between'>
                 {prevItem && (
-                    <Link href={`/news/${createSlug(prevItem.heading)}`} className='block rounded-3xl border border-solid border-[#EDDFD0] px-[40px] py-[7px] text-xs transition
-                    duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'>
-                            Back
+                    <Link
+                        href={`/news/${createSlug(prevItem.heading)}`}
+                        className='block rounded-3xl border border-solid border-[#EDDFD0] px-[40px] py-[7px] text-xs transition
+                    duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
+                    >
+                        Back
                     </Link>
                 )}
                 {nextItem && (
-                    <Link href={`/news/${createSlug(nextItem.heading)}`} className='block rounded-3xl border border-solid border-[#EDDFD0] px-[40px] py-[7px] text-xs transition
+                    <Link
+                        href={`/news/${createSlug(nextItem.heading)}`}
+                        className='block rounded-3xl border border-solid border-[#EDDFD0] px-[40px] py-[7px] text-xs transition
                             duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
-                        >
-                            Next
+                    >
+                        Next
                     </Link>
                 )}
             </div>

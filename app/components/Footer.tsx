@@ -4,8 +4,11 @@ import '@/app/ui/index.css';
 import s from '@/app/ui/main.module.css';
 import styles from '@/app/ui/home.module.css';
 import { Year, FooterEmailForm } from '@/app/components';
+import { ContactUs } from '../types';
+import { fetchData, getFieldValueByName } from '../constants';
 
-export const Footer = () => {
+export const Footer = async () => {
+    const contactUs: ContactUs = await fetchData(6);
     return (
         <footer
             className={`min-[1440px]-h-[477px] max-[639px]:bg-bottom relative bg-cover`}
@@ -114,31 +117,55 @@ export const Footer = () => {
                     </Link>
                 </div>
                 <div className='order-4 text-sm font-[200] sm:w-[calc(40%-20px)] bigtab:w-[20%]'>
-                    <Image
+                    <Link href='/'><Image
                         src='/logos/slim.svg'
                         alt='LIV Squared Properties logo'
                         width={142}
                         height={71}
                         className='ml-[-4px] h-auto w-auto'
                         priority={false}
-                    />
-                    <div className='mt-[30px] xl:mt-[53px]'>
-                        Office 304, Bay Square 11, Business Bay, Dubai, UAE
-                    </div>
-                    <div className='mt-[6px]'>
-                        Ph:{' '}
-                        <Link href='tel:971041111111' target='_blank'>
-                            +971 04 111 1111
-                        </Link>
-                    </div>
-                    <div className='mt-[6px]'>
-                        Email:{' '}
-                        <Link href='mailto:info@example.com' target='_blank'>
-                            info@example.com
-                        </Link>
-                    </div>
+                    /></Link>
+                    <p className='mt-[30px] xl:mt-[53px]'>
+                    {getFieldValueByName(
+                                contactUs?.['contact-us-section-1'],
+                                'Address'
+                            )}
+                    </p>
+                    <Link
+                        href={`tel:${getFieldValueByName(
+                            contactUs?.['contact-us-section-1'],
+                            'Phone'
+                        )}`}
+                        className='mt-[6px]'
+                    >
+                        <p>
+                            {getFieldValueByName(
+                                contactUs?.['contact-us-section-1'],
+                                'Phone'
+                            )}
+                        </p>
+                    </Link>
+                    <Link
+                        href={`mailto:${getFieldValueByName(
+                            contactUs?.['contact-us-section-1'],
+                            'Email'
+                        )}`}
+                        className='mt-[6px]'
+                    >
+                        <p>
+                            {getFieldValueByName(
+                                contactUs?.['contact-us-section-1'],
+                                'Email'
+                            )}
+                        </p>
+                    </Link>
                     <div className='mt-[13px] flex'>
-                        <Link href='/'>
+                        <Link
+                            href={`${getFieldValueByName(
+                                contactUs?.['contact-us-section-1'],
+                                'Facebook Url'
+                            ) ?? '/'}`} target='_blank'
+                        >
                             <Image
                                 src='/icons/fb.svg'
                                 alt='Facebook icon'
@@ -147,7 +174,12 @@ export const Footer = () => {
                                 className='mr-[13px] h-[13px] w-[13px]'
                             />
                         </Link>
-                        <Link href='/'>
+                        <Link
+                            href={`${getFieldValueByName(
+                                contactUs?.['contact-us-section-1'],
+                                'Twitter Url'
+                            ) ?? '/'}`} target='_blank'
+                        >
                             <Image
                                 src='/icons/x.svg'
                                 alt='X icon'
@@ -156,7 +188,12 @@ export const Footer = () => {
                                 className='mr-[13px] h-[13px] w-[13px]'
                             />
                         </Link>
-                        <Link href='/'>
+                        <Link
+                            href={`${getFieldValueByName(
+                                contactUs?.['contact-us-section-1'],
+                                'Instagram Url'
+                            ) ?? '/'}`} target='_blank'
+                        >
                             <Image
                                 src='/icons/instagram.svg'
                                 alt='Instagram icon'
@@ -165,7 +202,12 @@ export const Footer = () => {
                                 className='mr-[13px] h-[13px] w-[13px]'
                             />
                         </Link>
-                        <Link href='/'>
+                        <Link
+                            href={`${getFieldValueByName(
+                                contactUs?.['contact-us-section-1'],
+                                'Linkedin Url'
+                            ) ?? '/'}`} target='_blank'
+                        >
                             <Image
                                 src='/icons/linkedin.svg'
                                 alt='Linkedin icon'

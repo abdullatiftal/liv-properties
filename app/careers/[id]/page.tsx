@@ -21,7 +21,6 @@ export async function generateMetadata(): Promise<Metadata> {
 const careerdata: Career[] = await fetchGeneral('careers');
 
 export async function generateStaticParams() {
-    // const data = await fetchGeneral('careers');
     return careerdata.map((career: Career) => ({
         id: career.id.toString()
     }));
