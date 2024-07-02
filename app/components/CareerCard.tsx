@@ -14,7 +14,7 @@ const CareerCard: React.FC<CareerCardProps> = ({ career }) => {
                 <div
                     className='ellipse-text ellipse-text-2 mt-[10px] text-xs leading-[162%]'
                     dangerouslySetInnerHTML={{
-                        __html: career.description as string
+                        __html: career.description
                     }}
                 ></div>
                 <div className='mt-[19px] flex gap-[15px]'>

@@ -69,7 +69,7 @@ export const PageSearch = ({ type = 'ready' }) => {
     // Update the searchQuery state when the URL changes
     useEffect(() => {
         if (searchQuery) {
-            router.push(searchQuery);
+            router.push(searchQuery, { scroll: false });
             setSearchParameters(searchQuery);
         }
     }, [searchQuery]);

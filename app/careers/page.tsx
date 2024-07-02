@@ -15,9 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
     };
 }
 
-const data: Career[] = await fetchGeneral('careers');
-
 export default async function CareersPage() {
+    const data: Career[] = await fetchGeneral('careers');
     return (
         <div className='mb-[30px] w-full sm:mb-[60px] sm:mt-[-50px] lg:mt-0 xl:mb-[70px] 3xl:max-w-[1200px]'>
             <div

@@ -361,7 +361,7 @@ function ProjectComponent() {
                         <div
                             className='google-map'
                             dangerouslySetInnerHTML={{
-                                __html: property[0].map as string
+                                __html: property[0].map
                             }}
                         ></div>
                     </div>

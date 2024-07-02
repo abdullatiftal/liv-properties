@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         default: 'Liv Squared Properties'
     },
     description: 'The ultimate real estate agency in UAE.',
-    // metadataBase: new URL('https://ivang71.github.io')
+    metadataBase: new URL('https://ivang71.github.io')
 };
 
 export default function RootLayout({

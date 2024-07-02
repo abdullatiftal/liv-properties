@@ -160,6 +160,16 @@ export interface AboutUs {
     instagram: Section;
 }
 
+export interface TeamMember {
+    id: number;
+    image: string;
+    heading: string;
+    subheading: string;
+    status: number;
+    updated_at: string;
+    created_at: string;
+}
+
 export interface Careers {
     header: Header[];
     'careers-section-1': Field[];
@@ -192,13 +202,14 @@ export interface CareerCardProps {
 }
 
 export interface Career {
-    id: number;
-    title: string;
-    subtitle: string;
-    slug: string;
+    id: number | string;
+    image: string;
+    heading: string;
+    subheading: string;
     description: string;
-    remote: boolean;
-    fulltime: boolean;
+    status: number;
+    updated_at: string;
+    created_at: string;
 }
 
 export interface HomeSearchText {
@@ -208,4 +219,42 @@ export interface HomeSearchText {
     construction_status: string;
     search_text: string;
     [key: string]: string | undefined; // Add index signature
+}
+
+export interface CareerDetailProps {
+    params: {
+        id: string;
+    };
+}
+
+export interface NewsItem {
+    id: number;
+    image: string;
+    heading: string;
+    description: string;
+    status: number;
+    updated_at: string;
+    created_at: string;
+}
+
+export interface NewsResponse {
+    current_page: number;
+    data: NewsItem[];
+    first_page_url: string;
+    from: number;
+    last_page: number;
+    last_page_url: string;
+    links: Link[];
+    next_page_url: string | null;
+    path: string;
+    per_page: number;
+    prev_page_url: string | null;
+    to: number;
+    total: number;
+}
+
+export interface NewsPageProps {
+    params: {
+        slug: string;
+    };
 }

@@ -26,7 +26,6 @@ export const fetchTokenAndReturn = async () => {
 
 //fetch cms-pages
 export async function fetchData(id: number) {
-    console.log('fetching');
     try {
         const res = await fetch(apiUrl + `/api/cms-pages?page_id=${id}`, {
             next: { revalidate: 3600 }
@@ -45,7 +44,6 @@ export async function fetchData(id: number) {
 
 //fetch property data
 export async function fetchProperty(id: string | number) {
-    console.log('fetching Property');
     try {
         const res = await fetch(
             apiUrl + `/api/projectdetails?unique_id=${id}`,
@@ -53,6 +51,24 @@ export async function fetchProperty(id: string | number) {
                 next: { revalidate: 3600 }
             }
         );
+
+        if (!res.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+//fetch data
+export async function fetchGeneral(id: string | number) {
+    try {
+        const res = await fetch(apiUrl + `/api/${id}`, {
+            next: { revalidate: 3600 }
+        });
 
         if (!res.ok) {
             throw new Error('Network response was not ok');
@@ -75,3 +91,19 @@ export const getFieldValueByName = (
     );
     return item ? item.field_value : null;
 };
+
+export const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day} - ${month} - ${year}`;
+};
+
+// Define a function to generate a slug from a string
+export const createSlug = (heading: string) => {
+    return heading
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}

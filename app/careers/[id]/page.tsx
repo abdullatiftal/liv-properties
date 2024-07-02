@@ -21,8 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
 const careerdata: Career[] = await fetchGeneral('careers');
 
 export async function generateStaticParams() {
-    const data = await fetchGeneral('careers');
-    return data.map((career: Career) => ({
+    // const data = await fetchGeneral('careers');
+    return careerdata.map((career: Career) => ({
         id: career.id.toString()
     }));
 }
@@ -90,7 +90,7 @@ export default function CareerDetail({ params }: CareerDetailProps) {
                     <div
                         className='mt-[10px] text-xs leading-[162%]'
                         dangerouslySetInnerHTML={{
-                            __html: career?.description as string
+                            __html: career?.description
                         }}
                     ></div>
                 </div>
