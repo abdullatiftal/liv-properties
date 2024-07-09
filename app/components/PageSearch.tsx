@@ -8,14 +8,16 @@ import { Select } from '@/app/components';
 import { useRouter, useSearchParams } from 'next/navigation';
 import PriceRange from './PriceRange';
 
-type HomeTypeOption = 'Home Type' | 'Villa' | 'Apartment';
+type BedroomOption = 'Bedroom' | 'Studio' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '7+';
+type BathroomOption = 'Bathroom' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '7+';
+type HomeTypeOption = 'Home Type' | 'Villa' | 'Apartment' | 'Pentouse' | 'Townhouse' | 'Duplex';
 type SelectedOption = 'Price low to high' | 'Price high to low';
 
 export const PageSearch = ({ type = 'ready' }) => {
     const [projType, setProjType] = useState<'rent' | 'buy' | ''>('');
     const [pr, setPr] = useState('');
-    const [bedroom, setBedroom] = useState('');
-    const [bathroom, setBathroom] = useState('');
+    const [bedroom, setBedroom] = useState<BedroomOption>('Bedroom');
+    const [bathroom, setBathroom] = useState<BathroomOption>('Bathroom');
     const [location, setLocation] = useState('');
     const [hometype, setHometype] = useState<HomeTypeOption>('Home Type');
     const [selectedOption, setSelectedOption] =
@@ -44,11 +46,13 @@ export const PageSearch = ({ type = 'ready' }) => {
         const priceRange = params.get('price_range');
         if (priceRange) setPr(priceRange);
 
-        const numberOfBedroom = params.get('number_of_bedroom');
-        if (numberOfBedroom) setBedroom(numberOfBedroom);
+        const numberOfBedroom = params.get('number_of_bedroom') as BedroomOption;
+        if (numberOfBedroom && numberOfBedroom !== 'Bedroom')
+            setBedroom(numberOfBedroom);
 
-        const numberOfBathroom = params.get('number_of_bathroom');
-        if (numberOfBathroom) setBathroom(numberOfBathroom);
+        const numberOfBathroom = params.get('number_of_bathroom') as BathroomOption;
+        if (numberOfBathroom && numberOfBathroom !== 'Bathroom')
+            setBathroom(numberOfBathroom);
 
         const propertyType = params.get('property_type') as HomeTypeOption;
         if (propertyType && propertyType !== 'Home Type')
@@ -80,8 +84,8 @@ export const PageSearch = ({ type = 'ready' }) => {
 
         if (projType) params.set('availablefor', projType);
         if (pr) params.set('price_range', pr);
-        if (bedroom) params.set('number_of_bedroom', bedroom);
-        if (bathroom) params.set('number_of_bathroom', bathroom);
+        if (bedroom !== 'Bedroom') params.set('number_of_bedroom', bedroom);
+        if (bathroom !== 'Bathroom') params.set('number_of_bathroom', bathroom);
         if (hometype !== 'Home Type') params.set('property_type', hometype);
         type === 'ready'
             ? params.set('construction_status', type)
@@ -128,50 +132,96 @@ export const PageSearch = ({ type = 'ready' }) => {
                             {!pr ? 'Price Range' : pr}
                         </button>
                     </div>
-                    <div
-                        className={`!py-3 ${s.propFilter} ${s.hoverable} min-w-[calc(33.333%-0.8rem)] lg:min-w-[auto]`}
-                    >
-                        <input
-                            name='bedroom'
-                            type='number'
-                            min='1'
-                            max='20'
-                            id='bedroom_input'
-                            value={bedroom}
-                            onChange={(e) => setBedroom(e.target.value)}
-                            className={`block 
-                                h-full w-full 
-                                border-0 
-                                bg-transparent 
-                                py-1.5 
-                                text-left text-[100%] 
-                                placeholder-[#eddfd0] 
-                                ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50 
-                                focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] 
-                                sm:min-w-[150px] sm:text-center 
-                                sm:leading-6 
-                                lg:w-auto 
-                                ${s.hoverable}`}
-                            placeholder='Bedroom'
-                        />
-                    </div>
-                    <div
-                        className={`!py-3 ${s.propFilter} ${s.hoverable} min-w-[calc(33.333%-1rem)] lg:min-w-[auto]`}
-                    >
-                        <input
-                            name='bathroom'
-                            type='number'
-                            min='1'
-                            max='10'
-                            id='bathroom_input'
-                            value={bathroom}
-                            onChange={(e) => setBathroom(e.target.value)}
-                            className={`block h-full w-full border-0 bg-transparent py-1.5 text-left text-[100%]
-                        placeholder-[#eddfd0] ring-0 ring-inset ring-transparent transition duration-200 ease-in-out hover:ring-[#EDDFD0]/50
-                        focus:ring-0 focus:ring-inset focus:ring-[#EDDFD0] sm:min-w-[150px] sm:text-center sm:leading-6 lg:w-auto ${s.hoverable}`}
-                            placeholder='Bathroom'
-                        />
-                    </div>
+                    <Select
+                        options={[
+                            {
+                                value: 'Bedroom',
+                                label: 'Bedroom'
+                            },
+                            {
+                                value: 'studio',
+                                label: 'Studio'
+                            },
+                            {
+                                value: '1',
+                                label: '1'
+                            },
+                            {
+                                value: '2',
+                                label: '2'
+                            },
+                            {
+                                value: '3',
+                                label: '3'
+                            },
+                            {
+                                value: '4',
+                                label: '4'
+                            },
+                            {
+                                value: '5',
+                                label: '5'
+                            },
+                            {
+                                value: '6',
+                                label: '6'
+                            },
+                            {
+                                value: '7',
+                                label: '7'
+                            },
+                            {
+                                value: '7+',
+                                label: '7+'
+                            }
+                        ]}
+                        value={bedroom}
+                        className={`page-search ${s.propFilter} mt-[-12px] min-w-[calc(33.333%-0.5rem)] sm:mt-0 lg:min-w-[150px]`}
+                        onChange={(b) => setBedroom(b as BedroomOption)}
+                    />
+                    <Select
+                        options={[
+                            {
+                                value: 'Bathroom',
+                                label: 'Bathroom'
+                            },
+                            {
+                                value: '1',
+                                label: '1'
+                            },
+                            {
+                                value: '2',
+                                label: '2'
+                            },
+                            {
+                                value: '3',
+                                label: '3'
+                            },
+                            {
+                                value: '4',
+                                label: '4'
+                            },
+                            {
+                                value: '5',
+                                label: '5'
+                            },
+                            {
+                                value: '6',
+                                label: '6'
+                            },
+                            {
+                                value: '7',
+                                label: '7'
+                            },
+                            {
+                                value: '7+',
+                                label: '7+'
+                            }
+                        ]}
+                        value={bathroom}
+                        className={`page-search ${s.propFilter} mt-[-12px] min-w-[calc(33.333%-0.5rem)] sm:mt-0 lg:min-w-[150px]`}
+                        onChange={(bt) => setBathroom(bt as BathroomOption)}
+                    />
                     <Select
                         options={[
                             {
@@ -185,6 +235,18 @@ export const PageSearch = ({ type = 'ready' }) => {
                             {
                                 value: 'Apartment',
                                 label: 'Apartment'
+                            },
+                            {
+                                value: 'Pentouse',
+                                label: 'Pentouse'
+                            },
+                            {
+                                value: 'Townhouse',
+                                label: 'Townhouse'
+                            },
+                            {
+                                value: 'Duplex',
+                                label: 'Duplex'
                             }
                         ]}
                         value={hometype}
