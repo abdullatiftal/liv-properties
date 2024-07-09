@@ -132,7 +132,11 @@ export const ScrollingSections = () => {
         function handleResize() {
             if (!isViewportAbove920px()) {
                 observer.disable(); // Disable observer on small devices
-                document.body.style.overflow = ''; // Restore default scrolling
+                const bodyDiv = document.querySelector('body > div') as HTMLElement | null;
+                if (bodyDiv) {
+                    bodyDiv.style.overflow = '';
+                    bodyDiv.style.height = 'auto';
+                }
             } else {
                 observer.enable(); // Enable observer on large devices
                 gotoSection(currentIndex); // Ensure correct section is shown
@@ -144,6 +148,11 @@ export const ScrollingSections = () => {
         return () => {
             observer.kill();
             window.removeEventListener('resize', handleResize);
+            const bodyDivCleanup = document.querySelector('body > div') as HTMLElement | null;
+            if (bodyDivCleanup) {
+                bodyDivCleanup.style.overflow = '';
+                bodyDivCleanup.style.height = 'auto';
+            }
         };
     }, []);
 
