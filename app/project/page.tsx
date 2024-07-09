@@ -210,7 +210,7 @@ function ProjectComponent() {
                             {property[0].area_in_sqft ?? '0'} Sqft
                         </div>
                     </div>
-                    <div className='mt-[31px] max-w-[100%] text-sm leading-[202%] xl:max-w-[483px]'>
+                    <div className='mt-[31px] max-w-[100%] w-full text-sm leading-[202%] xl:w-[auto] xl:max-w-[483px]'>
                         {property[0].description ?? ''}
                     </div>
                 </div>
