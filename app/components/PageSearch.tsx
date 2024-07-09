@@ -116,6 +116,7 @@ export const PageSearch = ({ type = 'ready' }) => {
                                 setPr={setPr}
                                 pr={pr}
                                 setVisible={setVisible}
+                                keyPrefix='page'
                                 className='absolute bottom-[calc(100%-30px)] z-[10] sm:bottom-[calc(100%-10px)] sm:left-[-50%]'
                             />
                         )}

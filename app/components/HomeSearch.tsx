@@ -149,6 +149,7 @@ export const HomeSearch = () => {
                             setPr={setPr}
                             pr={pr}
                             setVisible={setVisible}
+                            keyPrefix='home'
                             className='absolute bottom-[calc(100%-30px)] left-[-40%] z-[10] sm:bottom-[calc(100%+20px)] md:left-[-50%] msmall:left-[unset] msmall:right-[-20px] small:left-[-50%] small:right-[unset]'
                         />
                     )}
@@ -264,6 +265,7 @@ export const HomeSearch = () => {
                             setPr={setPr}
                             pr={pr}
                             setVisible={setVisible}
+                            keyPrefix='homemob'
                             className='absolute bottom-[50px] left-[0%] z-[10]'
                         />
                     )}
