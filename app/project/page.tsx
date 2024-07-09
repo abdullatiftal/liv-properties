@@ -10,6 +10,7 @@ import useSWR from 'swr';
 import { Loading } from '../components';
 import renderService from './renderService';
 import Gallery from './Gallery';
+import ProjectImages from './ProjectImages';
 
 export default function ProjectPage() {
     return (
@@ -52,14 +53,8 @@ function ProjectComponent() {
     }
 
     if (!isClient) {
-        return null; // Render nothing on the server
+        return null;
     }
-
-    // const {
-    //     data: property,
-    //     error,
-    //     isLoading
-    // } = useSWR(`${apiUrl}/api/projectdetails?unique_id=${id}`, fetcher);
 
     if (isLoading) {
         return <Loading />;
@@ -83,7 +78,7 @@ function ProjectComponent() {
         ? JSON.parse(property[0].services)
         : [];
 
-    const handlePriceClick = () => {
+    const handlePopup = () => {
         setViewGallery((prevCheck) => !prevCheck);
     };
 
@@ -214,74 +209,16 @@ function ProjectComponent() {
                         {property[0].description ?? ''}
                     </div>
                 </div>
-
                 {images && (
-                    <div className='order-1 flex w-full flex-col items-end gap-[15px] xl:order-2 xl:w-[65%] xl:translate-y-[-100px]'>
-                        <Image
-                            src={property[0].main_image ?? ''}
-                            alt={property[0].property_name ?? 'property image'}
-                            width={791}
-                            height={490}
-                            className='w-full cursor-pointer xl:w-[791px]'
-                            priority
-                            onClick={handlePriceClick}
-                        />
-                        <div className='mx-auto flex max-h-[101px] gap-[11px]'>
-                            {images
-                                .slice(0, maxVisibleImages)
-                                .map((image: string, index: string) => (
-                                    <div
-                                        key={index}
-                                        className='h-[100px] w-[100px]'
-                                    >
-                                        <Image
-                                            src={image}
-                                            alt={
-                                                property[0].property_name ??
-                                                'property image'
-                                            }
-                                            width={0}
-                                            height={0}
-                                            className='m-1 h-[100px] w-[100px] cursor-pointer object-cover'
-                                            sizes='100vw'
-                                            onClick={handlePriceClick}
-                                        />
-                                    </div>
-                                ))}
-                            {images.length > maxVisibleImages && (
-                                <div className={`${s.viewMorePics}`}>
-                                    <Image
-                                        src={images[3]}
-                                        alt={
-                                            property[0].property_name ??
-                                            'property image'
-                                        }
-                                        width={0}
-                                        height={0}
-                                        sizes='100vw'
-                                        className='h-[100px] w-[100px] cursor-pointer object-cover'
-                                        onClick={handlePriceClick}
-                                    />
-                                    <div className={`${s.backdrop} text-sm`}>
-                                        <Image
-                                            src='/icons/camera.svg'
-                                            alt='Camera icon'
-                                            width={24}
-                                            height={24}
-                                            className='cursor-pointer'
-                                        />
-                                        <span>
-                                            {images.length - maxVisibleImages}+
-                                            Photos
-                                        </span>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
+                    <ProjectImages
+                        property={property[0]}
+                        stateChanger={handlePopup}
+                        images={images}
+                    />
                 )}
+
                 {images.length > 0 && viewGallery && (
-                    <Gallery stateChanger={handlePriceClick} images={images} />
+                    <Gallery stateChanger={handlePopup} images={images} />
                 )}
             </div>
             <div className='flex w-full flex-wrap items-center justify-center gap-7 border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[46px] pt-[36px] xl:justify-normal'>

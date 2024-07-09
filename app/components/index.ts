@@ -18,3 +18,5 @@ export { Select } from './Select';
 export { ScrollingSections } from './ScrollingSections';
 export { PageSearch } from './PageSearch';
 export { Loading } from './Loading';
+export { ListProperties } from './ListProperties';
+export { MeetTheTeam } from './MeetTheTeam';

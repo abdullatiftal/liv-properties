@@ -8,7 +8,6 @@ import Link from 'next/link';
 import s from '@/app/ui/main.module.css';
 import { useState, useLayoutEffect, Fragment } from 'react';
 import { FeaturedParameters, Property } from '@/app/types';
-import { useAPI } from '@/app/context/APIContext';
 import { apiUrl, fetcher } from '../constants';
 import useSWR from 'swr';
 
@@ -18,10 +17,6 @@ export const FeaturedProperties = () => {
         'all'
     );
 
-    // const { featuredProperties, setParameters } = useAPI();
-    // const [featuredProperties, setFeaturedProperties] = useState<Property[]>(
-    //     []
-    // );
     const [parameters, setParameters] = useState<FeaturedParameters>({
         propType: 'all',
         action: 'buy'
@@ -36,12 +31,6 @@ export const FeaturedProperties = () => {
         error: featuredPropertiesError,
         isLoading: featuredPropertiesisLoading
     } = useSWR<Property[]>(fetchUrl, fetcher);
-
-    // useEffect(() => {
-    //     if (featuredData) {
-    //         setFeaturedProperties(featuredData);
-    //     }
-    // }, [featuredData]);
 
     const [isLargeScreen, setIsLargeScreen] = useState(false);
 
@@ -60,10 +49,8 @@ export const FeaturedProperties = () => {
         <div className='verticalPanelInner featured-properties flex flex-col px-[3vw] sm:px-0 small:h-[100vh] small:px-[85px]'>
             <div className='max-[1024px]:justify-between mb-[30px] flex flex-wrap items-end justify-normal gap-8 small:mb-0'>
                 <div className='home-sec_title text-[40px] font-[700] leading-[94%] small:text-[69px]'>
-                    <h2>
-                        Featured
-                        <br />
-                        Properties
+                    <h2 className='inline-block max-w-[250px] capitalize small:max-w-[330px]'>
+                        Featured Properties
                     </h2>
                 </div>
                 {isLargeScreen ? (
@@ -169,6 +156,14 @@ export const FeaturedProperties = () => {
                 </div>
             )}
 
+            {!featuredPropertiesisLoading &&
+                Array.isArray(featuredData) &&
+                featuredData.length <= 0 && (
+                    <div className='mb-[20px] mt-[20px] w-full text-center md:mt-[43px]'>
+                        No data available for the selected filter
+                    </div>
+                )}
+
             <div className='featured-properties_grid flex'>
                 {Array.isArray(featuredData) &&
                     featuredData.slice(0, 3).map((p: Property) => (
@@ -206,7 +201,7 @@ export const FeaturedProperties = () => {
                     </div>
                 ) : (
                     <button
-                        className='mx-auto mt-[26px] w-[114px] rounded-3xl bg-[#EDDFD0] px-[30px] py-[8px] text-sm text-[#916940] transition
+                        className='mx-auto w-[114px] rounded-3xl bg-[#EDDFD0] px-[30px] py-[8px] text-sm text-[#916940] transition
                         duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
                     >
                         View&nbsp;All

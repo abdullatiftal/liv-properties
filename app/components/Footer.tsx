@@ -117,19 +117,21 @@ export const Footer = async () => {
                     </Link>
                 </div>
                 <div className='order-4 text-sm font-[200] sm:w-[calc(40%-20px)] bigtab:w-[20%]'>
-                    <Link href='/'><Image
-                        src='/logos/slim.svg'
-                        alt='LIV Squared Properties logo'
-                        width={142}
-                        height={71}
-                        className='ml-[-4px] h-auto w-auto'
-                        priority={false}
-                    /></Link>
+                    <Link href='/'>
+                        <Image
+                            src='/logos/logo.svg'
+                            alt='LIV Squared Properties logo'
+                            width={142}
+                            height={71}
+                            className='ml-[-4px] h-auto w-auto'
+                            priority={false}
+                        />
+                    </Link>
                     <p className='mt-[30px] xl:mt-[53px]'>
-                    {getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Address'
-                            )}
+                        {getFieldValueByName(
+                            contactUs?.['contact-us-section-1'],
+                            'Address'
+                        )}
                     </p>
                     <Link
                         href={`tel:${getFieldValueByName(
@@ -161,10 +163,13 @@ export const Footer = async () => {
                     </Link>
                     <div className='mt-[13px] flex'>
                         <Link
-                            href={`${getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Facebook Url'
-                            ) ?? '/'}`} target='_blank'
+                            href={`${
+                                getFieldValueByName(
+                                    contactUs?.['contact-us-section-1'],
+                                    'Facebook Url'
+                                ) ?? '/'
+                            }`}
+                            target='_blank'
                         >
                             <Image
                                 src='/icons/fb.svg'
@@ -175,10 +180,13 @@ export const Footer = async () => {
                             />
                         </Link>
                         <Link
-                            href={`${getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Twitter Url'
-                            ) ?? '/'}`} target='_blank'
+                            href={`${
+                                getFieldValueByName(
+                                    contactUs?.['contact-us-section-1'],
+                                    'Twitter Url'
+                                ) ?? '/'
+                            }`}
+                            target='_blank'
                         >
                             <Image
                                 src='/icons/x.svg'
@@ -189,10 +197,13 @@ export const Footer = async () => {
                             />
                         </Link>
                         <Link
-                            href={`${getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Instagram Url'
-                            ) ?? '/'}`} target='_blank'
+                            href={`${
+                                getFieldValueByName(
+                                    contactUs?.['contact-us-section-1'],
+                                    'Instagram Url'
+                                ) ?? '/'
+                            }`}
+                            target='_blank'
                         >
                             <Image
                                 src='/icons/instagram.svg'
@@ -203,10 +214,13 @@ export const Footer = async () => {
                             />
                         </Link>
                         <Link
-                            href={`${getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Linkedin Url'
-                            ) ?? '/'}`} target='_blank'
+                            href={`${
+                                getFieldValueByName(
+                                    contactUs?.['contact-us-section-1'],
+                                    'Linkedin Url'
+                                ) ?? '/'
+                            }`}
+                            target='_blank'
                         >
                             <Image
                                 src='/icons/linkedin.svg'

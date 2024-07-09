@@ -1,5 +1,4 @@
 import { Field } from '@/app/types';
-// import { useAPI } from '../context/APIContext';
 
 //constant values
 export const apiUrl = 'https://codeandcode.xyz/demo/slim_properties';
@@ -26,20 +25,21 @@ export const fetchTokenAndReturn = async () => {
 
 //fetch cms-pages
 export async function fetchData(id: number) {
-    try {
-        const res = await fetch(apiUrl + `/api/cms-pages?page_id=${id}`, {
-            next: { revalidate: 3600 }
-        });
+    // try {
+    const res = await fetch(apiUrl + `/api/cms-pages?page_id=${id}`, {
+        // next: { revalidate: 3600 }
+        // cache: "no-store",
+    });
 
-        if (!res.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await res.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
+    if (!res.ok) {
+        throw new Error('Network response was not ok');
     }
+
+    const data = await res.json();
+    return data;
+    // } catch (error) {
+    //     console.error('Error fetching data:', error);
+    // }
 }
 
 //fetch property data
@@ -48,7 +48,7 @@ export async function fetchProperty(id: string | number) {
         const res = await fetch(
             apiUrl + `/api/projectdetails?unique_id=${id}`,
             {
-                next: { revalidate: 3600 }
+                // next: { revalidate: 3600 }
             }
         );
 
@@ -67,7 +67,7 @@ export async function fetchProperty(id: string | number) {
 export async function fetchGeneral(id: string | number) {
     try {
         const res = await fetch(apiUrl + `/api/${id}`, {
-            next: { revalidate: 3600 }
+            // next: { revalidate: 3600 }
         });
 
         if (!res.ok) {

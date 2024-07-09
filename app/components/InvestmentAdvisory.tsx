@@ -7,7 +7,7 @@ export const InvestmentAdvisory = (data: any) => {
         return (
             <Link href='/invest' className='services-cta'>
                 <div
-                    className={`relative z-[-1] w-full bg-cover text-white xl:w-[1100px]`}
+                    className={`relative w-full bg-cover text-white xl:w-[1100px]`}
                     style={{ backgroundImage: 'url(/images/services-bg.webp)' }}
                 >
                     <div className={styles.tint}></div>
@@ -24,7 +24,7 @@ export const InvestmentAdvisory = (data: any) => {
     return (
         <Link href='/invest' className='services-cta'>
             <div
-                className={`relative z-[-1] w-full bg-cover text-white xl:w-[1100px]`}
+                className={`relative w-full bg-cover text-white xl:w-[1100px]`}
                 style={{ backgroundImage: 'url(/images/services-bg.webp)' }}
             >
                 <div className={styles.tint}></div>

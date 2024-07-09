@@ -3,7 +3,6 @@
 import s from '@/app/ui/main.module.css';
 import { useState, useRef, useEffect } from 'react';
 import { apiUrl } from '../constants';
-// import { useAPI } from '../context/APIContext';
 
 const useAutoResizeTextarea = () => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -57,12 +56,9 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    // const { token } = useAPI();
-
     const handleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-        // console.log(event.target.name);
         setFormData({ ...formData, [event.target.name]: event.target.value });
         resizeTextarea();
     };
@@ -270,12 +266,12 @@ export const EnquireForm = ({ hasUploadField = false }: EnquireFormProps) => {
                             sm:leading-6'
                         >
                             <span>{selectedFile}</span>
-                            <button
-                                className='z-[-1] rounded-3xl border border-solid border-[#EDDFD0] px-[50px] py-[15px] text-sm
+                            <div
+                                className='rounded-3xl border border-solid border-[#EDDFD0] px-[50px] py-[15px] text-sm
                             transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
                             >
                                 Upload
-                            </button>
+                            </div>
                         </div>
                         <input
                             type='file'

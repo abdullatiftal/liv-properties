@@ -105,7 +105,7 @@ export const Header = () => {
         >
             <Link href='/' className='w-fit'>
                 <Image
-                    src='/logos/slim.svg'
+                    src='/logos/logo.svg'
                     alt='LIV Squared Properties logo'
                     width={95}
                     height={87}
@@ -127,19 +127,20 @@ export const Header = () => {
         </div>
     ) : (
         <div
-            className={`mb-[50px] px-[15px] sm:mb-0 md:px-[85px] ${isRouteActive('/', path) ? 'h-auto ' : 'sm:h-[160px] '}pt-[30px] relative z-[99] flex !transform-none justify-between !opacity-[1] lg:pt-[60px]`}
+            className={`mb-[50px] px-[15px] sm:mb-0 md:px-[85px] ${isRouteActive('/', path) ? 'h-auto ' : 'sm:h-[160px] '}pt-[30px] relative z-[99] flex !transform-none items-center justify-between !opacity-[1] lg:pt-[60px]`}
         >
             <Link href='/'>
                 <Image
-                    src='/logos/slim.svg'
+                    src='/logos/logo.svg'
                     alt='LIV Squared Properties logo'
                     width={142}
                     height={71}
                     className='ml-[-4px] h-[38px] w-[76px] lg:h-[71px] lg:w-[142px]'
+                    priority={true}
                 />
             </Link>
             <button
-                className='flex h-[23px] w-[24px] items-center justify-center bg-[#EDDFD0] p-[1px] focus:outline-none lg:hidden'
+                className='flex h-[23px] w-[24px] items-center justify-center p-[1px] focus:outline-none lg:hidden'
                 onClick={toggleMenu}
             >
                 <svg
@@ -150,7 +151,7 @@ export const Header = () => {
                 >
                     <path
                         d='M4 6H20M4 12H20M4 18H20'
-                        stroke='currentColor'
+                        stroke='#EDDFD0'
                         strokeWidth='1'
                         strokeLinecap='round'
                     />
@@ -163,11 +164,12 @@ export const Header = () => {
                 <div className='flex items-center justify-between'>
                     <Link href='/'>
                         <Image
-                            src='/logos/slim_dark.svg'
+                            src='/logos/logo_dark.svg'
                             alt='LIV Squared Properties logo'
-                            width={76}
-                            height={38}
-                            className='ml-[-4px]'
+                            width={142}
+                            height={71}
+                            className='ml-[-4px] h-[38px] w-[76px] lg:h-[71px] lg:w-[142px]'
+                            priority={true}
                         />
                     </Link>
                     <div
@@ -250,6 +252,7 @@ const Header2 = () => {
                 width={95}
                 height={87}
                 className='ml-[-4px]'
+                priority={true}
             />
             <nav className='mt-[57px] flex gap-[38px] text-sm'>
                 <div className={styles.navActive}>Home</div>

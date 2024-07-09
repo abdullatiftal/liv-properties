@@ -22,11 +22,11 @@ export default async function Contact() {
         <div className='mb-[30px] w-full sm:mb-[60px] xl:mb-[84px] 3xl:max-w-[1200px]'>
             <div className='relative w-full 3xl:max-w-[1200px]'>
                 <div className='text-[40px] font-[700] leading-[38px] small:text-[69px] small:leading-[88px]'>
-                    <h1 className='inline-block max-w-[220px] capitalize small:max-w-[270px]'>
+                    <h1 className='inline-block max-w-[220px] capitalize small:max-w-[270px] z-[1] relative'>
                         {contactUs?.['contact-us-section-1'][0].field_value ??
                             'Contact us'}
                     </h1>
-                    <div className='pointer-events-none absolute top-[50%] z-[-30] translate-y-[-30%] scale-[1.6] sm:translate-y-[-60%] md:translate-y-[-60%] md:scale-[1.4] xl:translate-y-[-70%] xl:scale-[1.2] 2xl:scale-[1.1]'>
+                    <div className='pointer-events-none absolute top-[50%] z-[0] translate-y-[-30%] scale-[1.6] sm:translate-y-[-60%] md:translate-y-[-60%] md:scale-[1.4] xl:translate-y-[-70%] xl:scale-[1.2] 2xl:scale-[1.1]'>
                         <Image
                             src={
                                 (contactUs?.['contact-us-section-1'][1]
@@ -80,10 +80,13 @@ export default async function Contact() {
                     </Link>
                     <div className='mt-[13px] flex'>
                         <Link
-                            href={`${getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Facebook Url'
-                            ) ?? '/'}`} target='_blank'
+                            href={`${
+                                getFieldValueByName(
+                                    contactUs?.['contact-us-section-1'],
+                                    'Facebook Url'
+                                ) ?? '/'
+                            }`}
+                            target='_blank'
                         >
                             <Image
                                 src='/icons/fb.svg'
@@ -94,10 +97,13 @@ export default async function Contact() {
                             />
                         </Link>
                         <Link
-                            href={`${getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Twitter Url'
-                            ) ?? '/'}`} target='_blank'
+                            href={`${
+                                getFieldValueByName(
+                                    contactUs?.['contact-us-section-1'],
+                                    'Twitter Url'
+                                ) ?? '/'
+                            }`}
+                            target='_blank'
                         >
                             <Image
                                 src='/icons/x.svg'
@@ -108,10 +114,13 @@ export default async function Contact() {
                             />
                         </Link>
                         <Link
-                            href={`${getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Instagram Url'
-                            ) ?? '/'}`} target='_blank'
+                            href={`${
+                                getFieldValueByName(
+                                    contactUs?.['contact-us-section-1'],
+                                    'Instagram Url'
+                                ) ?? '/'
+                            }`}
+                            target='_blank'
                         >
                             <Image
                                 src='/icons/instagram.svg'
@@ -122,10 +131,13 @@ export default async function Contact() {
                             />
                         </Link>
                         <Link
-                            href={`${getFieldValueByName(
-                                contactUs?.['contact-us-section-1'],
-                                'Linkedin Url'
-                            ) ?? '/'}`} target='_blank'
+                            href={`${
+                                getFieldValueByName(
+                                    contactUs?.['contact-us-section-1'],
+                                    'Linkedin Url'
+                                ) ?? '/'
+                            }`}
+                            target='_blank'
                         >
                             <Image
                                 src='/icons/linkedin.svg'

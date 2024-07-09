@@ -19,11 +19,11 @@ export default async function SellPage() {
         <div className='mx-auto mb-[30px] w-full sm:mb-[60px] xl:mb-[84px] 3xl:max-w-[1200px]'>
             <div className='relative mb-[82px]'>
                 <div className='text-[40px] font-[700] leading-[38px] small:text-[69px] small:leading-[88px]'>
-                    <h1 className='inline-block max-w-[220px] capitalize small:max-w-[300px]'>
+                    <h1 className='inline-block max-w-[220px] capitalize small:max-w-[300px] z-[1] relative'>
                         {sellYourProperty?.['sell-your-property-section-1'][0]
                             .field_value ?? ''}
                     </h1>
-                    <div className='pointer-events-none absolute top-[50%] z-[-30] translate-y-[-30%] scale-[1.4] sm:translate-y-[-60%] md:translate-y-[-60%]  md:scale-[1.3] lg:scale-[1.3] xl:translate-y-[-80%] 2xl:scale-[1.4] msm:translate-y-[-55%] mdlap:translate-y-[-70%]'>
+                    <div className='pointer-events-none absolute top-[50%] z-[0] translate-y-[-30%] scale-[1.4] sm:translate-y-[-60%] md:translate-y-[-60%]  md:scale-[1.3] lg:scale-[1.3] xl:translate-y-[-80%] 2xl:scale-[1.4] msm:translate-y-[-55%] mdlap:translate-y-[-70%]'>
                         <Image
                             src={
                                 (sellYourProperty?.[

@@ -26,11 +26,11 @@ export default async function ServicesPage() {
         <div className='mx-auto mb-[30px] w-full sm:mb-[60px] xl:mb-[84px] 3xl:max-w-[1200px]'>
             <div className='min-[1630px]:min-w-[1440px] max-[1629px]:w-full relative mb-[82px]'>
                 <div className='text-[40px] font-[700] leading-[38px] small:text-[69px] small:leading-[88px]'>
-                    <h1 className='capitalize'>
+                    <h1 className='capitalize z-[1] relative'>
                         {ourServices?.['our-services-section-1'][0]
                             .field_value ?? ''}
                     </h1>
-                    <div className='pointer-events-none absolute top-[50%] z-[-30] translate-y-[-55%] scale-[1.4] sm:translate-y-[-60%] md:translate-y-[-60%] md:scale-[1.3] lg:scale-[1.3] xl:translate-y-[-70%] 2xl:scale-[1.4]'>
+                    <div className='pointer-events-none absolute top-[50%] z-[0] translate-y-[-55%] scale-[1.4] sm:translate-y-[-60%] md:translate-y-[-60%] md:scale-[1.3] lg:scale-[1.3] xl:translate-y-[-70%] 2xl:scale-[1.4]'>
                         <Image
                             src={
                                 ourServices?.['our-services-section-1'][1]
@@ -75,15 +75,14 @@ export default async function ServicesPage() {
                             {ourServices?.['our-services-section-2']?.[5]
                                 ?.field_value ?? ''}
                         </h2>
-                        <div className='mt-[20px] text-xs leading-[170%] text-white'>
-                            <p
-                                dangerouslySetInnerHTML={{
-                                    __html: ourServices?.[
-                                        'our-services-section-2'
-                                    ]?.[6]?.field_value as string
-                                }}
-                            ></p>
-                        </div>
+                        <div
+                            className='mt-[20px] text-xs leading-[170%] text-white'
+                            dangerouslySetInnerHTML={{
+                                __html: ourServices[
+                                    'our-services-section-2'
+                                ]?.[6]?.field_value as string
+                            }}
+                        ></div>
                     </div>
                     <div className={`flex-1 3xl:max-w-[380px] 3xl:flex-[auto]`}>
                         <h2 className='text-[20px]'>

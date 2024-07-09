@@ -31,7 +31,7 @@ export default async function Page() {
                     className='rounded-full p-1 transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
                 />
             </Link>
-            <ScrollingSections home={home} />
+            <ScrollingSections />
         </div>
     );
 }

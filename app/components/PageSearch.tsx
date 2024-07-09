@@ -253,9 +253,9 @@ export const PageSearch = ({ type = 'ready' }) => {
                     <Image
                         src='/icons/search.svg'
                         alt='Search icon'
-                        width={16}
-                        height={16}
-                        className='ml-[-20px] inline-block'
+                        width={0}
+                        height={0}
+                        className='inline=block ml-[-20px] h-[16px] w-[16px]'
                     />
                 </div>
             </div>

@@ -97,6 +97,10 @@ export interface PropertyCardProps {
     price?: number;
 }
 
+export interface PropertyProps {
+    property: Property;
+}
+
 export interface APIContextProviderProps {
     children: React.ReactNode;
 }

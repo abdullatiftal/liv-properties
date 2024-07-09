@@ -7,7 +7,6 @@ import '@/app/ui/index.css';
 import s from '@/app/ui/main.module.css';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useAPI } from '../context/APIContext';
 import PriceRange from './PriceRange';
 import { HomeSearchText } from '@/app/types';
 
@@ -171,16 +170,16 @@ export const HomeSearch = () => {
                     <Image
                         src='/icons/search.svg'
                         alt='Search icon'
-                        width={17}
-                        height={17}
-                        className='ml-[-20px]'
+                        width={0}
+                        height={0}
+                        className='ml-[-20px] h-[17px] w-[17px]'
                     />
                 </button>
             </div>
         </div>
     ) : (
         <>
-            <div className='mt-[300px] flex w-full px-[3vw] text-center text-sm xl:mt-[200px]'>
+            <div className='mt-[300px] flex w-full px-[3vw] text-center text-sm xl:mt-[200px] '>
                 <div
                     className={`min-w-[132px] flex-1 ${propertyType === 'ready' ? 'border-b-[3px]' : 'border-b'} border-solid border-[#eddfd0] pb-[8px]`}
                     onClick={() => setPropertyType('ready')}

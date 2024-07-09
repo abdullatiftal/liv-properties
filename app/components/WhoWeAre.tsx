@@ -2,7 +2,7 @@
 
 import { Fragment, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { InvestmentAdvisory, Loading } from '@/app/components';
+import { InvestmentAdvisory, Loading, MeetTheTeam } from '@/app/components';
 import { AboutUs, TeamMember } from '@/app/types';
 import { fetchGeneral } from '../constants';
 
@@ -13,31 +13,8 @@ const tabsState = {
     meet: false
 };
 
-export const WhoWeAre = (props: { data: AboutUs }) => {
+export const WhoWeAre = (props: { data: AboutUs; teamMembers: TeamMember }) => {
     const [activeTab, setActiveTab] = useState('who');
-    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<Error | null>(null);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await fetchGeneral('teams');
-                setTeamMembers(data);
-            } catch (err) {
-                if (err instanceof Error) {
-                    setError(err);
-                } else {
-                    setError(new Error('An unknown error occurred'));
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-    }, []);
-
     return (
         <>
             <div className='mt-[100px] flex flex-wrap text-xs xl:mt-[50px] msm:flex-nowrap mdlap:mt-[136px]'>
@@ -110,35 +87,13 @@ export const WhoWeAre = (props: { data: AboutUs }) => {
                     data={props.data?.personalisedinvestmentadvisory}
                 />
             )}
-            {/* Meet the team */}
-            {loading ? <Loading /> : ''}
-            {error ? <div>Error: {error.message}</div> : ''}
-
             {activeTab === 'meet' && (
                 <div className='mt-[36px]'>
                     <h3 className='text-[40px] font-[700] leading-[38px] small:text-[69px] small:leading-[88px]'>
                         {props.data?.meettheteam[13].field_value}
                     </h3>
                     <div className='mt-[47px] flex flex-wrap gap-[14px]'>
-                        {Array.isArray(teamMembers) &&
-                            teamMembers.map((member) => (
-                                <div key={member.id}>
-                                    <Image
-                                        src={member.image}
-                                        alt='Photo of Tim'
-                                        width={261}
-                                        height={319}
-                                        className='border border-solid border-[#EDDFD0] border-opacity-50'
-                                    />
-                                    <div className='mt-[11px] text-[23px] font-[700]'>
-                                        {member.heading}
-                                    </div>
-                                    <div className='text-xs'>
-                                        {member.subheading}
-                                    </div>
-                                    <div className='mt-[10px] h-[3px] w-[28px] bg-[#EDDFD0]' />
-                                </div>
-                            ))}
+                        <MeetTheTeam teamMembers={props.teamMembers} />
                     </div>
                 </div>
             )}

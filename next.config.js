@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    webpack: (config) => {
+        config.module.rules.push({
+            test: /\.node$/,
+            use: 'node-loader'
+        });
+
+        return config;
+    },
     /**
      * Enable static exports for the App Router.
      *
@@ -20,6 +28,7 @@ const nextConfig = {
      * @see https://nextjs.org/docs/app/api-reference/components/image#unoptimized
      */
     images: {
+        formats: ['image/webp'],
         unoptimized: true
     }
 };

@@ -41,12 +41,12 @@ export const InvestmentExperience: React.FC<OurServicesProps> = ({
                 </h4>
 
                 <div className='mt-[20px] text-xs font-[200] leading-[170%] text-white'>
-                    <p
+                    <div
                         dangerouslySetInnerHTML={{
                             __html: ourServices?.['our-services-section-2']?.[6]
                                 ?.field_value as string
                         }}
-                    ></p>
+                    ></div>
                 </div>
             </div>
             <div className={`flex-1 3xl:max-w-[380px] 3xl:flex-[auto]`}>

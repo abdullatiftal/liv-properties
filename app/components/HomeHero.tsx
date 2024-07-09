@@ -1,18 +1,31 @@
+'use client';
+
 import Image from 'next/image';
 import '@/app/ui/index.css';
-import { HomeSearch } from '@/app/components';
+import { HomeSearch, Loading } from '@/app/components';
 import s from '@/app/ui/main.module.css';
 import { Home } from '../types';
+import { apiUrl, fetchData, fetcher } from '../constants';
+import useSWR from 'swr';
 
-interface HomeHeroProps {
-    home: Home;
-}
+export const HomeHero = () => {
+    const {
+        data: home,
+        error,
+        isLoading
+    } = useSWR(`${apiUrl}/api/cms-pages?page_id=1`, fetcher);
+    if (isLoading) {
+        return <Loading />;
+    }
 
-export const HomeHero: React.FC<HomeHeroProps> = ({ home }) => {
-    const imageSrc =
-        home?.['section-1'][1].field_value ?? '/images/car-home.webp';
-    const imageAlt =
-        home?.['section-1'][0].field_value ?? 'Timeless luxury re-imagined';
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    const imageAlt = !home ? '' : home['section-1'][0].field_value;
+    const imageSrc = !home
+        ? '/images/car-home.webp'
+        : home['section-1'][1].field_value;
 
     return (
         <div className='min-[1630px]:min-w-[1440px] max-[1629px]:w-full verticalPanelInner flex h-full flex-col justify-between overflow-hidden lg:pb-[50px] xl:pb-[60px] small:pb-[40px]'>

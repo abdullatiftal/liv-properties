@@ -13,19 +13,12 @@ import {
     OurServices,
     Instagram
 } from '@/app/components';
-import { Home } from '../types';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(Observer, useGSAP);
 }
 
-interface ScrollingSectionsProps {
-    home: Home;
-}
-
-export const ScrollingSections: React.FC<ScrollingSectionsProps> = ({
-    home
-}) => {
+export const ScrollingSections = () => {
     const verticalSection = useRef(null);
     const sectionsRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -164,7 +157,7 @@ export const ScrollingSections: React.FC<ScrollingSectionsProps> = ({
                     className='verticalPanel'
                     ref={(el) => (sectionsRefs.current[0] = el!)}
                 >
-                    <HomeHero home={home} />
+                    <HomeHero />
                 </div>
                 <div
                     className='verticalPanel'
