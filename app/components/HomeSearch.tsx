@@ -252,12 +252,12 @@ export const HomeSearch = () => {
                         className='absolute right-[0px] top-[calc(50%-10px)] mr-[5px]'
                     />
                 </div>
-                <button
+                {/* <button
                     className='flex border-b border-solid border-[#eddfd0] border-opacity-60 pb-[15px] pt-[24px] transition duration-200 ease-in-out
                     hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
                 >
                     Price
-                </button>
+                </button> */}
                 <div className={`relative`}>
                     {visible && (
                         <PriceRange

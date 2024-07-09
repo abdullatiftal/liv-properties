@@ -57,7 +57,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <div className='ml-[10px] mt-[15px]'>
                 <div className=' text-[15px] font-[700]'>{title}</div>
                 <div className='text-xs'>{location}</div>
-                <div className='text-xs'>{description}</div>
+                {/* <div className='text-xs'>{description}</div> */}
                 <div className='mt-[4px] flex gap-[17px] text-xs'>
                     <div>
                         <Image

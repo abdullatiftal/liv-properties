@@ -24,6 +24,28 @@
     transform: translateX(-50%) scaleX(1.3);
 }
 
+.navMob {
+    position: relative;
+}
+
+.navMob::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background-color: #827161;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.navMob:hover::after {
+    transform: translateX(-50%) scaleX(1.3);
+}
+
 .tint {
     content: '';
     position: absolute;
@@ -36,7 +58,7 @@
     filter: brightness(0.5);
 }
 
-@media screen(sm) {
+@media screen and (min-width: 640px) {
     .tint {
         background: linear-gradient(
             to right,

@@ -25,7 +25,7 @@ export default async function ReadyProjectsPage() {
                         alt='Home and a car'
                         width={1404}
                         height={885}
-                        className='pointer-events-none absolute right-0 top-[140px] z-[0] max-w-[95dvw] translate-y-[-25%] sm:top-[200px] sm:max-w-full sm:translate-y-[-45%] lg:top-[340px] lg:translate-y-[-60%]'
+                        className='pointer-events-none absolute right-0 top-[180px] sm:top-[200px] z-[0] max-w-[120dvw] translate-y-[-25%] sm:max-w-full sm:translate-y-[-45%] lg:top-[340px] lg:translate-y-[-60%]'
                     />
                 </div>
             </div>

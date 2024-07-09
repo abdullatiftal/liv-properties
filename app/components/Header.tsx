@@ -127,7 +127,7 @@ export const Header = () => {
         </div>
     ) : (
         <div
-            className={`mb-[50px] px-[15px] sm:mb-0 md:px-[85px] ${isRouteActive('/', path) ? 'h-auto ' : 'sm:h-[160px] '}pt-[30px] relative z-[99] flex !transform-none items-center justify-between !opacity-[1] lg:pt-[60px]`}
+            className={`mb-[50px] px-[15px] sm:mb-0 md:px-[85px] ${isRouteActive('/', path) ? 'h-auto ' : 'sm:h-[160px] '}pt-[30px] relative z-[99] flex !transform-none lg:items-center justify-between !opacity-[1] lg:pt-[60px] flex-wrap lg:flex-nowrap items-start`}
         >
             <Link href='/'>
                 <Image
@@ -195,8 +195,8 @@ export const Header = () => {
                             onClick={toggleMenu}
                         >
                             <div
-                                className={`${isRouteActive(route, path) ? s.menuNavActive : ''}
-                  cursor-pointer rounded-xl p-4 transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-900 active:bg-white/60 active:text-black`}
+                                // className={`${isRouteActive(route, path) ? s.navMob : ''}
+                                className={`${s.navMob} cursor-pointer rounded-xl p-4 transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-900 active:bg-white/60 active:text-black`}
                             >
                                 <span>{routeNameMapping[route]}</span>
                             </div>

@@ -190,7 +190,7 @@ export const PageSearch = ({ type = 'ready' }) => {
                         className={`page-search ${s.propFilter} mt-[-12px] min-w-[calc(33.333%-0.5rem)] sm:mt-0 lg:min-w-[150px]`}
                         onChange={(v) => setHometype(v as HomeTypeOption)}
                     />
-                    <Select
+                    {/* <Select
                         options={[
                             {
                                 value: 'Price low to high',
@@ -204,7 +204,7 @@ export const PageSearch = ({ type = 'ready' }) => {
                         value={selectedOption}
                         className={`page-search ${s.propFilter} mt-[-12px] min-w-[calc(33.333%-0.5rem)] sm:mt-0 lg:min-w-[150px]`}
                         onChange={(v) => setSelectedOption(v as SelectedOption)}
-                    />
+                    /> */}
                 </div>
                 <div className='mt-[17px] flex flex-row flex-wrap text-center lg:flex-nowrap'>
                     <div
@@ -233,7 +233,7 @@ export const PageSearch = ({ type = 'ready' }) => {
             </div>
         );
     return (
-        <div className='mt-[80px] text-[12px] small:mt-[50px]'>
+        <div className='mt-[130px] sm:mt-[80px] text-[12px] small:mt-[50px]'>
             <div className='flex flex-wrap gap-4'>
                 <div
                     className={`${s.upcomingSearch} ${s.hoverable} flex !w-full justify-between sm:!w-[291px]`}

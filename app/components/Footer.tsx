@@ -11,7 +11,7 @@ export const Footer = async () => {
     const contactUs: ContactUs = await fetchData(6);
     return (
         <footer
-            className={`min-[1440px]-h-[477px] max-[639px]:bg-bottom relative bg-cover`}
+            className={`min-[1440px]-h-[477px] bg-right-bottom sm:bg-top  relative bg-cover`}
             style={{ backgroundImage: 'url("/images/ft-bg.webp")' }}
         >
             <div className={`z-[1] ${styles.tint} z-[1]`}></div>
@@ -20,13 +20,13 @@ export const Footer = async () => {
                     <h2 className='gotham mr-auto text-[20px] font-[200] leading-[164%] sm:text-[25px] xl:max-w-[80%]'>
                         A World of Leading Expertise Exclusively yours
                     </h2>
-                    <h3 className='mr-auto mt-[5px] text-[20px] font-[400] leading-[147%] sm:text-[25px] xl:mt-[38px] xl:max-w-[90%]'>
+                    <h3 className='mr-auto mt-[5px] text-[14px] font-[400] leading-[147%] sm:text-[25px] xl:mt-[38px] xl:max-w-[90%]'>
                         Sign up for our newsletter to stay updated with what’s
                         new in UAE real estate
                     </h3>
                     <FooterEmailForm />
                 </div>
-                <div className='max-[639px]:w-full order-2 text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
+                <div className='w-full order-2 text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
                     <div className='font-[700]'>EXPLORE RESIDENTIAL IN</div>
                     <a
                         href='/projects/ready?availablefor=buy&construction_status=ready&location=Palm%20Jumeirah'
@@ -71,7 +71,7 @@ export const Footer = async () => {
                         City Walk
                     </a>
                 </div>
-                <div className='max-[639px]:w-full order-3 text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
+                <div className='w-full order-3 text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
                     <div className='font-[700]'>SLIM PROPERTY</div>
                     <Link
                         href='/about'
@@ -161,7 +161,7 @@ export const Footer = async () => {
                             )}
                         </p>
                     </Link>
-                    <div className='mt-[13px] flex'>
+                    <div className='mt-[22px] flex'>
                         <Link
                             href={`${
                                 getFieldValueByName(
@@ -236,7 +236,7 @@ export const Footer = async () => {
             <div
                 className={`${styles.footerLine} relative z-[2] mt-[40px] font-[200]`}
             ></div>
-            <div className='max-[639px]:flex-wrap relative z-[2] ml-[3vw] mt-[26px] flex w-[calc(100%-3vw)] justify-between gap-x-5 gap-y-1 pb-[26px] text-sm font-[200] sm:ml-[80px] sm:w-[calc(100%-160px)]'>
+            <div className='flex-wrap sm:flex-nowrap relative z-[2] ml-[3vw] mt-[26px] flex w-[calc(100%-3vw)] justify-between gap-x-5 gap-y-1 pb-[26px] text-sm font-[200] sm:ml-[80px] sm:w-[calc(100%-160px)]'>
                 <div className={`${styles.designedBy}`}>
                     Designed & Developed By Cheval
                 </div>
