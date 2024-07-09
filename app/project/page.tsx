@@ -68,7 +68,12 @@ function ProjectComponent() {
         return <div>No property found</div>;
     }
 
-    let images = property[0].images ? JSON.parse(property[0].images) : [];
+    let images;
+    try {
+        images = JSON.parse(property[0].images);
+    } catch (e) {
+        images = property[0].images ? [property[0].images] : [];
+    }
     if (images.length <= 0 && property[0].main_image) {
         images.push(property[0].main_image);
     }
