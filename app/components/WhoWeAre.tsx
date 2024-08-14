@@ -43,6 +43,7 @@ export const WhoWeAre = (props: { data: AboutUs; teamMembers: TeamMember }) => {
                     {props.data?.meettheteam[13].field_value}
                 </h2>
             </div>
+            {console.log(props.data)}
             {/* Who we are */}
             {activeTab === 'who' && (
                 <div className='mt-[47px] flex w-full flex-wrap gap-[26px] border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[37px] text-xs'>
