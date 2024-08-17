@@ -4,7 +4,6 @@ import { Fragment, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { InvestmentAdvisory, Loading, MeetTheTeam } from '@/app/components';
 import { AboutUs, TeamMember } from '@/app/types';
-import { fetchGeneral } from '../constants';
 
 const tabsState = {
     who: true,
