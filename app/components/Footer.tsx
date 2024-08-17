@@ -167,7 +167,7 @@ export const Footer = async () => {
                                 getFieldValueByName(
                                     contactUs?.['contact-us-section-1'],
                                     'Facebook Url'
-                                ) ?? '/'
+                                ) ?? 'https://www.facebook.com/'
                             }`}
                             target='_blank'
                         >
@@ -184,7 +184,7 @@ export const Footer = async () => {
                                 getFieldValueByName(
                                     contactUs?.['contact-us-section-1'],
                                     'Twitter Url'
-                                ) ?? '/'
+                                ) ?? 'https://x.com/'
                             }`}
                             target='_blank'
                         >
@@ -201,7 +201,7 @@ export const Footer = async () => {
                                 getFieldValueByName(
                                     contactUs?.['contact-us-section-1'],
                                     'Instagram Url'
-                                ) ?? '/'
+                                ) ?? 'https://www.instagram.com/'
                             }`}
                             target='_blank'
                         >
@@ -218,7 +218,7 @@ export const Footer = async () => {
                                 getFieldValueByName(
                                     contactUs?.['contact-us-section-1'],
                                     'Linkedin Url'
-                                ) ?? '/'
+                                ) ?? 'https://www.linkedin.com/'
                             }`}
                             target='_blank'
                         >

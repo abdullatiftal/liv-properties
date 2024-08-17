@@ -22,7 +22,7 @@ export default async function Contact() {
         <div className='mb-[30px] w-full sm:mb-[60px] xl:mb-[84px] 3xl:max-w-[1200px]'>
             <div className='relative w-full 3xl:max-w-[1200px]'>
                 <div className='text-[40px] font-[700] leading-[38px] small:text-[69px] small:leading-[88px]'>
-                    <h1 className='inline-block max-w-[220px] capitalize small:max-w-[270px] z-[1] relative'>
+                    <h1 className='relative z-[1] inline-block max-w-[220px] capitalize small:max-w-[270px]'>
                         {contactUs?.['contact-us-section-1'][0].field_value ??
                             'Contact us'}
                     </h1>
@@ -84,7 +84,7 @@ export default async function Contact() {
                                 getFieldValueByName(
                                     contactUs?.['contact-us-section-1'],
                                     'Facebook Url'
-                                ) ?? '/'
+                                ) ?? 'https://www.facebook.com/'
                             }`}
                             target='_blank'
                         >
@@ -101,7 +101,7 @@ export default async function Contact() {
                                 getFieldValueByName(
                                     contactUs?.['contact-us-section-1'],
                                     'Twitter Url'
-                                ) ?? '/'
+                                ) ?? 'https://x.com/'
                             }`}
                             target='_blank'
                         >
@@ -118,7 +118,7 @@ export default async function Contact() {
                                 getFieldValueByName(
                                     contactUs?.['contact-us-section-1'],
                                     'Instagram Url'
-                                ) ?? '/'
+                                ) ?? 'https://www.instagram.com/'
                             }`}
                             target='_blank'
                         >
@@ -135,7 +135,7 @@ export default async function Contact() {
                                 getFieldValueByName(
                                     contactUs?.['contact-us-section-1'],
                                     'Linkedin Url'
-                                ) ?? '/'
+                                ) ?? 'https://www.linkedin.com/'
                             }`}
                             target='_blank'
                         >
