@@ -127,7 +127,7 @@ export const Header = () => {
         </div>
     ) : (
         <div
-            className={`mb-[50px] px-[15px] sm:mb-0 md:px-[85px] ${isRouteActive('/', path) ? 'h-auto ' : 'sm:h-[160px] '}pt-[30px] relative z-[99] flex !transform-none lg:items-center justify-between !opacity-[1] lg:pt-[60px] flex-wrap lg:flex-nowrap items-start`}
+            className={`mb-[50px] px-[15px] sm:mb-0 md:px-[85px] ${isRouteActive('/', path) ? 'h-auto ' : 'sm:h-[160px] '}pt-[30px] relative z-[99] flex !transform-none flex-wrap items-start justify-between !opacity-[1] lg:flex-nowrap lg:items-center lg:pt-[60px]`}
         >
             <Link href='/'>
                 <Image

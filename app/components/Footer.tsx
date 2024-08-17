@@ -11,7 +11,7 @@ export const Footer = async () => {
     const contactUs: ContactUs = await fetchData(6);
     return (
         <footer
-            className={`min-[1440px]-h-[477px] bg-right-bottom sm:bg-top  relative bg-cover`}
+            className={`min-[1440px]-h-[477px] relative bg-cover  bg-right-bottom sm:bg-top`}
             style={{ backgroundImage: 'url("/images/ft-bg.webp")' }}
         >
             <div className={`z-[1] ${styles.tint} z-[1]`}></div>
@@ -26,7 +26,7 @@ export const Footer = async () => {
                     </h3>
                     <FooterEmailForm />
                 </div>
-                <div className='w-full order-2 text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
+                <div className='order-2 w-full text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
                     <div className='font-[700]'>EXPLORE RESIDENTIAL IN</div>
                     <a
                         href='/projects/ready?availablefor=buy&construction_status=ready&location=Palm%20Jumeirah'
@@ -71,8 +71,8 @@ export const Footer = async () => {
                         City Walk
                     </a>
                 </div>
-                <div className='w-full order-3 text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
-                    <div className='font-[700]'>SLIM PROPERTY</div>
+                <div className='order-3 w-full text-sm font-[200] sm:w-[calc(30%-20px)] xl:w-[18%] bigtab:w-[15%]'>
+                    <div className='font-[700]'>LIV Squared Properties</div>
                     <Link
                         href='/about'
                         className={`mt-[7px] block w-fit ${s.hoverable}`}
@@ -236,7 +236,7 @@ export const Footer = async () => {
             <div
                 className={`${styles.footerLine} relative z-[2] mt-[40px] font-[200]`}
             ></div>
-            <div className='flex-wrap sm:flex-nowrap relative z-[2] ml-[3vw] mt-[26px] flex w-[calc(100%-3vw)] justify-between gap-x-5 gap-y-1 pb-[26px] text-sm font-[200] sm:ml-[80px] sm:w-[calc(100%-160px)]'>
+            <div className='relative z-[2] ml-[3vw] mt-[26px] flex w-[calc(100%-3vw)] flex-wrap justify-between gap-x-5 gap-y-1 pb-[26px] text-sm font-[200] sm:ml-[80px] sm:w-[calc(100%-160px)] sm:flex-nowrap'>
                 <div className={`${styles.designedBy}`}>
                     Designed & Developed By Cheval
                 </div>

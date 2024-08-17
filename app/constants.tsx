@@ -28,7 +28,7 @@ export async function fetchData(id: number) {
     // try {
     const res = await fetch(apiUrl + `/api/cms-pages?page_id=${id}`, {
         // next: { revalidate: 3600 }
-        // cache: "no-store",
+        cache: 'no-store'
     });
 
     if (!res.ok) {
