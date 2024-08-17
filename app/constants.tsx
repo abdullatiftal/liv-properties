@@ -49,6 +49,7 @@ export async function fetchProperty(id: string | number) {
             apiUrl + `/api/projectdetails?unique_id=${id}`,
             {
                 // next: { revalidate: 3600 }
+                cache: 'no-store'
             }
         );
 
@@ -68,6 +69,7 @@ export async function fetchGeneral(id: string | number) {
     try {
         const res = await fetch(apiUrl + `/api/${id}`, {
             // next: { revalidate: 3600 }
+            cache: 'no-store'
         });
 
         if (!res.ok) {
