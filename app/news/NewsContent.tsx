@@ -59,7 +59,7 @@ export const NewsContent = () => {
                     }}
                 ></div>
                 <div className='mt-[8px] flex flex-wrap border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[34px] md:mt-[0px] xl:flex-nowrap'>
-                    {otherNews.map((newsItem) => (
+                    {otherNews.slice(0, 4).map((newsItem) => (
                         <NewsCard key={newsItem.id} newsItem={newsItem} />
                     ))}
                 </div>
