@@ -17,7 +17,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const AboutPage = async () => {
     const aboutUs: AboutUs = await fetchData(2);
-    const teamMembers: TeamMember = await fetchGeneral('teams');
 
     if (!aboutUs || aboutUs === undefined) {
         return <Loading />;
@@ -27,7 +26,7 @@ const AboutPage = async () => {
                 <div className='relative mx-auto w-full 3xl:max-w-[1200px]'>
                     <SubHeader data={aboutUs} />
                 </div>
-                <WhoWeAre data={aboutUs} teamMembers={teamMembers} />
+                <WhoWeAre data={aboutUs} />
 
                 <div className='mb-[30px] mt-[50px] flex flex-wrap sm:mb-[60px]'>
                     <Instagram />

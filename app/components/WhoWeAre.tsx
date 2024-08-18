@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { InvestmentAdvisory, Loading, MeetTheTeam } from '@/app/components';
 import { AboutUs, TeamMember } from '@/app/types';
+import { fetchGeneral } from '../constants';
 
 const tabsState = {
     who: true,
@@ -12,8 +13,9 @@ const tabsState = {
     meet: false
 };
 
-export const WhoWeAre = (props: { data: AboutUs; teamMembers: TeamMember }) => {
+export const WhoWeAre = (props: { data: AboutUs }) => {
     const [activeTab, setActiveTab] = useState('who');
+
     return (
         <>
             <div className='mt-[100px] flex flex-wrap text-xs xl:mt-[50px] msm:flex-nowrap mdlap:mt-[136px]'>
@@ -93,7 +95,7 @@ export const WhoWeAre = (props: { data: AboutUs; teamMembers: TeamMember }) => {
                         {props.data?.meettheteam[13].field_value}
                     </h3>
                     <div className='mt-[47px] flex flex-wrap gap-[14px]'>
-                        <MeetTheTeam teamMembers={props.teamMembers} />
+                        <MeetTheTeam />
                     </div>
                 </div>
             )}

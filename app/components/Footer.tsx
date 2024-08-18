@@ -107,7 +107,7 @@ export const Footer = async () => {
                         href='/news'
                         className={`mt-[6px] block w-fit ${s.hoverable}`}
                     >
-                        Blogs & news
+                        News & Events
                     </Link>
                     <Link
                         href='/contact'

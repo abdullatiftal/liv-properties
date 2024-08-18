@@ -68,8 +68,7 @@ export async function fetchProperty(id: string | number) {
 export async function fetchGeneral(id: string | number) {
     try {
         const res = await fetch(apiUrl + `/api/${id}`, {
-            // next: { revalidate: 3600 }
-            cache: 'no-store'
+            // cache: 'no-store'
         });
 
         if (!res.ok) {

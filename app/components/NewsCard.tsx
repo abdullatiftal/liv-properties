@@ -27,7 +27,9 @@ const NewsCard: React.FC<NewsCardProps> = ({ newsItem }) => {
                 />
             </Link>
             <div className='ml-[10px] mt-[15px]'>
-                <h3 className=' text-[15px] font-[700]'>{newsItem.heading}</h3>
+                <h3 className=' text-[15px] font-[700] leading-normal'>
+                    {newsItem.heading}
+                </h3>
                 <div
                     className='ellipse-text ellipse-text-2 mt-[5px] text-xs'
                     dangerouslySetInnerHTML={{
