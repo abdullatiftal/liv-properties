@@ -98,15 +98,15 @@ function ProjectComponent() {
 
     return (
         <div className='w-full 3xl:max-w-[1200px]'>
-            <div className='flex w-full flex-wrap gap-8 border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[37px] mt-0 xl:flex-nowrap xl:gap-0 xl:pb-[0px]'>
-                <div className='z-[1] flex w-[100%] flex-row flex-wrap xl:mr-[-5%] xl:w-[40%] xl:translate-y-[50px] xl:flex-col xl:flex-nowrap'>
+            <div className='mt-0 flex w-full flex-wrap gap-8 border-b border-solid border-[#EDDFD0] border-opacity-50 pb-[37px] xl:flex-nowrap xl:gap-0'>
+                <div className='z-[1] flex w-[100%] flex-row flex-wrap xl:mr-[-5%] xl:w-[40%] xl:flex-col xl:flex-nowrap'>
                     <div className='w-[100%] text-[40px] font-[700] leading-[38px] small:text-[69px] small:leading-[88px]'>
                         <h2>{property[0].property_name ?? 'Property Name'}</h2>
                     </div>
                     <div className='mt-[10px] w-[100%] text-lg'>
                         {property[0].location ?? 'Property Location'}
                     </div>
-                    <div className='relative mt-[16px] md:mt-[40px] flex w-full items-center sm:w-[100%] xl:mt-[50px] xl:w-[auto] justify-normal'>
+                    <div className='relative mt-[16px] flex w-full items-center justify-normal sm:w-[100%] md:mt-[40px] xl:mt-[50px] xl:w-[auto]'>
                         <button
                             className='grid grid-cols-2 place-items-center gap-[11px] rounded-3xl border border-solid border-[#EDDFD0] px-[25px] py-[9px] pl-[15px] text-sm transition duration-200 ease-in-out hover:bg-white/30 hover:text-gray-700 active:bg-white/60 active:text-black'
                             onClick={handleShare}
@@ -215,7 +215,7 @@ function ProjectComponent() {
                             {property[0].area_in_sqft ?? '0'} Sqft
                         </div>
                     </div>
-                    <div className='mt-[31px] max-w-[100%] w-full text-sm leading-[202%] xl:w-[auto] xl:max-w-[483px]'>
+                    <div className='mt-[31px] w-full max-w-[100%] text-sm leading-[202%] xl:w-[auto] xl:max-w-[483px]'>
                         {property[0].description ?? ''}
                     </div>
                 </div>
@@ -289,7 +289,7 @@ function ProjectComponent() {
                     </div>
                 </div>
                 {/* <div> */}
-                    {/* <button className='pt-[13px] pr-[26px] pb-[17px] pl-[24px] rounded-3xl border border-solid border-[#EDDFD0] text-sm hover:bg-white/30 active:bg-white/60 hover:text-gray-700 active:text-black transition duration-200 ease-in-out'>
+                {/* <button className='pt-[13px] pr-[26px] pb-[17px] pl-[24px] rounded-3xl border border-solid border-[#EDDFD0] text-sm hover:bg-white/30 active:bg-white/60 hover:text-gray-700 active:text-black transition duration-200 ease-in-out'>
                         Payment Terms
                     </button> */}
                 {/* </div> */}

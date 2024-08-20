@@ -1,35 +1,35 @@
-// "use client"
+'use client';
 
-import '@/app/ui/index.css';
 import { EnquireForm, Loading } from '@/app/components';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Career, CareerDetailProps, Careers } from '@/app/types';
 import { fetchData, fetchGeneral, getFieldValueByName } from '@/app/constants';
-import { Metadata } from 'next';
-
-const careers: Careers = await fetchData(3);
-
-export async function generateMetadata(): Promise<Metadata> {
-    return {
-        title: careers.header[0].metatitle,
-        description: careers.header[0].metadescription,
-        keywords: careers.header[0].metakeyword
-    };
-}
-
-const careerdata: Career[] = await fetchGeneral('careers');
-
-export async function generateStaticParams() {
-    return careerdata.map((career: Career) => ({
-        id: career.id.toString()
-    }));
-}
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function CareerDetail({ params }: CareerDetailProps) {
-    const career = careerdata.find(
-        (career) => career.id === parseInt(params.id, 10)
-    );
+    const { slug } = useParams();
+
+    const [careers, setCareers] = useState<Careers | null>(null);
+    const [careersData, setCareersData] = useState<Careers | null>(null);
+    const [career, setCareer] = useState<Career | null>(null);
+
+    useEffect(() => {
+        const slugString = Array.isArray(slug) ? slug[0] : slug;
+        if (slug) {
+            fetchGeneral('careers').then((data) => {
+                setCareersData(data);
+
+                const foundItem = data.find(
+                    (item: Career) => item.id === parseInt(slugString, 10)
+                );
+                setCareer(foundItem || null);
+            });
+            fetchData(3).then((data) => setCareers(data));
+        }
+    }, [slug]);
+    console.log(careersData);
 
     if (!career) {
         return (
@@ -45,7 +45,7 @@ export default function CareerDetail({ params }: CareerDetailProps) {
             md:pb-[50px] xl:pb-[79px] small:text-[69px] small:leading-[88px]'
             >
                 <h1 className='inline-block max-w-[220px] capitalize small:max-w-[300px]'>
-                    {careers?.['careers-section-1'][0].field_value ?? ''}
+                    {careers?.['careers-section-1'][0].field_value ?? 'Careers'}
                 </h1>
             </div>
             <div className='mt-[21px] flex flex-wrap justify-between gap-x-[30px] gap-y-[20px] sm:flex-nowrap md:gap-x-[50px] lg:gap-x-[100px]'>
@@ -115,7 +115,7 @@ export default function CareerDetail({ params }: CareerDetailProps) {
             >
                 <h2>
                     {getFieldValueByName(
-                        careers?.['careers-section-1'],
+                        careers?.['careers-section-1'] || [],
                         'Form Heading'
                     )}
                 </h2>

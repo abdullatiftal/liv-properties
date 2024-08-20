@@ -1,9 +1,7 @@
-import '@/app/ui/index.css';
 import { Metadata } from 'next';
-import { EnquireForm } from '@/app/components';
-import { Careers, Career } from '@/app/types';
-import { fetchData, fetchGeneral, getFieldValueByName } from '@/app/constants';
-import CareerCard from '../components/CareerCard';
+import { Careers } from '@/app/types';
+import { fetchData } from '@/app/constants';
+import { CareersContent } from './CareersContent';
 
 const careers: Careers = await fetchData(3);
 
@@ -16,7 +14,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CareersPage() {
-    const data: Career[] = await fetchGeneral('careers');
     return (
         <div className='mb-[30px] w-full sm:mb-[60px] sm:mt-[-50px] lg:mt-0 xl:mb-[70px] 3xl:max-w-[1200px]'>
             <div
@@ -27,19 +24,7 @@ export default async function CareersPage() {
                     {careers?.['careers-section-1'][0].field_value ?? ''}
                 </h1>
             </div>
-            {Array.isArray(data) &&
-                data.map((career) => (
-                    <CareerCard key={career.id} career={career} />
-                ))}
-            <div className='mt-[30px] w-full text-[40px] font-[700] leading-[38px] lg:mt-[65px] small:text-[69px] small:leading-[88px]'>
-                <h2>
-                    {getFieldValueByName(
-                        careers?.['careers-section-1'],
-                        'Form Heading'
-                    )}
-                </h2>
-            </div>
-            <EnquireForm />
+            <CareersContent />
         </div>
     );
 }

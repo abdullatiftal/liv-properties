@@ -55,7 +55,10 @@ const ProjectImages = ({
                             className='h-[100px] w-[100px] cursor-pointer object-cover'
                             onClick={() => stateChanger()}
                         />
-                        <div className={`${s.backdrop} text-sm`}>
+                        <div
+                            className={`${s.backdrop} cursor-pointer text-sm`}
+                            onClick={() => stateChanger()}
+                        >
                             <Image
                                 src='/icons/camera.svg'
                                 alt='Camera icon'
